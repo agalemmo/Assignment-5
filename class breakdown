@@ -1,0 +1,23 @@
+MAIN CLASS
+   - check for existing studentTable, facultyTable
+      > if none, create a new one w/trees masterStudent, masterFaculty
+      > if exists, read through to copy into trees masterStudent, masterFaculty
+         ~method in tree class readFrom(?)
+   -display options
+      >loop until chosen
+      >take a # input
+      >move to particular class
+STUDENT CLASS
+   -basic variables (see assignment page)
+   -print
+   -get/set functions (change major, etc options)
+FACULTY CLASS
+   -basic variables (see assignment page)
+   -print
+   -get/set functions
+
+
+
+in regards to the undo function, possibly always have 5 different files of past trees loaded into some sort of list,
+get rid of the last item in the list when it gets filled out, iterate through with each undo function, when moving forward
+discard of all past items, etc.
