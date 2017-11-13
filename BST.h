@@ -6,9 +6,9 @@ class BST
     BST();
     virtual ~BST(); //you know the drill
 
-    void insert (int value);
-    bool contains(int value);
-    bool deleteNode(TreeNode* node);
+    void insert (int id, Student data);
+    bool contains(int id);
+    bool deleteNode(int id);
     TreeNode* getSuccessor(TreeNode* d);
     TreeNode* getMin();
     TreeNode* getMax();

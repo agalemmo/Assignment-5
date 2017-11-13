@@ -42,9 +42,9 @@ TreeNode* BST::getMax()
   return current;
 }
 
-void BST::insert(int value)
+void BST::insert(int id, Student data)
 {
-  TreeNode *newNode = new TreeNode(value);
+  TreeNode *newNode = new TreeNode(id, data);
 
   if (root == NULL) //empty TreeNode
     root = newNode;
@@ -82,7 +82,7 @@ void BST::insert(int value)
   }
 }
 
-bool BST::contains(int value)
+bool BST::contains(int id)
 {
   if (root == NULL)
     return false;
@@ -91,7 +91,7 @@ bool BST::contains(int value)
   {
     TreeNode* current = root;
 
-    while (current->key != value)
+    while (current->key != id)
     {
       if (value < current->key)
         current = current->left;
@@ -105,7 +105,7 @@ bool BST::contains(int value)
   return true;
 }
 
-bool BST::deleteNode(int k)
+bool BST::deleteNode(int id)
 {
   if(root == NULL)
     return false;
@@ -116,11 +116,11 @@ bool BST::deleteNode(int k)
 
   //need to find the node we want to deleteNode
 
-  while(current->key != k)
+  while(current->key != id)
   {
     parent = current;
 
-    if (k < current->key)
+    if (id < current->key)
     {
       isLeft = true;
       curent = current->left;

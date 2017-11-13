@@ -15,6 +15,15 @@ FACULTY CLASS
    -basic variables (see assignment page)
    -print
    -get/set functions
+TREENODE CLASS
+   -store key (id number)
+   -store data (student object)
+   -store height it sits at in BST
+   -point left and right
+BST CLASS //look into making this an AVL
+   -store pointer to root
+
+
 
 
 

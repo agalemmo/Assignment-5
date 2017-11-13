@@ -4,10 +4,11 @@ class TreeNode
     TreeNode* left;
     TreeNode* right;
     int height;
-    int key; //which in this example is my data as well
+    int key; //ID Number
+    Student data; //the student object
 
     TreeNode();
-    TreeNode(int k);
+    TreeNode(int k, Student s);
     virtual ~TreeNode();
 
     //create front pointer?
