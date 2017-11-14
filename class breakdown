@@ -25,7 +25,9 @@ BST CLASS //look into making this an AVL
 
 
 
-
+i'm anticipating this being pretty simple once the tree gets implemented--look into doing AVL?
+the only issue i'm really looking forward to having is working with the array and pointing to it through other things.
+other than that should be pretty gucci! 
 
 in regards to the undo function, possibly always have 5 different files of past trees loaded into some sort of list,
 get rid of the last item in the list when it gets filled out, iterate through with each undo function, when moving forward
