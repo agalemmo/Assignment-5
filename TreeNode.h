@@ -1,3 +1,5 @@
+#include "Student.h"
+
 class TreeNode
 {
   public:
@@ -9,7 +11,7 @@ class TreeNode
 
     TreeNode();
     TreeNode(int k, Student s);
-    virtual ~TreeNode();
+    ~TreeNode();
 
     //create front pointer?
 };

@@ -1,4 +1,4 @@
-#include <iostream>;
+#include <iostream>
 
 using namespace std;
 
@@ -118,7 +118,7 @@ void Student::setAdvisor(int n)
   advisor = n;
 }
 
-void print()
+void Student::print()
 {
   cout << "STUDENT ID: " << id << endl;
   cout << "STUDENT NAME: " << name << endl;

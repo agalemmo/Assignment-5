@@ -4,7 +4,7 @@ class BST
 {
   public:
     BST();
-    virtual ~BST(); //you know the drill
+    ~BST(); //you know the drill
 
     void insert (int id, Student data);
     bool contains(int id);

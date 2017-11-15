@@ -2,7 +2,7 @@
 
 BST::BST()
 {
-  root = NULL
+  root = NULL;
 }
 
 BST::~BST()
@@ -17,7 +17,7 @@ TreeNode* BST::getMin()
   TreeNode *current = root; //always start at root
 
   if(root == NULL)
-    return null;
+    return NULL;
 
   while (current->left != NULL)
   {
@@ -32,7 +32,7 @@ TreeNode* BST::getMax()
   TreeNode *current = root; //always start at root
 
   if(root == NULL)
-    return null;
+    return NULL;
 
   while (current->right != NULL)
   {
@@ -123,7 +123,7 @@ bool BST::deleteNode(int id)
     if (id < current->key)
     {
       isLeft = true;
-      curent = current->left;
+      current = current->left;
     }
     else
     {
@@ -143,7 +143,7 @@ bool BST::deleteNode(int id)
   if (current->left == NULL && current->right == NULL)
   {
     if (current == root)
-      root == NULL;
+      root = NULL;
     else if (isLeft)
       parent->left = NULL;
     else //it's right

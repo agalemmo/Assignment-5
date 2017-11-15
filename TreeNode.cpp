@@ -16,7 +16,7 @@ TreeNode::TreeNode(int k, Student s)
   data = s;
 }
 
-virtual TreeNode::~TreeNode()
+TreeNode::~TreeNode()
 {
   //let's build character, have fun!!!!!!!!!!!@!!@!!!!!!
 }
