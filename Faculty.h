@@ -3,83 +3,56 @@
 class Faculty
 {
   private:
-    //int id;
-    //string name;
-    //string level;
+    Person* p;
     string dept;
     int[]* advisee;
     Person* base;
 
   public:
     Faculty();
-    Faculty(Person* p, string dpt, int advNum);
-    Faculty(Person* p, string dpt, int[]* adv);
-    Faculty(int ident, string nam, string lvl, string dpt, int advNum); //necessary? same to the next one
-    Faculty(int ident, string nam, string lvl, string dpt, int[]* adv); //not sure about the pointer array thing
+    Faculty(Person* psn, string dpt);
+    Faculty(int ident, string nam, string lvl, string dpt);
     ~Faculty();
 
-    //int getId();
-    //string getName();
-    //string getLevel();
     string getDept();
     void getAdvisees();
 
-    //void setId(int n);
-    //void setName(string s);
-    //void setLevel(string s);
     void setDept(string s);
     void addAdvisee(int n);
 
+    void printArray();
     void print();
 };
 
-Faculty::Faculty() //rework this
+Faculty::Faculty()
 {
-  //id = 0;
-  //name = "";
-  //level = "";
+  p = new Person();
   dept = "";
-  int advArray[10];
-  advisee = advArray[0];
+  //int advArray[10];
+  //advisee = advArray[0];
+}
+
+Faculty::Faculty(Person* psn, string dpt)
+{
+  p = &psn;
+  dept = dpt;
 }
 
 Faculty::Faculty(int ident, string nam, string lvl, string dpt)//rework this
 {
-  id = ident;
-  name = nam;
-  level = lvl;
+  p = new Person();
+  p.setId(ident);
+  p.setName(nam);
+  p.setLevel(lvl);
   dept = dpt;
   int advArray[10];
   advisee = advArray[0];//djfdskfj this seems wrong
 }
 
-Faculty::Faculty(int ident, string nam, string lvl, string dpt, int[]* adv)//rework this
-{
-  id = ident;
-  name = nam;
-  level = lvl;
-  dept = dpt;
-  advisee = adv[0];//djfdskfj this seems wrong
-}
 Faculty::~Faculty()
 {
-
+  delete &p;
 }
-
-/*int Faculty::getId()
-{
-  return id;
-}
-
-string Faculty::getName()
-{
-  return name;
-}
-
-string Faculty::getLevel()
-{
-  return level;
-}*/
 
 string Faculty::getDept()
 {
@@ -91,20 +64,10 @@ void Faculty::getAdvisees()
   //return
 }
 
-/*void Faculty::setId(int n)
-{
-  id = n;
-}
-
-void Faculty::setName(string s)
-{
-  name = s;
-}
-
 void Faculty::setLevel(string s)
 {
   level = s;
-}*/
+}
 
 void Faculty::setDept(string s)
 {
@@ -116,7 +79,19 @@ void Faculty::addAdvisee(int n)
   //add advisee to array
 }
 
+void Faculty::printArray()
+{
+  for (int i = 0; i < advNum; ++i)
+  {
+    cout << p[i].getId() << endl;
+  }
+}
+
 void Faculty::print()
 {
-
+  cout << "FACULTY ID: " << id << endl;
+  cout << "FACULTY NAME: " << name << endl;
+  cout << "FACULTY DEPARTMENT: " << dept << endl;
+  cout << "FACULTY TITLE: " << title << endl;
+  cout << "FACULTY ADVISEES: "<< printArray() << endl; //probably a print function for the array itself. not bad. printAdv()?
 }

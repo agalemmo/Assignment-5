@@ -1,4 +1,4 @@
-#include <iostream>
+#include "Person.h"
 
 using namespace std;
 
@@ -11,6 +11,7 @@ class Student
     string major;
     double gpa;
     int advisor;
+    
   public:
     Student();
     Student(int ident, string nam, string lvl, string maj, double grade, int adv);

@@ -20,4 +20,8 @@ class Person
     void setId(int n);
     void setName(string s);
     void setLevel(string s);
+
+    //overloading operators
+    
+    print();
 };
