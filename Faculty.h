@@ -1,48 +1,49 @@
-#include <iostream>;
-
-using namespace std;
+#include "Person.h"
 
 class Faculty
 {
   private:
-    int id;
-    string name;
-    string level;
+    //int id;
+    //string name;
+    //string level;
     string dept;
     int[]* advisee;
+    Person* base;
 
   public:
     Faculty();
-    Faculty(int ident, string nam, string lvl, string dpt, int advNum);
+    Faculty(Person* p, string dpt, int advNum);
+    Faculty(Person* p, string dpt, int[]* adv);
+    Faculty(int ident, string nam, string lvl, string dpt, int advNum); //necessary? same to the next one
     Faculty(int ident, string nam, string lvl, string dpt, int[]* adv); //not sure about the pointer array thing
     ~Faculty();
 
-    int getId();
-    string getName();
-    string getLevel();
+    //int getId();
+    //string getName();
+    //string getLevel();
     string getDept();
     void getAdvisees();
 
-    void setId(int n);
-    void setName(string s);
-    void setLevel(string s);
+    //void setId(int n);
+    //void setName(string s);
+    //void setLevel(string s);
     void setDept(string s);
     void addAdvisee(int n);
 
     void print();
 };
 
-Faculty::Faculty()
+Faculty::Faculty() //rework this
 {
-  id = 0;
-  name = "";
-  level = "";
+  //id = 0;
+  //name = "";
+  //level = "";
   dept = "";
   int advArray[10];
   advisee = advArray[0];
 }
 
-Faculty::Faculty(int ident, string nam, string lvl, string dpt)
+Faculty::Faculty(int ident, string nam, string lvl, string dpt)//rework this
 {
   id = ident;
   name = nam;
@@ -52,7 +53,7 @@ Faculty::Faculty(int ident, string nam, string lvl, string dpt)
   advisee = advArray[0];//djfdskfj this seems wrong
 }
 
-Faculty::Faculty(int ident, string nam, string lvl, string dpt, int[]* adv)
+Faculty::Faculty(int ident, string nam, string lvl, string dpt, int[]* adv)//rework this
 {
   id = ident;
   name = nam;
@@ -65,7 +66,7 @@ Faculty::~Faculty()
 
 }
 
-int Faculty::getId()
+/*int Faculty::getId()
 {
   return id;
 }
@@ -78,7 +79,7 @@ string Faculty::getName()
 string Faculty::getLevel()
 {
   return level;
-}
+}*/
 
 string Faculty::getDept()
 {
@@ -87,10 +88,10 @@ string Faculty::getDept()
 
 void Faculty::getAdvisees()
 {
-  return
+  //return
 }
 
-void Faculty::setId(int n)
+/*void Faculty::setId(int n)
 {
   id = n;
 }
@@ -103,7 +104,7 @@ void Faculty::setName(string s)
 void Faculty::setLevel(string s)
 {
   level = s;
-}
+}*/
 
 void Faculty::setDept(string s)
 {
@@ -117,5 +118,5 @@ void Faculty::addAdvisee(int n)
 
 void Faculty::print()
 {
-  
+
 }
