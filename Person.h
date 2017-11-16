@@ -22,6 +22,6 @@ class Person
     void setLevel(string s);
 
     //overloading operators
-    
-    print();
+
+    void print();
 };
