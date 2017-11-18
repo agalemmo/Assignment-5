@@ -77,7 +77,7 @@ void BST::insert(int id, Student data)
     {
       parent = current;
 
-      if (value < current->key)
+      if (id < current->key)
       {
         current = current->left;
 
@@ -112,7 +112,7 @@ bool BST::contains(int id)
 
     while (current->key != id)
     {
-      if (value < current->key)
+      if (id < current->key)
         current = current->left;
       else
         current = current->right;

@@ -21,7 +21,7 @@ TreeNode::TreeNode()
   left = NULL;
   right = NULL;
   key = 0;
-  data = NULL;
+  data = *new Student();
 }
 
 TreeNode::TreeNode(int k, Student s)
