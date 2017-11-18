@@ -1,16 +1,17 @@
 #include "Person.h"
 
-class Faculty
+class Faculty : public Person
 {
   private:
-    Person* p;
+    Person p;
     string dept;
-    int[]* advisee;
-    Person* base;
+    int advisee;
+    Person base;
+    int advArray[10];
 
   public:
     Faculty();
-    Faculty(Person* psn, string dpt);
+    Faculty(Person psn, string dpt);
     Faculty(int ident, string nam, string lvl, string dpt);
     ~Faculty();
 
@@ -20,32 +21,31 @@ class Faculty
     void setDept(string s);
     void addAdvisee(int n);
 
-    void printArray();
+    string returnArray();
     void print();
 };
 
 Faculty::Faculty()
 {
-  p = new Person();
+  p = *new Person();
   dept = "";
   //int advArray[10];
   //advisee = advArray[0];
 }
 
-Faculty::Faculty(Person* psn, string dpt)
+Faculty::Faculty(Person psn, string dpt)
 {
-  p = &psn;
+  p = psn;
   dept = dpt;
 }
 
 Faculty::Faculty(int ident, string nam, string lvl, string dpt)//rework this
 {
-  p = new Person();
+  p = *new Person();
   p.setId(ident);
   p.setName(nam);
   p.setLevel(lvl);
   dept = dpt;
-  int advArray[10];
   advisee = advArray[0];//djfdskfj this seems wrong
 }
 
@@ -64,10 +64,13 @@ void Faculty::getAdvisees()
   //return
 }
 
-void Faculty::setLevel(string s)
-{
-  level = s;
-}
+/** @TODO
+Is setLevel needed for faculty?
+*/
+// void Faculty::setLevel(string s)
+// {
+//   level = s;
+// }
 
 void Faculty::setDept(string s)
 {
@@ -79,19 +82,22 @@ void Faculty::addAdvisee(int n)
   //add advisee to array
 }
 
-void Faculty::printArray()
+string Faculty::returnArray()
 {
-  for (int i = 0; i < advNum; ++i)
+  string adviseeString = "";
+  for (int i = 0; i < 10; ++i) //@TODO - un-hardcode this
   {
-    cout << p[i].getId() << endl;
+    adviseeString += advArray[i];
+    adviseeString += "\n";
   }
+  return adviseeString;
 }
 
 void Faculty::print()
 {
-  cout << "FACULTY ID: " << id << endl;
-  cout << "FACULTY NAME: " << name << endl;
+  cout << "FACULTY ID: " << getId() << endl;
+  cout << "FACULTY NAME: " << getName() << endl;
   cout << "FACULTY DEPARTMENT: " << dept << endl;
-  cout << "FACULTY TITLE: " << title << endl;
-  cout << "FACULTY ADVISEES: "<< printArray() << endl; //probably a print function for the array itself. not bad. printAdv()?
+  //cout << "FACULTY TITLE: " << title << endl; @TODO ??? what do you mean by this
+  cout << "FACULTY ADVISEES: "<< returnArray() << endl; //probably a print function for the array itself. not bad. printAdv()?
 }

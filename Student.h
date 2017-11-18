@@ -2,7 +2,7 @@
 
 using namespace std;
 
-class Student
+class Student : public Person
 {
   private:
     int id;
@@ -11,7 +11,7 @@ class Student
     string major;
     double gpa;
     int advisor;
-    
+
   public:
     Student();
     Student(int ident, string nam, string lvl, string maj, double grade, int adv);
