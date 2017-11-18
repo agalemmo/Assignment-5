@@ -5,9 +5,6 @@ using namespace std;
 class Student : public Person
 {
   private:
-    int id;
-    string name;
-    string level;
     string major;
     double gpa;
     int advisor;
@@ -34,21 +31,15 @@ class Student : public Person
     void print();
 };
 
-Student::Student()
+Student::Student() : Person()
 {
-  id = 0;
-  name = "";
-  level = "";
   major = "";
   gpa = 0;
   advisor = 0;
 }
 
-Student::Student(int ident, string nam, string lvl, string maj, double grade, int adv)
+Student::Student(int ident, string nam, string lvl, string maj, double grade, int adv) : Person(ident, nam, lvl)
 {
-  id = ident;
-  name = nam;
-  level = lvl;
   major = maj;
   gpa = grade;
   advisor = adv;
@@ -57,21 +48,6 @@ Student::Student(int ident, string nam, string lvl, string maj, double grade, in
 Student::~Student()
 {
 
-}
-
-int Student::getId()
-{
-  return id;
-}
-
-string Student::getName()
-{
-  return name;
-}
-
-string Student::getLevel()
-{
-  return level;
 }
 
 string Student::getMajor()
@@ -87,21 +63,6 @@ double Student::getGpa()
 int Student::getAdvisor()
 {
   return advisor;
-}
-
-void Student::setId(int n)
-{
-  id = n;
-}
-
-void Student::setName(string s)
-{
-  name = s;
-}
-
-void Student::setLevel(string s)
-{
-  level = s;
 }
 
 void Student::setMajor(string s)
@@ -121,9 +82,9 @@ void Student::setAdvisor(int n)
 
 void Student::print()
 {
-  cout << "STUDENT ID: " << id << endl;
-  cout << "STUDENT NAME: " << name << endl;
-  cout << "STUDENT LEVEL: " << level << endl;
+  cout << "STUDENT ID: " << Person::getId() << endl;
+  cout << "STUDENT NAME: " << Person::getName() << endl;
+  cout << "STUDENT LEVEL: " << Person::getLevel() << endl;
   cout << "STUDENT MAJOR: " << major << endl;
   cout << "STUDENT GPA: " << gpa << endl;
   cout << "STUDENT'S ADVISOR: " << advisor << endl;

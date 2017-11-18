@@ -3,7 +3,6 @@
 class Faculty : public Person
 {
   private:
-    Person p;
     string dept;
     int advisee;
     Person base;
@@ -11,8 +10,7 @@ class Faculty : public Person
 
   public:
     Faculty();
-    Faculty(Person psn, string dpt);
-    Faculty(int ident, string nam, string lvl, string dpt);
+    Faculty(int id, string name, string level, string dpt);
     ~Faculty();
 
     string getDept();
@@ -25,33 +23,23 @@ class Faculty : public Person
     void print();
 };
 
-Faculty::Faculty()
+Faculty::Faculty() : Person()
 {
-  p = *new Person();
   dept = "";
-  //int advArray[10];
-  //advisee = advArray[0];
+  int advArray[10];
+  advisee = advArray[0];
 }
 
-Faculty::Faculty(Person psn, string dpt)
+Faculty::Faculty(int id, string name, string level, string dpt) : Person(id, name, level)
 {
-  p = psn;
   dept = dpt;
+  int advArray[10];
+  advisee = advArray[0];
 }
 
-Faculty::Faculty(int ident, string nam, string lvl, string dpt)//rework this
-{
-  p = *new Person();
-  p.setId(ident);
-  p.setName(nam);
-  p.setLevel(lvl);
-  dept = dpt;
-  advisee = advArray[0];//djfdskfj this seems wrong
-}
 
 Faculty::~Faculty()
 {
-  delete &p;
 }
 
 string Faculty::getDept()
