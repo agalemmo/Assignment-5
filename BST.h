@@ -1,39 +1,43 @@
 #include "TreeNode.h"
 
+template <class T>
 class BST
 {
   public:
     BST();
     ~BST(); //you know the drill
 
-    void insert (int id, Student data);
+    void insert (int id, T data);
     bool contains(int id);
     bool deleteNode(int id);
-    TreeNode* getSuccessor(TreeNode* d);
-    TreeNode* getMin();
-    TreeNode* getMax();
+    TreeNode<T>* getSuccessor(TreeNode<T>* d);
+    TreeNode<T>* getMin();
+    TreeNode<T>* getMax();
 
     void printTree();
 
   private:
-    TreeNode* root;
+    TreeNode<T>* root;
 };
 
-BST::BST()
+template <class T>
+BST<T>::BST()
 {
   root = NULL;
 }
 
-BST::~BST()
+template <class T>
+BST<T>::~BST()
 {
   //build more character
 
   //iterate and delete
 }
 
-TreeNode* BST::getMin()
+template <class T>
+TreeNode<T>* BST<T>::getMin()
 {
-  TreeNode *current = root; //always start at root
+  TreeNode<T>* current = root; //always start at root
 
   if(root == NULL)
     return NULL;
@@ -46,9 +50,10 @@ TreeNode* BST::getMin()
   return current;
 }
 
-TreeNode* BST::getMax()
+template <class T>
+TreeNode<T>* BST<T>::getMax()
 {
-  TreeNode *current = root; //always start at root
+  TreeNode<T>* current = root; //always start at root
 
   if(root == NULL)
     return NULL;
@@ -61,17 +66,18 @@ TreeNode* BST::getMax()
   return current;
 }
 
-void BST::insert(int id, Student data)
+template <class T>
+void BST<T>::insert(int id, T data)
 {
-  TreeNode *newNode = new TreeNode(id, data);
+  TreeNode<T>* newNode = new TreeNode<T>(id, data);
 
   if (root == NULL) //empty TreeNode
     root = newNode;
 
   else //not empty
   {
-    TreeNode *current = root; //always start at the root
-    TreeNode *parent; //empty node
+    TreeNode<T>* current = root; //always start at the root
+    TreeNode<T>*parent; //empty node
 
     while (true)
     {
@@ -101,14 +107,15 @@ void BST::insert(int id, Student data)
   }
 }
 
-bool BST::contains(int id)
+template <class T>
+bool BST<T>::contains(int id)
 {
   if (root == NULL)
     return false;
 
   else
   {
-    TreeNode* current = root;
+    TreeNode<T>* current = root;
 
     while (current->key != id)
     {
@@ -124,13 +131,14 @@ bool BST::contains(int id)
   return true;
 }
 
-bool BST::deleteNode(int id)
+template <class T>
+bool BST<T>::deleteNode(int id)
 {
   if(root == NULL)
     return false;
 
-  TreeNode *current = root;
-  TreeNode *parent = root;
+  TreeNode<T>* current = root;
+  TreeNode<T>*parent = root;
   bool isLeft = true;
 
   //need to find the node we want to deleteNode
@@ -189,7 +197,7 @@ bool BST::deleteNode(int id)
   }
   else //the node has two children, now rip
   {
-      TreeNode *successor = getSuccessor(current);
+      TreeNode<T>*successor = getSuccessor(current);
 
       if (current == root)
         root = successor;
@@ -203,11 +211,12 @@ bool BST::deleteNode(int id)
   return true;
 }
 
-TreeNode* BST::getSuccessor(TreeNode *d)
+template <class T>
+TreeNode<T>* BST<T>::getSuccessor(TreeNode<T>*d)
 {
-  TreeNode *current = d->right;
-  TreeNode *successor = d;
-  TreeNode *sp = d;
+  TreeNode<T>* current = d->right;
+  TreeNode<T>*successor = d;
+  TreeNode<T>*sp = d;
 
   while (current != NULL)
   {

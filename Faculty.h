@@ -10,7 +10,7 @@ class Faculty : public Person
 
   public:
     Faculty();
-    Faculty(int id, string name, string level, string dpt);
+    Faculty(string id, string name, string level, string dpt);
     ~Faculty();
 
     string getDept();
@@ -30,7 +30,7 @@ Faculty::Faculty() : Person()
   advisee = advArray[0];
 }
 
-Faculty::Faculty(int id, string name, string level, string dpt) : Person(id, name, level)
+Faculty::Faculty(string id, string name, string level, string dpt) : Person(id, name, level)
 {
   dept = dpt;
   int advArray[10];

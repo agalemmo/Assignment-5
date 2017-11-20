@@ -1,38 +1,40 @@
-#include "Student.h"
 
+template <class T>
 class TreeNode
 {
   public:
-    TreeNode* left;
-    TreeNode* right;
+    TreeNode<T>* left;
+    TreeNode<T>* right;
     int height;
     int key; //ID Number
-    Student data; //the student object
+    T data; //the T object
 
     TreeNode();
-    TreeNode(int k, Student s);
+    TreeNode(int k, T s);
     ~TreeNode();
 
     //create front pointer?
 };
 
-TreeNode::TreeNode()
+template <class T>
+TreeNode<T>::TreeNode()
 {
   left = NULL;
   right = NULL;
   key = 0;
-  data = *new Student();
+  data = *new T();
 }
 
-TreeNode::TreeNode(int k, Student s)
+template <class T>
+TreeNode<T>::TreeNode(int k, T s)
 {
   left = NULL;
   right = NULL;
   key = k;
   data = s;
 }
-
-TreeNode::~TreeNode()
+template <class T>
+TreeNode<T>::~TreeNode()
 {
   //let's build character, have fun!!!!!!!!!!!@!!@!!!!!!
 }

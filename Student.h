@@ -14,16 +14,10 @@ class Student : public Person
     Student(int ident, string nam, string lvl, string maj, double grade, int adv);
     ~Student();
 
-    int getId();
-    string getName();
-    string getLevel();
     string getMajor();
     double getGpa();
     int getAdvisor();
 
-    void setId(int n);
-    void setName(string s);
-    void setLevel(string s);
     void setMajor(string s);
     void setGPA(double d);
     void setAdvisor(int n);
