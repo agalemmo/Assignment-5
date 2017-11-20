@@ -1,3 +1,6 @@
+#ifndef BST_H
+#define BST_H
+
 #include "TreeNode.h"
 
 template <class T>
@@ -232,3 +235,5 @@ TreeNode<T>* BST<T>::getSuccessor(TreeNode<T>*d)
   }
   return successor;
 }
+
+#endif

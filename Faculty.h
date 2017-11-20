@@ -1,3 +1,6 @@
+#ifndef FACULTY_H
+#define FACULTY_H
+
 #include "Person.h"
 
 class Faculty : public Person
@@ -89,3 +92,5 @@ void Faculty::print()
   //cout << "FACULTY TITLE: " << title << endl; @TODO ??? what do you mean by this
   cout << "FACULTY ADVISEES: "<< returnArray() << endl; //probably a print function for the array itself. not bad. printAdv()?
 }
+
+#endif

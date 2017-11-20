@@ -1,3 +1,6 @@
+#ifndef STUDENT_H
+#define STUDENT_H
+
 #include "Person.h"
 
 using namespace std;
@@ -83,3 +86,5 @@ void Student::print()
   cout << "STUDENT GPA: " << gpa << endl;
   cout << "STUDENT'S ADVISOR: " << advisor << endl;
 }
+
+#endif 
