@@ -11,7 +11,7 @@ class Student : public Person
 
   public:
     Student();
-    Student(int ident, string nam, string lvl, string maj, double grade, int adv);
+    Student(string ident, string nam, string lvl, string maj, double grade, int adv);
     ~Student();
 
     string getMajor();
@@ -32,7 +32,7 @@ Student::Student() : Person()
   advisor = 0;
 }
 
-Student::Student(int ident, string nam, string lvl, string maj, double grade, int adv) : Person(ident, nam, lvl)
+Student::Student(string ident, string nam, string lvl, string maj, double grade, int adv) : Person(ident, nam, lvl)
 {
   major = maj;
   gpa = grade;
