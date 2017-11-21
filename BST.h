@@ -265,17 +265,12 @@ TreeNode<T>* BST<T>::getNode(string id)
     }
     return current;
   }
+}
 
+template <class T> // Will be overloaded in StudentTree and FacultyTree
 void BST<T>::printTree(TreeNode<T>* root)
 {
-  TreeNode<T>* n = root;
-  if (n)
-  {
-    printTree(n->left);
-    cout << n->data << endl;
-    printTree(n->right);
-  }
-  delete n;
+
 }
 
 #endif
