@@ -18,9 +18,8 @@ class BST
     TreeNode<T>* getMin();
     TreeNode<T>* getMax();
 
-    void printTree();
+    void printTree(TreeNode<T>* root);
 
-  private:
     TreeNode<T>* root;
 };
 
@@ -266,6 +265,17 @@ TreeNode<T>* BST<T>::getNode(string id)
     }
     return current;
   }
+
+void BST<T>::printTree(TreeNode<T>* root)
+{
+  TreeNode<T>* n = root;
+  if (n)
+  {
+    printTree(n->left);
+    cout << n->data << endl;
+    printTree(n->right);
+  }
+  delete n;
 }
 
 #endif
