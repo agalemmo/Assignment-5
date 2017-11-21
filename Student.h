@@ -10,20 +10,20 @@ class Student : public Person
   private:
     string major;
     double gpa;
-    int advisor;
+    string advisor;
 
   public:
     Student();
-    Student(string ident, string nam, string lvl, string maj, double grade, int adv);
+    Student(string ident, string nam, string lvl, string maj, double grade, string adv);
     ~Student();
 
     string getMajor();
     double getGpa();
-    int getAdvisor();
+    string getAdvisor();
 
     void setMajor(string s);
     void setGPA(double d);
-    void setAdvisor(int n);
+    void setAdvisor(string s);
 
     void print();
 };
@@ -32,10 +32,10 @@ Student::Student() : Person()
 {
   major = "";
   gpa = 0;
-  advisor = 0;
+  advisor = "";
 }
 
-Student::Student(string ident, string nam, string lvl, string maj, double grade, int adv) : Person(ident, nam, lvl)
+Student::Student(string ident, string nam, string lvl, string maj, double grade, string adv) : Person(ident, nam, lvl)
 {
   major = maj;
   gpa = grade;
@@ -57,7 +57,7 @@ double Student::getGpa()
   return gpa;
 }
 
-int Student::getAdvisor()
+string Student::getAdvisor()
 {
   return advisor;
 }
@@ -72,9 +72,9 @@ void Student::setGPA(double d)
   gpa = d;
 }
 
-void Student::setAdvisor(int n)
+void Student::setAdvisor(string s)
 {
-  advisor = n;
+  advisor = s;
 }
 
 bool operator==(Student& x, Student& y)
