@@ -84,12 +84,31 @@ string Faculty::returnArray()
   return adviseeString;
 }
 
+bool operator==(Faculty& x, Faculty& y)
+{
+  return x.getId() == y.getId()
+      && x.getName() == y.getName()
+      && x.getLevel() == y.getLevel()
+      && x.getDept() == y.getDept();
+      //&& x.getAdvisor() == y.getAdvisor(); advisee bs
+}
+
+bool operator < (Faculty& x, Faculty& y)
+{
+  return x.getId() < y.getId();
+}
+
+bool operator > (Faculty& x, Faculty& y)
+{
+  return x.getId() > y.getId();
+}
+
 void Faculty::print()
 {
   cout << "FACULTY ID: " << getId() << endl;
   cout << "FACULTY NAME: " << getName() << endl;
   cout << "FACULTY DEPARTMENT: " << dept << endl;
-  //cout << "FACULTY TITLE: " << title << endl; @TODO ??? what do you mean by this
+  cout << "FACULTY TITLE: " << getLevel() << endl;
   cout << "FACULTY ADVISEES: "<< returnArray() << endl; //probably a print function for the array itself. not bad. printAdv()?
 }
 

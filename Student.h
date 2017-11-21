@@ -77,6 +77,26 @@ void Student::setAdvisor(int n)
   advisor = n;
 }
 
+bool operator==(Student& x, Student& y)
+{
+  return x.getId() == y.getId()
+      && x.getName() == y.getName()
+      && x.getLevel() == y.getLevel()
+      && x.getMajor() == y.getMajor()
+      && x.getGpa() == y.getGpa()
+      && x.getAdvisor() == y.getAdvisor();
+}
+
+bool operator < (Student& x, Student& y)
+{
+  return x.getId() < y.getId();
+}
+
+bool operator > (Student& x, Student& y)
+{
+  return x.getId() > y.getId();
+}
+
 void Student::print()
 {
   cout << "STUDENT ID: " << Person::getId() << endl;
@@ -87,4 +107,4 @@ void Student::print()
   cout << "STUDENT'S ADVISOR: " << advisor << endl;
 }
 
-#endif 
+#endif

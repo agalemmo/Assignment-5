@@ -8,7 +8,7 @@ class BST
 {
   public:
     BST();
-    ~BST(); //you know the drill
+    ~BST();
 
     void insert (string id, T data);
     bool contains(string id);
@@ -180,6 +180,7 @@ bool BST<T>::deleteNode(string id)
       parent->right = NULL;
   }
   //one child
+
   else if (current->right == NULL) //then it's the left child
   {
     if (current == root)
