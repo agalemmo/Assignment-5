@@ -13,6 +13,7 @@ class BST
     void insert (string id, T data);
     bool contains(string id);
     bool deleteNode(string id);
+    TreeNode<T>* getNode(string id);
     TreeNode<T>* getSuccessor(TreeNode<T>* d);
     TreeNode<T>* getMin();
     TreeNode<T>* getMax();
@@ -235,6 +236,36 @@ TreeNode<T>* BST<T>::getSuccessor(TreeNode<T>*d)
     successor->right = d->right;
   }
   return successor;
+}
+
+template <class T>
+TreeNode<T>* BST<T>::getNode(string id)
+{
+  if (root == NULL)
+  {
+    cout << "Node not found" << endl;
+    return NULL;
+  }
+
+  else
+  {
+    TreeNode<T>* current = root;
+
+    while (current->key != id)
+    {
+      if (id < current->key)
+        current = current->left;
+      else
+        current = current->right;
+
+      if (current == NULL)
+      {
+        cout << "Node not found" << endl;
+        return NULL;
+      }
+    }
+    return current;
+  }
 }
 
 #endif
