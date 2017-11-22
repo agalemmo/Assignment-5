@@ -1,3 +1,9 @@
+/**
+  @TODO
+    all that array business
+    make it a string array
+**/
+
 #ifndef FACULTY_H
 #define FACULTY_H
 
@@ -7,7 +13,6 @@ class Faculty : public Person
 {
   private:
     string dept;
-    int advisee;
     Person base;
     int advArray[10];
 
@@ -17,10 +22,10 @@ class Faculty : public Person
     ~Faculty();
 
     string getDept();
-    void getAdvisees();
+    //void getAdvisees();
 
     void setDept(string s);
-    void addAdvisee(int n);
+    void addAdvisee(string s);
 
     string returnArray();
     void print();
@@ -29,15 +34,13 @@ class Faculty : public Person
 Faculty::Faculty() : Person()
 {
   dept = "";
-  int advArray[10];
-  advisee = advArray[0];
+  //advArray = new string[10];
 }
 
 Faculty::Faculty(string id, string name, string level, string dpt) : Person(id, name, level)
 {
   dept = dpt;
-  int advArray[10];
-  advisee = advArray[0];
+  //advArray = new string[10];
 }
 
 
@@ -50,25 +53,17 @@ string Faculty::getDept()
   return dept;
 }
 
-void Faculty::getAdvisees()
+/*string* Faculty::getAdvisees()
 {
-  //return
-}
-
-/** @TODO
-Is setLevel needed for faculty?
-*/
-// void Faculty::setLevel(string s)
-// {
-//   level = s;
-// }
+  return advArray;
+}*/
 
 void Faculty::setDept(string s)
 {
   dept = s;
 }
 
-void Faculty::addAdvisee(int n)
+void Faculty::addAdvisee(string s)
 {
   //add advisee to array
 }

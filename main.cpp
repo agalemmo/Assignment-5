@@ -1,3 +1,8 @@
+/**
+  @TODO
+    Figure out the problem with case 11
+**/
+
 #include "Student.h"
 #include "StudentTree.h"
 #include "FacultyTree.h"
@@ -77,14 +82,14 @@ int main()
       faculty->deleteNode(idToBeFound);
       break;
     case 11: //change student's advisor
-      string fid = "";
+      /*string fid = "";
       string sid = "";
       cout << "Enter the Student's ID Number: " << endl;
       cin >> sid;
       cout << "Enter the Faculty Member's ID Number: " << endl;
       cin >> fid;
-      students->getNode(sid)->setAdvisor(fid);
-      cout << "Student " << sid << "'s advisor successfully changed to " << fid << "." << endl;
+      //students->getNode(sid)->setAdvisor(fid);
+      cout << "Student " << sid << "'s advisor successfully changed to " << fid << "." << endl;*/
       break;
     case 12: //remove advisee from faculty member
       break;
