@@ -1,6 +1,5 @@
 /**
   @TODO
-    Figure out the problem with case 11
 **/
 
 #include "Student.h"
@@ -14,6 +13,8 @@ int main()
   int option;
   string idToBeFound;
   string info;
+  string facID;
+  string studID;
 
   switch(option)
   {
@@ -82,14 +83,12 @@ int main()
       faculty->deleteNode(idToBeFound);
       break;
     case 11: //change student's advisor
-      /*string fid = "";
-      string sid = "";
       cout << "Enter the Student's ID Number: " << endl;
-      cin >> sid;
+      cin >> studID;
       cout << "Enter the Faculty Member's ID Number: " << endl;
-      cin >> fid;
+      cin >> facID;
       //students->getNode(sid)->setAdvisor(fid);
-      cout << "Student " << sid << "'s advisor successfully changed to " << fid << "." << endl;*/
+      cout << "Student " << studID << "'s advisor successfully changed to " << facID << "." << endl;
       break;
     case 12: //remove advisee from faculty member
       break;

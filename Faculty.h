@@ -1,7 +1,6 @@
 /**
   @TODO
     all that array business
-    make it a string array
 **/
 
 #ifndef FACULTY_H
@@ -14,7 +13,7 @@ class Faculty : public Person
   private:
     string dept;
     Person base;
-    int advArray[10];
+    string advArray[10];
 
   public:
     Faculty();
