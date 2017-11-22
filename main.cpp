@@ -20,8 +20,6 @@ int main()
   Student* s = new Student();
   Faculty* f = new Faculty();
 
-  cout << "post array delete" << endl;
-
   switch(option)
   {
     case 1: //print all students
@@ -91,10 +89,20 @@ int main()
       cin >> studID;
       cout << "Enter the Faculty Member's ID Number: " << endl;
       cin >> facID;
-      students->getNode(studID)->getObj().setAdvisor(facID);
-      cout << "Student " << studID << "'s advisor successfully changed to " << facID << "." << endl;
+      if (faculty->contains(facID))
+      {
+        students->getNode(studID)->getObj().setAdvisor(facID);
+        cout << "Student " << studID << "'s advisor successfully changed to " << facID << "." << endl;
+      }
+      else
+        cout << "Faculty member " << facID << " not found." << endl;
       break;
     case 12: //remove advisee from faculty member
+      cout << "Enter the Faculty Member's ID Number: " << endl;
+      cin >> facID;
+      cout << "Enter the Student's ID Number: " << endl;
+      cin >> studID;
+      faculty->getNode(facID)->getObj().removeAdvisee(studID);
       break;
     case 13: //rollback
       break;
