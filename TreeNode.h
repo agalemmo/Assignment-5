@@ -13,6 +13,8 @@ class TreeNode
     TreeNode(int k, T s);
     ~TreeNode();
 
+    T getObj();
+
     //create front pointer?
 };
 
@@ -37,4 +39,10 @@ template <class T>
 TreeNode<T>::~TreeNode()
 {
   //let's build character, have fun!!!!!!!!!!!@!!@!!!!!!
+}
+
+template <class T>
+T TreeNode<T>::getObj()
+{
+  return data;
 }

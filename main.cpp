@@ -15,6 +15,12 @@ int main()
   string info;
   string facID;
   string studID;
+  double d;
+
+  Student* s = new Student();
+  Faculty* f = new Faculty();
+
+  cout << "post array delete" << endl;
 
   switch(option)
   {
@@ -27,17 +33,17 @@ int main()
     case 3: //find student given id
       cout << "Enter the ID number.\n";
       cin >> idToBeFound;
-      //cout << students->getNode(idToBeFound) << endl;
+      cout << students->getNode(idToBeFound) << endl;
       break;
     case 4: //find faculty member given id
       cout << "Enter the ID Number." << endl;
       cin >> idToBeFound;
-      //cout << faculty.getNode(idToBeFound) << endl;
+      cout << faculty->getNode(idToBeFound) << endl;
       break;
     case 5: //with id of student print info of faculty ADVISOR
       cout << "Enter the ID Number." << endl;
       cin >> idToBeFound;
-      //cout << faculty.getNode((students->getNode(idToBeFound).getAdvisor()) << endl;
+      cout << faculty->getNode(students->getNode(idToBeFound)->getObj().getAdvisor()) << endl;
       break;
     case 6: //with id of faculty print names and id of adviseeString
       cout << "Enter the ID Number." << endl;
@@ -45,7 +51,6 @@ int main()
       //cout << faculty->getNode(idToBeFound).getAdvisees() << endl;
       break;
     case 7: //add a new student to StudentTree
-      /*Student* s = new Student();
       cout << "Enter student information: " << endl;
       cout << "NAME: ";
       cin >> info;
@@ -59,15 +64,14 @@ int main()
       cout << "\nMAJOR: ";
       cin >> info;
       s->setMajor(info);
-      double d;
       cout << "\nGPA: ";
       cin >> d;
       s->setGPA(d);
       cout << "\nADVISOR: ";
       cin >> info;
       s->setAdvisor(info);
-      students->insert(s->getId(), &s); //trouble with pointers come back to this
-      cout << "\n New student object created and inserted into tree." << endl;*/
+      //students->insert(s->getId(), &s); //trouble with pointers come back to this
+      cout << "\n New student object created and inserted into tree." << endl;
       break;
     case 8: //remove student from StudentTree
       cout << "Enter the ID Number: " << endl;
@@ -87,7 +91,7 @@ int main()
       cin >> studID;
       cout << "Enter the Faculty Member's ID Number: " << endl;
       cin >> facID;
-      //students->getNode(sid)->setAdvisor(fid);
+      students->getNode(studID)->getObj().setAdvisor(facID);
       cout << "Student " << studID << "'s advisor successfully changed to " << facID << "." << endl;
       break;
     case 12: //remove advisee from faculty member
