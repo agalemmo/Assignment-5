@@ -10,7 +10,7 @@ class BST
     BST();
     ~BST();
 
-    void insert (string id, T data);
+    void insert(string id, T data);
     bool contains(string id);
     bool deleteNode(string id);
     TreeNode<T>* getNode(string id);

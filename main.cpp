@@ -36,10 +36,10 @@ int main()
     case 6: //with id of faculty print names and id of adviseeString
       cout << "Enter the ID Number." << endl;
       cin >> idToBeFound;
-      //cout << faculty.getNode(id.ToBeFound).getAdvisees() << endl;
+      //cout << faculty->getNode(idToBeFound).getAdvisees() << endl;
       break;
-    case 7: //add a new StudentTree
-      Student* s = new Student();
+    case 7: //add a new student to StudentTree
+      /*Student* s = new Student();
       cout << "Enter student information: " << endl;
       cout << "NAME: ";
       cin >> info;
@@ -60,7 +60,41 @@ int main()
       cout << "\nADVISOR: ";
       cin >> info;
       s->setAdvisor(info);
-      //students->insert(s);  NEED TO OVERWRITE INSERT TO CHECK IDS ONLY?
-      cout << "\n New student object created and inserted into tree." << endl;
+      students->insert(s->getId(), &s); //trouble with pointers come back to this
+      cout << "\n New student object created and inserted into tree." << endl;*/
+      break;
+    case 8: //remove student from StudentTree
+      cout << "Enter the ID Number: " << endl;
+      cin >> idToBeFound;
+      students->deleteNode(idToBeFound);
+      break;
+    case 9: //add a new faculty member to FacultyTree
+      //initialize based on 7
+      break;
+    case 10: //remove faculty from FacultyTree
+      cout << "Enter the ID Number: " << endl;
+      cin >> idToBeFound;
+      faculty->deleteNode(idToBeFound);
+      break;
+    case 11: //change student's advisor
+      string fid = "";
+      string sid = "";
+      cout << "Enter the Student's ID Number: " << endl;
+      cin >> sid;
+      cout << "Enter the Faculty Member's ID Number: " << endl;
+      cin >> fid;
+      students->getNode(sid)->setAdvisor(fid);
+      cout << "Student " << sid << "'s advisor successfully changed to " << fid << "." << endl;
+      break;
+    case 12: //remove advisee from faculty member
+      break;
+    case 13: //rollback
+      break;
+    case 14: //exit
+      cout << "Goodbye." << endl;
+      return 0;
+      break;
+
+
   }
 }
