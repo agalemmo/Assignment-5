@@ -34,6 +34,7 @@ class Faculty : public Person
 
     string returnArray();
     void print();
+    void printToFile();
 };
 
 Faculty::Faculty() : Person()
@@ -157,9 +158,20 @@ void Faculty::print()
 {
   cout << "FACULTY ID: " << getId() << endl;
   cout << "FACULTY NAME: " << getName() << endl;
-  cout << "FACULTY DEPARTMENT: " << dept << endl;
+  cout << "FACULTY DEPARTMENT: " << getDept() << endl;
   cout << "FACULTY TITLE: " << getLevel() << endl;
   cout << "FACULTY ADVISEES: "<< returnArray() << endl; //probably a print function for the array itself. not bad. printAdv()?
+}
+
+void Faculty::printToFile()
+{
+  cout << "BEGIN NODE" << endl;
+  cout << getId() << endl;
+  cout << getName() << endl;
+  cout << getDept() << endl;
+  cout << getLevel() << endl;
+  cout << returnArray() << endl;
+  cout << "END NODE" << endl;
 }
 
 #endif

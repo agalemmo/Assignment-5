@@ -26,6 +26,7 @@ class Student : public Person
     void setAdvisor(string s);
 
     void print();
+    void printToFile();
 };
 
 Student::Student() : Person()
@@ -105,6 +106,18 @@ void Student::print()
   cout << "STUDENT MAJOR: " << major << endl;
   cout << "STUDENT GPA: " << gpa << endl;
   cout << "STUDENT'S ADVISOR: " << advisor << endl;
+}
+
+void Student::printToFile()
+{
+  cout << "BEGIN NODE" << endl;
+  cout << getId() << endl;
+  cout << getName() << endl;
+  cout << getLevel() << endl;
+  cout << getMajor() << endl;
+  cout << getGpa() << endl;
+  cout << getAdvisor() << endl;
+  cout << "END NODE" << endl;
 }
 
 #endif
