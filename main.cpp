@@ -5,10 +5,15 @@
 #include "Student.h"
 #include "StudentTree.h"
 #include "FacultyTree.h"
+#include "History.h"
+
 int main()
 {
   StudentTree* students = new StudentTree();
   FacultyTree* faculty = new FacultyTree();
+
+  StudentTree* st;
+  FacultyTree* ft;
 
   int option;
   string idToBeFound;
@@ -16,6 +21,8 @@ int main()
   string facID;
   string studID;
   double d;
+
+  History* hist = new History();
 
   Student* s = new Student();
   Faculty* f = new Faculty();
@@ -46,9 +53,11 @@ int main()
     case 6: //with id of faculty print names and id of adviseeString
       cout << "Enter the ID Number." << endl;
       cin >> idToBeFound;
-      //cout << faculty->getNode(idToBeFound).getAdvisees() << endl;
+      cout << faculty->getNode(idToBeFound)->getObj().returnArray() << endl;
       break;
     case 7: //add a new student to StudentTree
+      hist->addHistory(students);
+      hist->addHistory(faculty);
       cout << "Enter student information: " << endl;
       cout << "NAME: ";
       cin >> info;
@@ -72,19 +81,27 @@ int main()
       cout << "\n New student object created and inserted into tree." << endl;
       break;
     case 8: //remove student from StudentTree
+      hist->addHistory(students);
+      hist->addHistory(faculty);
       cout << "Enter the ID Number: " << endl;
       cin >> idToBeFound;
       students->deleteNode(idToBeFound);
       break;
     case 9: //add a new faculty member to FacultyTree
+      hist->addHistory(students);
+      hist->addHistory(faculty);
       //initialize based on 7
       break;
     case 10: //remove faculty from FacultyTree
+      hist->addHistory(students);
+      hist->addHistory(faculty);
       cout << "Enter the ID Number: " << endl;
       cin >> idToBeFound;
       faculty->deleteNode(idToBeFound);
       break;
     case 11: //change student's advisor
+      hist->addHistory(students);
+      hist->addHistory(faculty);
       cout << "Enter the Student's ID Number: " << endl;
       cin >> studID;
       cout << "Enter the Faculty Member's ID Number: " << endl;
@@ -98,6 +115,8 @@ int main()
         cout << "Faculty member " << facID << " not found." << endl;
       break;
     case 12: //remove advisee from faculty member
+      hist->addHistory(students);
+      hist->addHistory(faculty);
       cout << "Enter the Faculty Member's ID Number: " << endl;
       cin >> facID;
       cout << "Enter the Student's ID Number: " << endl;
@@ -105,6 +124,11 @@ int main()
       faculty->getNode(facID)->getObj().removeAdvisee(studID);
       break;
     case 13: //rollback
+      st = hist->getStudHist();
+      students = &st;
+      ft = hist->getFacHist();
+      faculty = &ft;
+      cout << "Last version restored." << endl;
       break;
     case 14: //exit
       cout << "Goodbye." << endl;

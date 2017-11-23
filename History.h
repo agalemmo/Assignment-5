@@ -6,7 +6,9 @@ using namespace std;
 class History
 {
   private:
-    DoublyLinkedList<StudentTree, FacultyTree>* hist;
+    DoublyLinkedList<StudentTree> *studHist;
+    DoublyLinkedList<FacultyTree> *facHist;
+    //DoublyLinkedList<StudentTree, FacultyTree>* hist;
   public:
     History();
     ~History();
@@ -14,54 +16,61 @@ class History
     void addHistory(StudentTree* stud);
     void addHistory(FacultyTree* fac);
 
-    StudentTree* getHist();
-    FacultyTree* getHist();
+    StudentTree getStudHist();
+    FacultyTree getFacHist();
 };
 
 History::History()
 {
-  hist = new DoublyLinkedList<StudentTree, FacultyTree>();
+  studHist = new DoublyLinkedList<StudentTree>();
+  facHist = new DoublyLinkedList<FacultyTree>();
+
+  //hist = new DoublyLinkedList<StudentTree, FacultyTree>();
 }
 
 History::~History()
 {
-  delete hist;
+  delete studHist;
+  delete facHist;
+  //delete hist;
 }
 
 void History::addHistory(StudentTree* stud)
 {
-  if (hist->getSize() == 5)
-    hist->removeBack();
-  hist->insertFront(stud);
+  if (studHist->getSize() == 5)
+    studHist->removeBack();
+  studHist->insertFront(&stud);
 }
 
 void History::addHistory(FacultyTree* fac)
 {
-  if (hist->getSize() == 5)
-    hist->removeBack();
-  hist->insertFront(fac);
+  if (facHist->getSize() == 5)
+    facHist->removeBack();
+  facHist->insertFront(&fac);
 }
 
-StudentTree* History::getHist();
+StudentTree History::getStudHist()
 {
-  if (hist->front == NULL)
+  if (studHist->front == NULL)
     cout << "No history." << endl;
   else
   {
-    StudentTree* s = hist->front;
-    hist->removeFront();
+    StudentTree s;
+    s = studHist->front->data;
+    studHist->removeFront();
     return s;
   }
 }
 
-FacultyTree* History::getHist();
+FacultyTree History::getFacHist()
 {
-  if (hist->front == NULL)
+  if (facHist->front == NULL)
     cout << "No history." << endl;
   else
   {
-    FacultyTree* f = hist->front;
-    hist->removeFront();
+    FacultyTree f;
+    f = facHist->front->data;
+    facHist->removeFront();
     return f;
   }
 }
