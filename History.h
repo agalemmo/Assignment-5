@@ -6,51 +6,62 @@ using namespace std;
 class History
 {
   private:
-    DoublyLinkedList<StudentTree> studHist*;
-    DoublyLinkedList<FacultyTree> facHist*;
-
-    StudentTree* s;
-    FacultyTree* f;
+    DoublyLinkedList<StudentTree, FacultyTree>* hist;
   public:
     History();
     ~History();
 
-    void addStudHistory(StudentTree* stud);
-    void addFacHistory();
+    void addHistory(StudentTree* stud);
+    void addHistory(FacultyTree* fac);
 
-    StudentTree* getLastStud();
-    FacultyTree* getLastFac();
+    StudentTree* getHist();
+    FacultyTree* getHist();
 };
 
 History::History()
 {
-  studHist = new DoublyLinkedList<StudentTree>();
-  facHist = new DoublyLinkedList<FacultyTree>();
+  hist = new DoublyLinkedList<StudentTree, FacultyTree>();
 }
 
 History::~History()
 {
-  delete studHist;
-  delete facHist;
-  delete s;
-  delete f;
+  delete hist;
 }
 
-void History::addStudHistory(StudentTree* stud)
+void History::addHistory(StudentTree* stud)
 {
-  if (studHist->getSize() == 5)
-    studHist->removeBack();
-  studHist->insertFront(stud);
+  if (hist->getSize() == 5)
+    hist->removeBack();
+  hist->insertFront(stud);
 }
 
-StudentTree* History::getLastStud();
+void History::addHistory(FacultyTree* fac)
 {
-  if (studHist->front == NULL)
+  if (hist->getSize() == 5)
+    hist->removeBack();
+  hist->insertFront(fac);
+}
+
+StudentTree* History::getHist();
+{
+  if (hist->front == NULL)
     cout << "No history." << endl;
   else
   {
-    s = studHist->front;
-    studHist->removeFront();
+    StudentTree* s = hist->front;
+    hist->removeFront();
     return s;
+  }
+}
+
+FacultyTree* History::getHist();
+{
+  if (hist->front == NULL)
+    cout << "No history." << endl;
+  else
+  {
+    FacultyTree* f = hist->front;
+    hist->removeFront();
+    return f;
   }
 }
