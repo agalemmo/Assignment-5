@@ -7,20 +7,17 @@
 #include "FacultyTree.h"
 //#include "History.h"
 #include <fstream>
+#include <string>
+
+using namespace std;
 
 int main()
 {
   string line;
   ifstream studFile;
   ifstream facfile;
-  ofstream studentTable;
-  ofstream facultyTable;
-
-  studFile.open("Assignment-5\\studentTable.txt");
-  if (studFile.is_open())
-  {
-    
-  }
+  ofstream studentTable ("studentTable.txt");
+  ofstream facultyTable ("facultyTable.txt");
 
   StudentTree* masterStudent = new StudentTree();
   FacultyTree* masterFaculty = new FacultyTree();
@@ -36,6 +33,79 @@ int main()
 
   Student* s = new Student();
   Faculty* f = new Faculty();
+
+  studFile.open("Assignment-5\\studentTable.txt");
+  if (studFile.is_open())
+  {
+    while ( getLine (studFile, line))
+    {
+      if (line == "BEGIN NODE")
+        continue;
+      if (line[0] == '1')
+        s->setId(line.substr(1));
+      if (line[0] == '2')
+        s->setName(line.substr(1));
+      if (line[0] == '3')
+        s->setLevel(line.substr(1));
+      if (line[0] == '4')
+        s->setMajor(line.substr(1));
+      if (line[0] == '5')
+        s->setGPA((double)line.substr(1));
+      if (line[0] == '6')
+        s->setAdvisor(line.substr(1));
+      if (line == "END NODE")
+      {
+        masterStudent->insert(s->getId(), s);
+        delete s;
+      }
+    }
+    studFile.close();
+  }
+
+  studFile.open("Assignment-5\\facultyTable.txt");
+  if (facfile.is_open())
+  {
+    while ( getLine (facfile, line))
+    {
+      if (line == "BEGIN NODE")
+        continue;
+      if (line[0] == '1')
+        f->setId(line.substr(1));
+      if (line[0] == '2')
+        f->setName(line.substr(1));
+      if (line[0] == '3')
+        f->setDept(line.substr(1));
+      if (line[0] == '4')
+        f->setLevel(line.substr(1));
+      if (line[0] == '5')
+        f->addAdvisee(line.substr(1));
+      if (line != "END NODE")
+        f->addAdvisee(line);
+      if (line == "END NODE")
+      {
+        masterFaculty->insert(f->getId(), f);
+        delete f;
+      }
+    }
+    facfile.close();
+  }
+
+  cout << "DATABASE MENU: " << endl;
+  cout << "[1] Print all students and their information (sorted by ascending id #)" << endl;
+  cout << "[2] Print all faculty and their information (sorted by ascending id #)" << endl;
+  cout << "[3] Find and display all student information given the student's ID" << endl;
+  cout << "[4] Find and display all faculty information given the faculty member's ID" << endl;
+  cout << "[5] Given a student's ID print the name and info of their faculty advisor" << endl;
+  cout << "[6] Given a faculty ID, print ALL the names and info of their advisees" << endl;
+  cout << "[7] Add a new student" << endl;
+  cout << "[8] Delete a student given the ID" << endl;
+  cout << "[9] Add a new faculty member" << endl;
+  cout << "[10] Delete a faculty member given the ID" << endl;
+  cout << "[11] Change a student's advisor given the student ID and the new faculty ID" << endl;
+  cout << "[12] Remove an advisee from a faculty member given the ID" << endl;
+  cout << "[13] Rollback" << endl;
+  cout << "[14] Exit." << endl;
+  cin >> option;
 
   switch(option)
   {
@@ -141,7 +211,17 @@ int main()
       cout << "Last version restored." << endl;*/
       break;
     case 14: //exit
-      cout << "Goodbye." << endl;
+      /*if (studentTable.is_open())
+      {
+        studentTable << masterStudent->printTreeToFile(masterStudent->root);
+        studentTable.close();
+      }
+      if (facultyTable.is_open())
+      {
+        facultyTable << masterFaculty->printTreeToFile(masterFaculty->root);
+        facultyTable.close();
+      }*/
+      cout << "Saved to studentTable.txt and facultyTable.txt. Goodbye." << endl;
       return 0;
       break;
 

@@ -166,11 +166,11 @@ void Faculty::print()
 void Faculty::printToFile()
 {
   cout << "BEGIN NODE" << endl;
-  cout << getId() << endl;
-  cout << getName() << endl;
-  cout << getDept() << endl;
-  cout << getLevel() << endl;
-  cout << returnArray() << endl;
+  cout << "1" << getId() << endl;
+  cout << "2" << getName() << endl;
+  cout << "3" << getDept() << endl;
+  cout << "4" << getLevel() << endl;
+  cout << "5" << returnArray() << endl;
   cout << "END NODE" << endl;
 }
 

@@ -111,12 +111,12 @@ void Student::print()
 void Student::printToFile()
 {
   cout << "BEGIN NODE" << endl;
-  cout << getId() << endl;
-  cout << getName() << endl;
-  cout << getLevel() << endl;
-  cout << getMajor() << endl;
-  cout << getGpa() << endl;
-  cout << getAdvisor() << endl;
+  cout << "1" << getId() << endl;
+  cout << "2" << getName() << endl;
+  cout << "3" << getLevel() << endl;
+  cout << "4" << getMajor() << endl;
+  cout << "5" << getGpa() << endl;
+  cout << "6" << getAdvisor() << endl;
   cout << "END NODE" << endl;
 }
 
