@@ -20,6 +20,8 @@ class BST
 
     void printTree(TreeNode<T>* root);
 
+    bool isEmpty();
+
     TreeNode<T>* root;
 };
 
@@ -271,6 +273,12 @@ template <class T> // Will be overloaded in StudentTree and FacultyTree
 void BST<T>::printTree(TreeNode<T>* root)
 {
 
+}
+
+template <class T>
+bool BST<T>::isEmpty()
+{
+  return root == NULL;
 }
 
 #endif

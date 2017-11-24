@@ -3,8 +3,10 @@
     FUNCTIONS TO BE ADDED:
       - Fix write/restore from file
       - Should be randomly generating our own ID, not prompting
+      - Rollback/history
     BUGS:
-      - Print all students only works once
+      - Print all students only works once (also with faculty)
+      - Faculty prints all the /n's, even if they have an empty advisee array
 **/
 
 #include "Student.h"
@@ -47,12 +49,15 @@ int main()
   FacultyTree* masterFaculty = new FacultyTree();
 
   int option;
-  string idToBeFound;
+  int idToBeFound;
   string info;
   int facID;
   int studID;
   double d;
   Student* s;
+  Faculty* f;
+  TreeNode<Student>* ts;
+  TreeNode<Faculty>* tf;
 
   int lineCount;
 
@@ -135,34 +140,80 @@ int main()
       case 3: //find student given id
         cout << "Enter the ID number.\n";
         cin >> (idToBeFound);
-        cout << masterStudent->getNode(stoi(idToBeFound)) << endl;
+        while (cin.fail())
+        {
+          cin.clear();
+          cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+          cerr << "Data is formatted improperly. Please try again. ID should be an int.\n";
+          cin >> facID;
+        }
+        ts = (masterStudent->getNode(idToBeFound));
+        if (ts)
+        {
+          ts->getObj().print();
+        }
+        else
+          cerr << "No student exists with that ID number. Please try again.\n";
         break;
       case 4: //find faculty member given id
         cout << "Enter the ID Number." << endl;
         cin >> (idToBeFound);
-        cout << masterFaculty->getNode(stoi(idToBeFound)) << endl;
+        while (cin.fail())
+        {
+          cin.clear();
+          cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+          cerr << "Data is formatted improperly. Please try again. ID should be an int.\n";
+          cin >> facID;
+        }
+        (masterFaculty->getNode(idToBeFound))->getObj().print();
         break;
       case 5: //with id of student print info of faculty ADVISOR
         cout << "Enter the ID Number." << endl;
         cin >> (idToBeFound);
-        cout << masterFaculty->getNode(masterStudent->getNode(stoi(idToBeFound))->getObj().getAdvisor()) << endl;
+        while (cin.fail())
+        {
+          cin.clear();
+          cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+          cerr << "Data is formatted improperly. Please try again. ID should be an int.\n";
+          cin >> facID;
+        }
+        cout << masterFaculty->getNode(masterStudent->getNode(idToBeFound)->getObj().getAdvisor()) << endl;
         break;
       case 6: //with id of faculty print names and id of adviseeString
         cout << "Enter the ID Number." << endl;
         cin >> (idToBeFound);
-        cout << masterFaculty->getNode(stoi(idToBeFound))->getObj().returnArray() << endl;
+        while (cin.fail())
+        {
+          cin.clear();
+          cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+          cerr << "Data is formatted improperly. Please try again. ID should be an int.\n";
+          cin >> facID;
+        }
+        cout << masterFaculty->getNode(idToBeFound)->getObj().returnArray() << endl;
         break;
       case 7: //add a new student to StudentTree
         //hist->addHistory(masterStudent);
         //hist->addHistory(masterFaculty);
+        if (masterFaculty->isEmpty())
+        {
+          cerr << "Your faculty tree is empty. You can't add a student until you have at least one faculty member, or your student can't have an advisor.\n";
+          continue;
+        }
         s = new Student();
         cout << "Enter student information: " << endl;
         cout << "NAME: ";
         cin >> info;
         s->setName(info);
         cout << "\nID: ";
-        cin >> info;
-        s->setId(stoi(info));
+        cin >> studID;
+        while (cin.fail())
+        {
+          cin.clear();
+          cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+          cerr << "Data is formatted improperly. Please try again. ID should be an int.\n";
+          cin >> facID;
+        }
+        s->setId(studID);
         cout << "\nYEAR: ";
         cin >> info;
         s->setLevel(info);
@@ -173,8 +224,21 @@ int main()
         cin >> d;
         s->setGPA(d);
         cout << "\nADVISOR: ";
-        cin >> info;
-        s->setAdvisor(stoi(info));
+        cin >> facID;
+        while (cin.fail())
+        {
+          cin.clear();
+          cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+          cerr << "Data is formatted improperly. Please try again. ID should be an int.\n";
+          cin >> facID;
+        }
+        if (masterFaculty->getNode(idToBeFound))
+          s->setAdvisor(facID);
+        else
+        {
+          cerr << "This advisor does not exist. Please try creating the student again, with a valid advisor ID.\n";
+          continue;
+        }
         masterStudent->insert(s->getId(), *s);
         cout << "\n New student object created and inserted into tree." << endl;
         break;
@@ -183,27 +247,77 @@ int main()
         //hist->addHistory(masterFaculty);
         cout << "Enter the ID Number: " << endl;
         cin >> (idToBeFound);
-        masterStudent->deleteNode(stoi(idToBeFound));
+        while (cin.fail())
+        {
+          cin.clear();
+          cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+          cerr << "Data is formatted improperly. Please try again. ID should be an int.\n";
+          cin >> facID;
+        }
+        masterStudent->deleteNode(idToBeFound);
         break;
       case 9: //add a new faculty member to FacultyTree
         //hist->addHistory(masterStudent);
         //hist->addHistory(masterFaculty);
-        //initialize based on 7
+        f = new Faculty();
+        cout << "Enter faculty information: " << endl;
+        cout << "NAME: ";
+        cin >> info;
+        f->setName(info);
+        cout << "\nID: ";
+        cin >> facID;
+        while (cin.fail())
+        {
+          cin.clear();
+          cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+          cerr << "Data is formatted improperly. Please try again. ID should be an int.\n";
+          cin >> facID;
+        }
+        f->setId(facID);
+        cout << "\nLEVEL: ";
+        cin >> info;
+        f->setLevel(info);
+        cout << "\nDEPARTMENT: ";
+        cin >> info;
+        f->setDept(info);
+        masterFaculty->insert(f->getId(), *f);
+        cout << "\n New faculty object created and inserted into tree." << endl;
         break;
       case 10: //remove faculty from FacultyTree
         //hist->addHistory(masterStudent);
         //hist->addHistory(masterFaculty);
         cout << "Enter the ID Number: " << endl;
         cin >> idToBeFound;
-        masterFaculty->deleteNode(stoi(idToBeFound));
+        while (cin.fail())
+        {
+          cin.clear();
+          cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+          cerr << "Data is formatted improperly. Please try again. ID should be an int.\n";
+          cin >> facID;
+        }
+        masterFaculty->deleteNode(idToBeFound);
         break;
       case 11: //change student's advisor
         //hist->addHistory(masterStudent);
         //hist->addHistory(masterFaculty);
         cout << "Enter the Student's ID Number: " << endl;
         cin >> studID;
+        while (cin.fail())
+        {
+          cin.clear();
+          cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+          cerr << "Data is formatted improperly. Please try again. ID should be an int.\n";
+          cin >> facID;
+        }
         cout << "Enter the Faculty Member's ID Number: " << endl;
         cin >> facID;
+        while (cin.fail())
+        {
+          cin.clear();
+          cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+          cerr << "Data is formatted improperly. Please try again. ID should be an int.\n";
+          cin >> facID;
+        }
         if (masterFaculty->contains(facID))
         {
           masterStudent->getNode(studID)->getObj().setAdvisor(facID);
@@ -217,8 +331,22 @@ int main()
         //hist->addHistory(masterFaculty);
         cout << "Enter the Faculty Member's ID Number: " << endl;
         cin >> facID;
+        while (cin.fail())
+        {
+          cin.clear();
+          cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+          cerr << "Data is formatted improperly. Please try again. ID should be an int.\n";
+          cin >> facID;
+        }
         cout << "Enter the Student's ID Number: " << endl;
         cin >> studID;
+        while (cin.fail())
+        {
+          cin.clear();
+          cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+          cerr << "Data is formatted improperly. Please try again. ID should be an int.\n";
+          cin >> facID;
+        }
         masterFaculty->getNode(facID)->getObj().removeAdvisee(studID);
         break;
       case 13: //rollback

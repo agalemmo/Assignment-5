@@ -126,7 +126,7 @@ void Faculty::removeAdvisee(int s)
 string Faculty::returnArray()
 {
   string adviseeString = "";
-  for (int i = 0; i < arraySize; ++i) //@TODO - un-hardcode this
+  for (int i = 0; i < arraySize; ++i)
   {
     adviseeString += advArray[i];
     adviseeString += "\n";
