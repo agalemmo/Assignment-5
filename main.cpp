@@ -2,9 +2,7 @@
   @TODO
     FUNCTIONS TO BE ADDED:
       - Fix write/restore from file
-      - Should be randomly generating our own ID, not prompting
       - Rollback/history
-      - Exception handling for case 11 and 12.
     BUGS:
       - Print all students only works once (also with faculty) TEMP FIX
       - Advisors recognize that they have advisees when students added, but don't remember that later on. WHY???
@@ -377,8 +375,15 @@ int main()
         }
         if (masterFaculty->contains(facID))
         {
-          masterStudent->getNode(studID)->getObj().setAdvisor(facID);
-          cout << "Student " << studID << "'s advisor successfully changed to " << facID << "." << endl;
+          if (masterStudent->contains(studID))
+          {
+            masterStudent->getNode(studID)->getObj().setAdvisor(facID);
+            cout << "Student " << studID << "'s advisor successfully changed to " << facID << "." << endl;
+          }
+          else
+          {
+            cout << "Student " << studID << " not found.";
+          }
         }
         else
           cout << "Faculty member " << facID << " not found." << endl;
@@ -406,11 +411,18 @@ int main()
         }
         if (masterFaculty->contains(facID))
         {
-          masterFaculty->getNode(facID)->getObj().removeAdvisee(studID);
-          cout << "Student " << studID << " successfully removed." << endl;
+          if (masterStudent->contains(studID))
+          {
+            masterFaculty->getNode(facID)->getObj().removeAdvisee(studID);
+            cout << "Student " << studID << " successfully removed." << endl;
+          }
+          else
+          {
+            cout << "Student " << studID << " not found.\n";
+          }
         }
         else
-          cout << "Student " << studID << " not found." << endl;
+          cout << "Faculty " << facID << " not found." << endl;
         break;
       case 13: //rollback
         st = hist->getStudHist();
