@@ -6,7 +6,7 @@ class TreeNode
     TreeNode<T>* left;
     TreeNode<T>* right;
     int height;
-    string key; //ID Number
+    int key; //ID Number
     T data; //the T object
 
     TreeNode();

@@ -5,22 +5,26 @@
 
 using namespace std;
 
+/**
+A person class. Has the shared methods/member variables of Student and Faculty.
+*/
+
 class Person
 {
   private:
-    string id;
+    int id;
     string name;
     string level;
   public:
     Person();
-    Person(string iden, string nam, string lvl);
+    Person(int iden, string nam, string lvl);
     ~Person();
 
-    string getId();
+    int getId();
     string getName();
     string getLevel();
 
-    void setId(string n);
+    void setId(int n);
     void setName(string s);
     void setLevel(string s);
 
@@ -29,51 +33,86 @@ class Person
     void print();
 };
 
+/**
+Default constructor.
+*/
 Person::Person()
 {
-  id = "";
+  id = 0;
+  name = "";
+  level = "";
 }
 
-Person::Person(string iden, string nam, string lvl)
+/**
+Overloaded constructor.
+Takes in ID, name, and level.
+*/
+Person::Person(int iden, string nam, string lvl)
 {
   id = iden;
   name = nam;
   level = lvl;
 }
 
+/**
+Destructor.
+Does nothing.
+*/
 Person::~Person()
 {}
 
-string Person::getId()
+/**
+getID returns ID.
+*/
+int Person::getId()
 {
   return id;
 }
 
+/**
+getName returns name.
+*/
 string Person::getName()
 {
   return name;
 }
 
+/**
+getLevel returns level.
+*/
 string Person::getLevel()
 {
   return level;
 }
 
-void Person::setId(string n)
+/**
+setID sets ID to parameter int.
+*/
+void Person::setId(int n)
 {
   id = n;
 }
 
+/**
+setName sets name to parameter string.
+*/
 void Person::setName(string s)
 {
   name = s;
 }
 
+/**
+setLevel sets level to parameter string.
+*/
 void Person::setLevel(string s)
 {
   level = s;
 }
 
+/**
+Print
+To be overridden in sub-classes.
+*/
 void Person::print()
 {
 }

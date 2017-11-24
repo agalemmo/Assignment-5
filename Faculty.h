@@ -13,28 +13,28 @@ class Faculty : public Person
   private:
     string dept;
     Person base;
-    string advArray[10];
+    int advArray[10];
     int numAdvisees;
     int arraySize;
-    string* array;
+    int* array;
 
   public:
     Faculty();
-    Faculty(string id, string name, string level, string dpt);
+    Faculty(int id, string name, string level, string dpt);
     ~Faculty();
 
     string getDept();
-    string* getAdvisees();
+    int* getAdvisees();
 
     void setDept(string s);
-    void addAdvisee(string s);
-    void removeAdvisee(string s);
+    void addAdvisee(int s);
+    void removeAdvisee(int s);
 
     //bool advFull();
 
     string returnArray();
     void print();
-    void printToFile();
+    string printToFile();
 };
 
 Faculty::Faculty() : Person()
@@ -45,7 +45,7 @@ Faculty::Faculty() : Person()
   array = advArray;
 }
 
-Faculty::Faculty(string id, string name, string level, string dpt) : Person(id, name, level) //add advisees?
+Faculty::Faculty(int id, string name, string level, string dpt) : Person(id, name, level) //add advisees?
 {
   dept = dpt;
   numAdvisees = 0;
@@ -63,7 +63,7 @@ string Faculty::getDept()
   return dept;
 }
 
-string* Faculty::getAdvisees()
+int* Faculty::getAdvisees()
 {
   return array;
 }
@@ -73,22 +73,22 @@ void Faculty::setDept(string s)
   dept = s;
 }
 
-void Faculty::addAdvisee(string s)
+void Faculty::addAdvisee(int s)
 {
   if (numAdvisees < arraySize)
   {
     advArray[numAdvisees] = s;
     numAdvisees++;
+    cout << numAdvisees << "He has an advisee, computer.\n";
   }
   else
   {
-    string newArray[arraySize*2];
+    int *newArray = new int[arraySize*2];
     for (int i = 0; i < arraySize; ++i)
       newArray[i] = advArray[i];
     arraySize = arraySize *2;
     array = newArray;
-    delete [] advArray;
-    string advArray[arraySize];
+    int *advArray = new int[arraySize];
     for (int i = 0; i < arraySize; ++i)
       advArray[i] = newArray[i];
     array = advArray;
@@ -98,7 +98,7 @@ void Faculty::addAdvisee(string s)
   }
 }
 
-void Faculty::removeAdvisee(string s)
+void Faculty::removeAdvisee(int s)
 {
   if (numAdvisees >= 0)
   {
@@ -108,7 +108,7 @@ void Faculty::removeAdvisee(string s)
       {
         for (int n = i; n < arraySize; ++n)
         {
-          if (n = (arraySize - 1))
+          if (n == (arraySize - 1))
             cout << "placeholder" << endl;
             //array[n] = NULL;
           else
@@ -116,7 +116,7 @@ void Faculty::removeAdvisee(string s)
         }
         cout << "Student " << s << " removed." << endl;
       }
-      else if (i = arraySize - 1 && array[i] != s)
+      else if (i == arraySize - 1 && array[i] != s)
         cout << "Student " << s << " not found." << endl;
     }
   }
@@ -126,12 +126,14 @@ void Faculty::removeAdvisee(string s)
 
 string Faculty::returnArray()
 {
+  cout << "ReturnArray called. The prof has this many advisees: " << numAdvisees << "\n";
   string adviseeString = "";
-  for (int i = 0; i < arraySize; ++i) //@TODO - un-hardcode this
+  for (int i = 0; i < numAdvisees; ++i)
   {
     adviseeString += advArray[i];
     adviseeString += "\n";
   }
+  cout << adviseeString;
   return adviseeString;
 }
 
@@ -160,18 +162,25 @@ void Faculty::print()
   cout << "FACULTY NAME: " << getName() << endl;
   cout << "FACULTY DEPARTMENT: " << getDept() << endl;
   cout << "FACULTY TITLE: " << getLevel() << endl;
-  cout << "FACULTY ADVISEES: "<< returnArray() << endl; //probably a print function for the array itself. not bad. printAdv()?
+  cout << "FACULTY ADVISEES: "<< returnArray() << endl;
 }
 
-void Faculty::printToFile()
+string Faculty::printToFile()
 {
-  cout << "BEGIN NODE" << endl;
-  cout << "1" << getId() << endl;
-  cout << "2" << getName() << endl;
-  cout << "3" << getDept() << endl;
-  cout << "4" << getLevel() << endl;
-  cout << "5" << returnArray() << endl;
-  cout << "END NODE" << endl;
+  string returnString = "";
+  returnString += "BEGIN NODE\n";
+  returnString += getId();
+  returnString += "\n";
+  returnString += getName();
+  returnString += "\n";
+  returnString += getDept();
+  returnString += "\n";
+  returnString += getLevel();
+  returnString += "\n";
+  returnString += returnArray();
+  returnString += "\n";
+  returnString += "END NODE\n";
+  return returnString;
 }
 
 #endif

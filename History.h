@@ -39,20 +39,23 @@ void History::addHistory(StudentTree* stud)
 {
   if (studHist->getSize() == 5)
     studHist->removeBack();
-  studHist->insertFront(&stud);
+  studHist->insertFront(*stud);
 }
 
 void History::addHistory(FacultyTree* fac)
 {
   if (facHist->getSize() == 5)
     facHist->removeBack();
-  facHist->insertFront(&fac);
+  facHist->insertFront(*fac);
 }
 
 StudentTree History::getStudHist()
 {
   if (studHist->front == NULL)
-    cout << "No history." << endl;
+  {
+    cerr << "No history." << endl;
+    return StudentTree();
+  }
   else
   {
     StudentTree s;
@@ -65,7 +68,10 @@ StudentTree History::getStudHist()
 FacultyTree History::getFacHist()
 {
   if (facHist->front == NULL)
-    cout << "No history." << endl;
+  {
+    cerr << "No history." << endl;
+    return FacultyTree();
+  }
   else
   {
     FacultyTree f;
