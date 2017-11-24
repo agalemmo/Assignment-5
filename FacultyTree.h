@@ -13,6 +13,7 @@ FacultyTree::FacultyTree() : BST()
 {
 }
 
+//TEMP FIX OF NO DELETE - look at this pls
 void FacultyTree::printTree(TreeNode<Faculty>* root)
 {
   TreeNode<Faculty>* n = root;
@@ -22,7 +23,6 @@ void FacultyTree::printTree(TreeNode<Faculty>* root)
     n->data.print();
     printTree(n->right);
   }
-  delete n;
 }
 
 string FacultyTree::printTreeToFile(TreeNode<Faculty>* root)

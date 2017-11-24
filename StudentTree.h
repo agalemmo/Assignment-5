@@ -19,22 +19,16 @@ StudentTree::StudentTree() : BST()
   return (Student)BST::getNode(int id);
 }*/
 
+//TEMP FIX OF NO DELETE - look at this pls
 void StudentTree::printTree(TreeNode<Student>* root)
 {
-  cout << "PrintTree has been called.\n";
   TreeNode<Student>* n = root;
-  int count = 0;
-  if (count > 8)
-    return;
   if (n)
   {
-    count++;
-    cout << count << endl;
     printTree(n->left);
     n->data.print();
     printTree(n->right);
   }
-  delete n;
 }
 
 string StudentTree::printTreeToFile(TreeNode<Student>* root)

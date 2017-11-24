@@ -5,6 +5,7 @@
       - Should be randomly generating our own ID, not prompting
       - Rollback/history
       - Exception handling for case 11 and 12.
+      - Add student to advisor's advisee list when student is created.
     BUGS:
       - Print all students only works once (also with faculty)
       - Faculty prints all the /n's, even if they have an empty advisee array
@@ -137,6 +138,7 @@ int main()
         break;
       case 2: //print all masterFaculty
         masterFaculty->printTree(masterFaculty->root);
+        cout << "Turkey.\n";
         break;
       case 3: //find student given id
         cout << "Enter the ID number.\n";
@@ -248,7 +250,10 @@ int main()
           cin >> facID;
         }
         if (masterFaculty->contains(facID))
+        {
           s->setAdvisor(facID);
+          masterFaculty->getNode(facID)->getObj().addAdvisee(studID);
+        }
         else
         {
           cerr << "This advisor does not exist. Please try creating the student again, with a valid advisor ID.\n";
