@@ -4,6 +4,7 @@
       - Fix write/restore from file
       - Should be randomly generating our own ID, not prompting
       - Rollback/history
+      - Exception handling for case 11 and 12.
     BUGS:
       - Print all students only works once (also with faculty)
       - Faculty prints all the /n's, even if they have an empty advisee array
@@ -165,7 +166,11 @@ int main()
           cerr << "Data is formatted improperly. Please try again. ID should be an int.\n";
           cin >> facID;
         }
-        (masterFaculty->getNode(idToBeFound))->getObj().print();
+        tf = masterFaculty->getNode(idToBeFound);
+        if (tf)
+          tf->getObj().print();
+        else
+          cerr << "No faculty exists with that ID number. Please try again.\n";
         break;
       case 5: //with id of student print info of faculty ADVISOR
         cout << "Enter the ID Number." << endl;
@@ -177,7 +182,13 @@ int main()
           cerr << "Data is formatted improperly. Please try again. ID should be an int.\n";
           cin >> facID;
         }
-        cout << masterFaculty->getNode(masterStudent->getNode(idToBeFound)->getObj().getAdvisor()) << endl;
+        ts = (masterStudent->getNode(idToBeFound));
+        if (ts)
+        {
+          masterFaculty->getNode(ts->getObj().getAdvisor())->getObj().print();
+        }
+        else
+          cerr << "No student exists with that ID number. Please try again.\n";
         break;
       case 6: //with id of faculty print names and id of adviseeString
         cout << "Enter the ID Number." << endl;
@@ -189,7 +200,11 @@ int main()
           cerr << "Data is formatted improperly. Please try again. ID should be an int.\n";
           cin >> facID;
         }
-        cout << masterFaculty->getNode(idToBeFound)->getObj().returnArray() << endl;
+        tf = masterFaculty->getNode(idToBeFound);
+        if (tf)
+          cout << tf->getObj().returnArray() << endl;
+        else
+          cerr << "No faculty exists with that ID number. Please try again.\n";
         break;
       case 7: //add a new student to StudentTree
         //hist->addHistory(masterStudent);
@@ -254,7 +269,8 @@ int main()
           cerr << "Data is formatted improperly. Please try again. ID should be an int.\n";
           cin >> facID;
         }
-        masterStudent->deleteNode(idToBeFound);
+        if (!masterStudent->deleteNode(idToBeFound))
+          cerr << "This student does not exist, and therefore could not be removed.\n";
         break;
       case 9: //add a new faculty member to FacultyTree
         //hist->addHistory(masterStudent);
@@ -295,7 +311,8 @@ int main()
           cerr << "Data is formatted improperly. Please try again. ID should be an int.\n";
           cin >> facID;
         }
-        masterFaculty->deleteNode(idToBeFound);
+        if (!masterFaculty->deleteNode(idToBeFound))
+          cer << "This faculty member does not exist, and therefore could not be removed.\n";
         break;
       case 11: //change student's advisor
         //hist->addHistory(masterStudent);
