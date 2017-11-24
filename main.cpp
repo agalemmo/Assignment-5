@@ -247,7 +247,7 @@ int main()
           cerr << "Data is formatted improperly. Please try again. ID should be an int.\n";
           cin >> facID;
         }
-        if (masterFaculty->getNode(idToBeFound))
+        if (masterFaculty->contains(facID))
           s->setAdvisor(facID);
         else
         {
@@ -311,8 +311,12 @@ int main()
           cerr << "Data is formatted improperly. Please try again. ID should be an int.\n";
           cin >> facID;
         }
+        if (!masterFaculty->getNode(idToBeFound)->left && !masterFaculty->getNode(idToBeFound)->right && !masterStudent->isEmpty())
+        {
+          cerr << "You are trying to delete the only faculty member listed. This will leave several students without an advisor, so you can not do this until there are more faculty.\n";
+        }
         if (!masterFaculty->deleteNode(idToBeFound))
-          cer << "This faculty member does not exist, and therefore could not be removed.\n";
+          cerr << "This faculty member does not exist, and therefore could not be removed.\n";
         break;
       case 11: //change student's advisor
         //hist->addHistory(masterStudent);
