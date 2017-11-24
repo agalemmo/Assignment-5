@@ -1,7 +1,6 @@
 /**
   @TODO
     FUNCTIONS TO BE ADDED:
-      - Fix write/restore from file
       - Rollback/history
     BUGS:
       - Print all students only works once (also with faculty) TEMP FIX
@@ -131,7 +130,6 @@ int main()
     f = new Faculty();
     while ( getline (facFile, line))
     {
-      cout << "While loop calle.d\n";
       if (line == "BEGIN NODE")
       {
         lineCount = 0;
@@ -291,6 +289,7 @@ int main()
         {
           s->setAdvisor(facID);
           masterFaculty->getNode(facID)->getObj().addAdvisee(studID);
+          cout << "1." << to_string(masterFaculty->getNode(facID)->getObj().getNumAdvisees()) << endl;
         }
         else
         {

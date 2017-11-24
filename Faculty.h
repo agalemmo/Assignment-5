@@ -29,6 +29,8 @@ class Faculty : public Person
     void setDept(string s);
     void addAdvisee(int s);
     void removeAdvisee(int s);
+    int getNumAdvisees();
+    void setNumAdvisees(int n);
 
     //bool advFull();
 
@@ -39,6 +41,7 @@ class Faculty : public Person
 
 Faculty::Faculty() : Person()
 {
+  cout << "Constructor called for Faculty number " << getId() << endl;
   dept = "";
   numAdvisees = 0;
   arraySize = 10;
@@ -47,6 +50,7 @@ Faculty::Faculty() : Person()
 
 Faculty::Faculty(int id, string name, string level, string dpt) : Person(id, name, level) //add advisees?
 {
+  cout << "Overloaded constructor.\n";
   dept = dpt;
   numAdvisees = 0;
   arraySize = 10;
@@ -73,13 +77,23 @@ void Faculty::setDept(string s)
   dept = s;
 }
 
+int Faculty::getNumAdvisees()
+{
+  return numAdvisees;
+}
+
+void Faculty::setNumAdvisees(int n)
+{
+  numAdvisees = n;
+}
+
 void Faculty::addAdvisee(int s)
 {
   if (numAdvisees < arraySize)
   {
     advArray[numAdvisees] = s;
-    numAdvisees++;
-    cout << numAdvisees << "He has an advisee, computer.\n";
+    setNumAdvisees(++numAdvisees);
+    cout << to_string(getNumAdvisees()) << endl;
   }
   else
   {
