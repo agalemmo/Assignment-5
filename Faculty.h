@@ -82,13 +82,12 @@ void Faculty::addAdvisee(string s)
   }
   else
   {
-    string newArray[arraySize*2];
+    string *newArray = new string[arraySize*2];
     for (int i = 0; i < arraySize; ++i)
       newArray[i] = advArray[i];
     arraySize = arraySize *2;
     array = newArray;
-    delete [] advArray;
-    string advArray[arraySize];
+    string *advArray = new string[arraySize];
     for (int i = 0; i < arraySize; ++i)
       advArray[i] = newArray[i];
     array = advArray;
@@ -108,7 +107,7 @@ void Faculty::removeAdvisee(string s)
       {
         for (int n = i; n < arraySize; ++n)
         {
-          if (n = (arraySize - 1))
+          if (n == (arraySize - 1))
             cout << "placeholder" << endl;
             //array[n] = NULL;
           else
@@ -116,7 +115,7 @@ void Faculty::removeAdvisee(string s)
         }
         cout << "Student " << s << " removed." << endl;
       }
-      else if (i = arraySize - 1 && array[i] != s)
+      else if (i == arraySize - 1 && array[i] != s)
         cout << "Student " << s << " not found." << endl;
     }
   }

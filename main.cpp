@@ -28,6 +28,7 @@ int main()
   string facID;
   string studID;
   double d;
+  Student* s;
 
   int lineCount;
 
