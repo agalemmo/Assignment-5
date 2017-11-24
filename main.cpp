@@ -29,10 +29,9 @@ int main()
   string studID;
   double d;
 
-  //History* hist = new History();
+  int lineCount;
 
-  Student* s = new Student();
-  Faculty* f = new Faculty();
+  //History* hist = new History();
 
   /*studFile.open("Assignment-5\\studentTable.txt");
   if (studFile.is_open())
@@ -40,52 +39,58 @@ int main()
     while ( getLine (studFile, line))
     {
       if (line == "BEGIN NODE")
-        continue;
-      if (line[0] == '1')
-        s->setId(line.substr(1));
-      if (line[0] == '2')
-        s->setName(line.substr(1));
-      if (line[0] == '3')
-        s->setLevel(line.substr(1));
-      if (line[0] == '4')
-        s->setMajor(line.substr(1));
-      if (line[0] == '5')
-        s->setGPA((double)line.substr(1));
-      if (line[0] == '6')
-        s->setAdvisor(line.substr(1));
+      {
+        Student* s = new Student();
+        lineCount == 0;
+      }
+      if (lineCount == 1)
+        s->setId(line);
+      if (lineCount == 2)
+        s->setName(line);
+      if (lineCount == 3)
+        s->setLevel(line);
+      if (lineCount == 4)
+        s->setMajor(line);
+      if (lineCount == 5)
+        s->setGPA((double)line);
+      if (lineCount == 6)
+        s->setAdvisor(line);
       if (line == "END NODE")
       {
         masterStudent->insert(s->getId(), s);
         delete s;
       }
+      lineCount++;
     }
     studFile.close();
   }
 
-  studFile.open("Assignment-5\\facultyTable.txt");
+  facFile.open("Assignment-5\\facultyTable.txt");
   if (facfile.is_open())
   {
     while ( getLine (facfile, line))
     {
       if (line == "BEGIN NODE")
-        continue;
-      if (line[0] == '1')
-        f->setId(line.substr(1));
-      if (line[0] == '2')
-        f->setName(line.substr(1));
-      if (line[0] == '3')
-        f->setDept(line.substr(1));
-      if (line[0] == '4')
-        f->setLevel(line.substr(1));
-      if (line[0] == '5')
-        f->addAdvisee(line.substr(1));
-      if (line != "END NODE")
+      {
+        Faculty* f = new Faculty();
+        lineCount = 0;
+      }
+      if (lineCount == 1)
+        f->setId(line);
+      if (lineCount == 2)
+        f->setName(line);
+      if (lineCount == 3)
+        f->setDept(line);
+      if (lineCount == 4)
+        f->setLevel(line);
+      if (lineCount >= 5)
         f->addAdvisee(line);
       if (line == "END NODE")
       {
         masterFaculty->insert(f->getId(), f);
         delete f;
       }
+      lineCount++;
     }
     facfile.close();
   }*/

@@ -110,14 +110,14 @@ void Student::print()
 
 void Student::printToFile()
 {
-  cout << "BEGIN NODE" << endl;
-  cout << "1" << getId() << endl;
-  cout << "2" << getName() << endl;
-  cout << "3" << getLevel() << endl;
-  cout << "4" << getMajor() << endl;
-  cout << "5" << getGpa() << endl;
-  cout << "6" << getAdvisor() << endl;
-  cout << "END NODE" << endl;
+  cout << "BEGIN NODE" << endl;       //0
+  cout << getId() << endl;            //1
+  cout << getName() << endl;          //2
+  cout << getLevel() << endl;         //3
+  cout << getMajor() << endl;         //4
+  cout << getGpa() << endl;           //5
+  cout << getAdvisor() << endl;       //6
+  cout << "END NODE" << endl;         //7
 }
 
 #endif
