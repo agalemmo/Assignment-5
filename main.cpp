@@ -16,6 +16,7 @@
 #include "History.h"
 #include <fstream>
 #include <string>
+#include <limits>
 
 using namespace std;
 
