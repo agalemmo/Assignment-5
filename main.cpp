@@ -2,9 +2,7 @@
   @TODO
     FUNCTIONS TO BE ADDED:
       - Fix write/restore from file
-      - Should be randomly generating our own ID, not prompting
       - Rollback/history
-      - Exception handling for case 11 and 12.
     BUGS:
       - Print all students only works once (also with faculty) TEMP FIX
       - Advisors recognize that they have advisees when students added, but don't remember that later on. WHY???
@@ -39,6 +37,33 @@ void printOptions()
   cout << "[14] Exit." << endl;
 }
 
+/**
+generateStudID generates an ID for a student between 1000 and 4999.
+*/
+int generateStudID(StudentTree* masterStudent)
+{
+  while (true)
+  {
+    int num = rand() % 4000 + 1000;
+    if (masterStudent->contains(num))
+      continue;
+    else return num;
+  }
+}
+
+/**
+generateFacID generates an ID for the faculty between 5000 and 8999.
+*/
+int generateFacID(FacultyTree* masterFaculty)
+{
+  while (true)
+  {
+    int num = rand() % 4000 + 5000;
+    if (masterFaculty->contains(num))
+      continue;
+    else return num;
+  }
+}
 
 int main()
 {
@@ -223,15 +248,16 @@ int main()
         cout << "NAME: ";
         cin >> info;
         s->setName(info);
-        cout << "\nID: ";
-        cin >> studID;
-        while (cin.fail())
-        {
-          cin.clear();
-          cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-          cerr << "Data is formatted improperly. Please try again. ID should be an int.\n";
-          cin >> facID;
-        }
+        // cout << "\nID: ";
+        // cin >> studID;
+        // while (cin.fail())
+        // {
+        //   cin.clear();
+        //   cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        //   cerr << "Data is formatted improperly. Please try again. ID should be an int.\n";
+        //   cin >> facID;
+        // }
+        studID = generateStudID(masterStudent);
         s->setId(studID);
         cout << "\nYEAR: ";
         cin >> info;
@@ -288,15 +314,16 @@ int main()
         cout << "NAME: ";
         cin >> info;
         f->setName(info);
-        cout << "\nID: ";
-        cin >> facID;
-        while (cin.fail())
-        {
-          cin.clear();
-          cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-          cerr << "Data is formatted improperly. Please try again. ID should be an int.\n";
-          cin >> facID;
-        }
+        // cout << "\nID: ";
+        // cin >> facID;
+        // while (cin.fail())
+        // {
+        //   cin.clear();
+        //   cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        //   cerr << "Data is formatted improperly. Please try again. ID should be an int.\n";
+        //   cin >> facID;
+        // }
+        facID = generateFacID(masterFaculty);
         f->setId(facID);
         cout << "\nLEVEL: ";
         cin >> info;
@@ -349,8 +376,15 @@ int main()
         }
         if (masterFaculty->contains(facID))
         {
-          masterStudent->getNode(studID)->getObj().setAdvisor(facID);
-          cout << "Student " << studID << "'s advisor successfully changed to " << facID << "." << endl;
+          if (masterStudent->contains(studID))
+          {
+            masterStudent->getNode(studID)->getObj().setAdvisor(facID);
+            cout << "Student " << studID << "'s advisor successfully changed to " << facID << "." << endl;
+          }
+          else
+          {
+            cout << "Student " << studID << " not found.";
+          }
         }
         else
           cout << "Faculty member " << facID << " not found." << endl;
@@ -378,11 +412,18 @@ int main()
         }
         if (masterFaculty->contains(facID))
         {
-          masterFaculty->getNode(facID)->getObj().removeAdvisee(studID);
-          cout << "Student " << studID << " successfully removed." << endl;
+          if (masterStudent->contains(studID))
+          {
+            masterFaculty->getNode(facID)->getObj().removeAdvisee(studID);
+            cout << "Student " << studID << " successfully removed." << endl;
+          }
+          else
+          {
+            cout << "Student " << studID << " not found.\n";
+          }
         }
         else
-          cout << "Student " << studID << " not found." << endl;
+          cout << "Faculty " << facID << " not found." << endl;
         break;
       case 13: //rollback
         cout << "\n+++Student before" << endl;
