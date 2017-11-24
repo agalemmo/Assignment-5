@@ -5,10 +5,9 @@
       - Should be randomly generating our own ID, not prompting
       - Rollback/history
       - Exception handling for case 11 and 12.
-      - Add student to advisor's advisee list when student is created.
     BUGS:
-      - Print all students only works once (also with faculty)
-      - Faculty prints all the /n's, even if they have an empty advisee array
+      - Print all students only works once (also with faculty) TEMP FIX
+      - Advisors recognize that they have advisees when students added, but don't remember that later on. WHY???
 **/
 
 #include "Student.h"

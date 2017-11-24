@@ -79,6 +79,7 @@ void Faculty::addAdvisee(int s)
   {
     advArray[numAdvisees] = s;
     numAdvisees++;
+    cout << numAdvisees << "He has an advisee, computer.\n";
   }
   else
   {
@@ -125,12 +126,14 @@ void Faculty::removeAdvisee(int s)
 
 string Faculty::returnArray()
 {
+  cout << "ReturnArray called. The prof has this many advisees: " << numAdvisees << "\n";
   string adviseeString = "";
   for (int i = 0; i < numAdvisees; ++i)
   {
     adviseeString += advArray[i];
     adviseeString += "\n";
   }
+  cout << adviseeString;
   return adviseeString;
 }
 
@@ -159,8 +162,7 @@ void Faculty::print()
   cout << "FACULTY NAME: " << getName() << endl;
   cout << "FACULTY DEPARTMENT: " << getDept() << endl;
   cout << "FACULTY TITLE: " << getLevel() << endl;
-  cout << "FACULTY ADVISEES: "<< returnArray() << endl; //probably a print function for the array itself. not bad. printAdv()?
-  cout << "Cake.\n";
+  cout << "FACULTY ADVISEES: "<< returnArray() << endl;
 }
 
 string Faculty::printToFile()
