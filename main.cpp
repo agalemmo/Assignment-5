@@ -5,7 +5,7 @@
 #include "Student.h"
 #include "StudentTree.h"
 #include "FacultyTree.h"
-//#include "History.h"
+#include "History.h"
 #include <fstream>
 #include <string>
 
@@ -15,7 +15,7 @@ int main()
 {
   string line;
   ifstream studFile;
-  ifstream facfile;
+  ifstream facFile;
   ofstream studentTable ("studentTable.txt");
   ofstream facultyTable ("facultyTable.txt");
 
@@ -32,17 +32,17 @@ int main()
 
   int lineCount;
 
-  //History* hist = new History();
+  History* hist = new History();
 
-  /*studFile.open("Assignment-5\\studentTable.txt");
+  studFile.open("Assignment-5\\studentTable.txt");
   if (studFile.is_open())
   {
-    while ( getLine (studFile, line))
+    while ( getline (studFile, line))
     {
       if (line == "BEGIN NODE")
       {
         Student* s = new Student();
-        lineCount == 0;
+        lineCount = 0;
       }
       if (lineCount == 1)
         s->setId(line);
@@ -53,12 +53,12 @@ int main()
       if (lineCount == 4)
         s->setMajor(line);
       if (lineCount == 5)
-        s->setGPA((double)line);
+        s->setGPA(stoi(line));
       if (lineCount == 6)
         s->setAdvisor(line);
       if (line == "END NODE")
       {
-        masterStudent->insert(s->getId(), s);
+        masterStudent->insert(s->getId(), *s);
         delete s;
       }
       lineCount++;
@@ -67,13 +67,13 @@ int main()
   }
 
   facFile.open("Assignment-5\\facultyTable.txt");
-  if (facfile.is_open())
+  if (facFile.is_open())
   {
-    while ( getLine (facfile, line))
+    Faculty* f = new Faculty();
+    while ( getline (facFile, line))
     {
       if (line == "BEGIN NODE")
       {
-        Faculty* f = new Faculty();
         lineCount = 0;
       }
       if (lineCount == 1)
@@ -88,13 +88,13 @@ int main()
         f->addAdvisee(line);
       if (line == "END NODE")
       {
-        masterFaculty->insert(f->getId(), f);
+        masterFaculty->insert(f->getId(), *f);
         delete f;
       }
       lineCount++;
     }
-    facfile.close();
-  }*/
+    facFile.close();
+  }
   while (true)
   {
     cout << "DATABASE MENU: " << endl;

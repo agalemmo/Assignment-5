@@ -10,7 +10,7 @@ class TreeNode
     T data; //the T object
 
     TreeNode();
-    TreeNode(int k, T s);
+    TreeNode(string k, T s);
     ~TreeNode();
 
     T getObj();
@@ -28,7 +28,7 @@ TreeNode<T>::TreeNode()
 }
 
 template <class T>
-TreeNode<T>::TreeNode(int k, T s)
+TreeNode<T>::TreeNode(string k, T s)
 {
   left = NULL;
   right = NULL;
