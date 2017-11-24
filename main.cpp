@@ -39,6 +39,33 @@ void printOptions()
   cout << "[14] Exit." << endl;
 }
 
+/**
+generateStudID generates an ID for a student between 1000 and 4999.
+*/
+int generateStudID(StudentTree* masterStudent)
+{
+  while (true)
+  {
+    int num = rand() % 4000 + 1000;
+    if (masterStudent->contains(num))
+      continue;
+    else return num;
+  }
+}
+
+/**
+generateFacID generates an ID for the faculty between 5000 and 8999.
+*/
+int generateFacID(FacultyTree* masterFaculty)
+{
+  while (true)
+  {
+    int num = rand() % 4000 + 5000;
+    if (masterFaculty->contains(num))
+      continue;
+    else return num;
+  }
+}
 
 int main()
 {
@@ -223,15 +250,16 @@ int main()
         cout << "NAME: ";
         cin >> info;
         s->setName(info);
-        cout << "\nID: ";
-        cin >> studID;
-        while (cin.fail())
-        {
-          cin.clear();
-          cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-          cerr << "Data is formatted improperly. Please try again. ID should be an int.\n";
-          cin >> facID;
-        }
+        // cout << "\nID: ";
+        // cin >> studID;
+        // while (cin.fail())
+        // {
+        //   cin.clear();
+        //   cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        //   cerr << "Data is formatted improperly. Please try again. ID should be an int.\n";
+        //   cin >> facID;
+        // }
+        studID = generateStudID(masterStudent);
         s->setId(studID);
         cout << "\nYEAR: ";
         cin >> info;
@@ -287,15 +315,16 @@ int main()
         cout << "NAME: ";
         cin >> info;
         f->setName(info);
-        cout << "\nID: ";
-        cin >> facID;
-        while (cin.fail())
-        {
-          cin.clear();
-          cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-          cerr << "Data is formatted improperly. Please try again. ID should be an int.\n";
-          cin >> facID;
-        }
+        // cout << "\nID: ";
+        // cin >> facID;
+        // while (cin.fail())
+        // {
+        //   cin.clear();
+        //   cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        //   cerr << "Data is formatted improperly. Please try again. ID should be an int.\n";
+        //   cin >> facID;
+        // }
+        facID = generateFacID(masterFaculty);
         f->setId(facID);
         cout << "\nLEVEL: ";
         cin >> info;
