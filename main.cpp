@@ -38,6 +38,7 @@ void printOptions()
   cout << "[14] Exit." << endl;
 }
 
+
 int main()
 {
   string line;
@@ -59,6 +60,8 @@ int main()
   Faculty* f;
   TreeNode<Student>* ts;
   TreeNode<Faculty>* tf;
+  StudentTree st;
+  FacultyTree ft;
 
   int lineCount;
 
@@ -137,7 +140,6 @@ int main()
         break;
       case 2: //print all masterFaculty
         masterFaculty->printTree(masterFaculty->root);
-        cout << "Turkey.\n";
         break;
       case 3: //find student given id
         cout << "Enter the ID number.\n";
@@ -208,8 +210,8 @@ int main()
           cerr << "No faculty exists with that ID number. Please try again.\n";
         break;
       case 7: //add a new student to StudentTree
-        //hist->addHistory(masterStudent);
-        //hist->addHistory(masterFaculty);
+        hist->addHistory(masterStudent);
+        hist->addHistory(masterFaculty);
         if (masterFaculty->isEmpty())
         {
           cerr << "Your faculty tree is empty. You can't add a student until you have at least one faculty member, or your student can't have an advisor.\n";
@@ -262,8 +264,8 @@ int main()
         cout << "\n New student object created and inserted into tree." << endl;
         break;
       case 8: //remove student from StudentTree
-        //hist->addHistory(masterStudent);
-        //hist->addHistory(masterFaculty);
+        hist->addHistory(masterStudent);
+        hist->addHistory(masterFaculty);
         cout << "Enter the ID Number: " << endl;
         cin >> (idToBeFound);
         while (cin.fail())
@@ -277,8 +279,8 @@ int main()
           cerr << "This student does not exist, and therefore could not be removed.\n";
         break;
       case 9: //add a new faculty member to FacultyTree
-        //hist->addHistory(masterStudent);
-        //hist->addHistory(masterFaculty);
+        hist->addHistory(masterStudent);
+        hist->addHistory(masterFaculty);
         f = new Faculty();
         cout << "Enter faculty information: " << endl;
         cout << "NAME: ";
@@ -304,8 +306,8 @@ int main()
         cout << "\n New faculty object created and inserted into tree." << endl;
         break;
       case 10: //remove faculty from FacultyTree
-        //hist->addHistory(masterStudent);
-        //hist->addHistory(masterFaculty);
+        hist->addHistory(masterStudent);
+        hist->addHistory(masterFaculty);
         cout << "Enter the ID Number: " << endl;
         cin >> idToBeFound;
         while (cin.fail())
@@ -323,8 +325,8 @@ int main()
           cerr << "This faculty member does not exist, and therefore could not be removed.\n";
         break;
       case 11: //change student's advisor
-        //hist->addHistory(masterStudent);
-        //hist->addHistory(masterFaculty);
+        hist->addHistory(masterStudent);
+        hist->addHistory(masterFaculty);
         cout << "Enter the Student's ID Number: " << endl;
         cin >> studID;
         while (cin.fail())
@@ -352,8 +354,8 @@ int main()
           cout << "Faculty member " << facID << " not found." << endl;
         break;
       case 12: //remove advisee from faculty member
-        //hist->addHistory(masterStudent);
-        //hist->addHistory(masterFaculty);
+        hist->addHistory(masterStudent);
+        hist->addHistory(masterFaculty);
         cout << "Enter the Faculty Member's ID Number: " << endl;
         cin >> facID;
         while (cin.fail())
@@ -375,11 +377,11 @@ int main()
         masterFaculty->getNode(facID)->getObj().removeAdvisee(studID);
         break;
       case 13: //rollback
-        /*st = hist->getStudHist();
+        st = hist->getStudHist();
         masterStudent = &st;
         ft = hist->getFacHist();
         masterFaculty = &ft;
-        cout << "Last version restored." << endl;*/
+        cout << "Last version restored." << endl;
         break;
       case 14: //exit
         if (studentTable.is_open())
