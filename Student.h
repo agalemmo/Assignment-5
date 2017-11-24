@@ -30,7 +30,7 @@ class Student : public Person
     void setAdvisor(int s);
 
     void print();
-    void printToFile();
+    string printToFile();
 };
 
 /**
@@ -146,18 +146,26 @@ void Student::print()
 }
 
 /**
-printToFile prints student's data to file, to be used when loading database.
+printToFile returns student's data to be printed to file, to be used when loading database.
 */
-void Student::printToFile()
+string Student::printToFile()
 {
-  cout << "BEGIN NODE" << endl;       //0
-  cout << getId() << endl;            //1
-  cout << getName() << endl;          //2
-  cout << getLevel() << endl;         //3
-  cout << getMajor() << endl;         //4
-  cout << getGpa() << endl;           //5
-  cout << getAdvisor() << endl;       //6
-  cout << "END NODE" << endl;         //7
+  string fileString = "";
+  fileString += "BEGIN NODE\n";       //0
+  fileString += getId();            //1
+  fileString += "\n";
+  fileString += getName();          //2
+  fileString += "\n";
+  fileString += getLevel();         //3
+  fileString += "\n";
+  fileString += getMajor();         //4
+  fileString += "\n";
+  fileString += getGpa();           //5
+  fileString += "\n";
+  fileString += getAdvisor();       //6
+  fileString += "\n";
+  fileString += "END NODE\n";         //7
+  return fileString;
 }
 
 #endif

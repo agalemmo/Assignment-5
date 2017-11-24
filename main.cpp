@@ -378,7 +378,7 @@ int main()
         cout << "Last version restored." << endl;*/
         break;
       case 14: //exit
-        /*if (studentTable.is_open())
+        if (studentTable.is_open())
         {
           studentTable << masterStudent->printTreeToFile(masterStudent->root);
           studentTable.close();
@@ -387,7 +387,7 @@ int main()
         {
           facultyTable << masterFaculty->printTreeToFile(masterFaculty->root);
           facultyTable.close();
-        }*/
+        }
         cout << "Saved to studentTable.txt and facultyTable.txt. Goodbye." << endl;
         return 0;
         break;

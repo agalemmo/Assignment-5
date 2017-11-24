@@ -6,7 +6,7 @@ class FacultyTree : public BST<Faculty>
 public:
   FacultyTree();
   void printTree(TreeNode<Faculty>* root);
-  void printTreeToFile(TreeNode<Faculty>* root);
+  string printTreeToFile(TreeNode<Faculty>* root);
 };
 
 FacultyTree::FacultyTree() : BST()
@@ -25,14 +25,16 @@ void FacultyTree::printTree(TreeNode<Faculty>* root)
   delete n;
 }
 
-void FacultyTree::printTreeToFile(TreeNode<Faculty>* root)
+string FacultyTree::printTreeToFile(TreeNode<Faculty>* root)
 {
+  string returnString = "";
   TreeNode<Faculty>* n = root;
   if (n)
   {
     printTreeToFile(n->left);
-    n->data.printToFile();
+    returnString += n->data.printToFile();
     printTreeToFile(n->right);
   }
   delete n;
+  return returnString;
 }
