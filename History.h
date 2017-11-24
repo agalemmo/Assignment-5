@@ -25,7 +25,6 @@ History::History()
   studHist = new DoublyLinkedList<StudentTree>();
   facHist = new DoublyLinkedList<FacultyTree>();
 
-  //hist = new DoublyLinkedList<StudentTree, FacultyTree>();
 }
 
 History::~History()
