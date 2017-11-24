@@ -372,7 +372,13 @@ int main()
           cerr << "Data is formatted improperly. Please try again. ID should be an int.\n";
           cin >> facID;
         }
-        masterFaculty->getNode(facID)->getObj().removeAdvisee(studID);
+        if (masterFaculty->contains(facID))
+        {
+          masterFaculty->getNode(facID)->getObj().removeAdvisee(studID);
+          cout << "Student " << studID << " successfully removed." << endl;
+        }
+        else
+          cout << "Student " << studID << " not found." << endl;
         break;
       case 13: //rollback
         /*st = hist->getStudHist();

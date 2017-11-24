@@ -109,11 +109,11 @@ void Faculty::removeAdvisee(int s)
         for (int n = i; n < arraySize; ++n)
         {
           if (n == (arraySize - 1))
-            cout << "placeholder" << endl;
-            //array[n] = NULL;
+            array[n] = 0;
           else
             array[n] = array[n+1];
         }
+        numAdvisees--;
         cout << "Student " << s << " removed." << endl;
       }
       else if (i == arraySize - 1 && array[i] != s)
