@@ -32,6 +32,8 @@ class Person
 Person::Person()
 {
   id = "";
+  name = "";
+  level = "";
 }
 
 Person::Person(string iden, string nam, string lvl)

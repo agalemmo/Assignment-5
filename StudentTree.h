@@ -21,6 +21,7 @@ StudentTree::StudentTree() : BST()
 
 void StudentTree::printTree(TreeNode<Student>* root)
 {
+  cout << "PrintTree has been called.\n";
   TreeNode<Student>* n = root;
   if (n)
   {

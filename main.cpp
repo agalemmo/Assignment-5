@@ -11,6 +11,25 @@
 
 using namespace std;
 
+void printOptions()
+{
+  cout << "DATABASE MENU: " << endl;
+  cout << "[1] Print all students and their information (sorted by ascending id #)" << endl;
+  cout << "[2] Print all faculty and their information (sorted by ascending id #)" << endl;
+  cout << "[3] Find and display all student information given the student's ID" << endl;
+  cout << "[4] Find and display all faculty information given the faculty member's ID" << endl;
+  cout << "[5] Given a student's ID print the name and info of their faculty advisor" << endl;
+  cout << "[6] Given a faculty ID, print ALL the names and info of their advisees" << endl;
+  cout << "[7] Add a new student" << endl;
+  cout << "[8] Delete a student given the ID" << endl;
+  cout << "[9] Add a new faculty member" << endl;
+  cout << "[10] Delete a faculty member given the ID" << endl;
+  cout << "[11] Change a student's advisor given the student ID and the new faculty ID" << endl;
+  cout << "[12] Remove an advisee from a faculty member given the ID" << endl;
+  cout << "[13] Rollback" << endl;
+  cout << "[14] Exit." << endl;
+}
+
 int main()
 {
   string line;
@@ -97,21 +116,7 @@ int main()
   }
   while (true)
   {
-    cout << "DATABASE MENU: " << endl;
-    cout << "[1] Print all students and their information (sorted by ascending id #)" << endl;
-    cout << "[2] Print all faculty and their information (sorted by ascending id #)" << endl;
-    cout << "[3] Find and display all student information given the student's ID" << endl;
-    cout << "[4] Find and display all faculty information given the faculty member's ID" << endl;
-    cout << "[5] Given a student's ID print the name and info of their faculty advisor" << endl;
-    cout << "[6] Given a faculty ID, print ALL the names and info of their advisees" << endl;
-    cout << "[7] Add a new student" << endl;
-    cout << "[8] Delete a student given the ID" << endl;
-    cout << "[9] Add a new faculty member" << endl;
-    cout << "[10] Delete a faculty member given the ID" << endl;
-    cout << "[11] Change a student's advisor given the student ID and the new faculty ID" << endl;
-    cout << "[12] Remove an advisee from a faculty member given the ID" << endl;
-    cout << "[13] Rollback" << endl;
-    cout << "[14] Exit." << endl;
+    printOptions();
     cin >> option;
 
     switch(option)
@@ -145,6 +150,7 @@ int main()
       case 7: //add a new student to StudentTree
         //hist->addHistory(masterStudent);
         //hist->addHistory(masterFaculty);
+        s = new Student();
         cout << "Enter student information: " << endl;
         cout << "NAME: ";
         cin >> info;
@@ -164,7 +170,7 @@ int main()
         cout << "\nADVISOR: ";
         cin >> info;
         s->setAdvisor(info);
-        //masterStudent->insert(s->getId(), &s); //trouble with pointers come back to this
+        masterStudent->insert(s->getId(), *s); //trouble with pointers come back to this
         cout << "\n New student object created and inserted into tree." << endl;
         break;
       case 8: //remove student from StudentTree
