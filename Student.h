@@ -5,6 +5,10 @@
 
 using namespace std;
 
+/**
+A student class.
+Students have a name, level, ID, major, GPA, and advisor.
+*/
 class Student : public Person
 {
   private:
@@ -29,6 +33,9 @@ class Student : public Person
     void printToFile();
 };
 
+/**
+Default constructor inherits from Person's constructor.
+*/
 Student::Student() : Person()
 {
   major = "";
@@ -36,6 +43,9 @@ Student::Student() : Person()
   advisor = 0;
 }
 
+/**
+Overloaded constructor sets major, GPA, and advisor, in addition to inheriting from Person.
+*/
 Student::Student(int ident, string nam, string lvl, string maj, double grade, int adv) : Person(ident, nam, lvl)
 {
   major = maj;
@@ -43,21 +53,33 @@ Student::Student(int ident, string nam, string lvl, string maj, double grade, in
   advisor = adv;
 }
 
+/**
+Destructor does nothing.
+*/
 Student::~Student()
 {
 
 }
 
+/**
+getMajor returns major.
+*/
 string Student::getMajor()
 {
   return major;
 }
 
+/**
+getGpa returns GPA.
+*/
 double Student::getGpa()
 {
   return gpa;
 }
 
+/**
+getAdvisor returns advisor.
+*/
 int Student::getAdvisor()
 {
   return advisor;
@@ -78,6 +100,10 @@ void Student::setAdvisor(int s)
   advisor = s;
 }
 
+/**
+Overloaded equality operator.
+Returns true if all elements of the students are equal.
+*/
 bool operator==(Student& x, Student& y)
 {
   return x.getId() == y.getId()
@@ -88,16 +114,27 @@ bool operator==(Student& x, Student& y)
       && x.getAdvisor() == y.getAdvisor();
 }
 
+/**
+Overloaded less than operator.
+Returns true if the first student's ID is less than the second student's.
+*/
 bool operator < (Student& x, Student& y)
 {
   return x.getId() < y.getId();
 }
 
+/**
+Overloaded greater than operator.
+Returns true if the first student's ID is greater than the second student's.
+*/
 bool operator > (Student& x, Student& y)
 {
   return x.getId() > y.getId();
 }
 
+/**
+print prints student's data to cout.
+*/
 void Student::print()
 {
   cout << "STUDENT ID: " << Person::getId() << endl;
@@ -108,6 +145,9 @@ void Student::print()
   cout << "STUDENT'S ADVISOR: " << advisor << endl;
 }
 
+/**
+printToFile prints student's data to file, to be used when loading database.
+*/
 void Student::printToFile()
 {
   cout << "BEGIN NODE" << endl;       //0

@@ -5,6 +5,10 @@
 
 using namespace std;
 
+/**
+A person class. Has the shared methods/member variables of Student and Faculty.
+*/
+
 class Person
 {
   private:
@@ -29,6 +33,9 @@ class Person
     void print();
 };
 
+/**
+Default constructor.
+*/
 Person::Person()
 {
   id = 0;
@@ -36,6 +43,10 @@ Person::Person()
   level = "";
 }
 
+/**
+Overloaded constructor.
+Takes in ID, name, and level.
+*/
 Person::Person(int iden, string nam, string lvl)
 {
   id = iden;
@@ -43,39 +54,65 @@ Person::Person(int iden, string nam, string lvl)
   level = lvl;
 }
 
+/**
+Destructor.
+Does nothing.
+*/
 Person::~Person()
 {}
 
+/**
+getID returns ID.
+*/
 int Person::getId()
 {
   return id;
 }
 
+/**
+getName returns name.
+*/
 string Person::getName()
 {
   return name;
 }
 
+/**
+getLevel returns level.
+*/
 string Person::getLevel()
 {
   return level;
 }
 
+/**
+setID sets ID to parameter int.
+*/
 void Person::setId(int n)
 {
   id = n;
 }
 
+/**
+setName sets name to parameter string.
+*/
 void Person::setName(string s)
 {
   name = s;
 }
 
+/**
+setLevel sets level to parameter string.
+*/
 void Person::setLevel(string s)
 {
   level = s;
 }
 
+/**
+Print
+To be overridden in sub-classes.
+*/
 void Person::print()
 {
 }
