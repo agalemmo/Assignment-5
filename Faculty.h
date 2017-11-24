@@ -169,7 +169,7 @@ string Faculty::printToFile()
 {
   string returnString = "";
   returnString += "BEGIN NODE\n";
-  returnString += getId();
+  returnString += to_string(getId());
   returnString += "\n";
   returnString += getName();
   returnString += "\n";
