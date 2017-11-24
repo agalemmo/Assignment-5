@@ -1,5 +1,10 @@
 /**
   @TODO
+    FUNCTIONS TO BE ADDED:
+      - Fix write/restore from file
+      - Should be randomly generating our own ID, not prompting
+    BUGS:
+      - Print all students only works once
 **/
 
 #include "Student.h"
