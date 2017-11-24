@@ -128,9 +128,10 @@ int main()
   facFile.open("facultyTable.txt");
   if (facFile.is_open())
   {
-    Faculty* f = new Faculty();
+    f = new Faculty();
     while ( getline (facFile, line))
     {
+      cout << "While loop calle.d\n";
       if (line == "BEGIN NODE")
       {
         lineCount = 0;
@@ -143,7 +144,12 @@ int main()
         f->setDept(line);
       if (lineCount == 4)
         f->setLevel(line);
-      if (lineCount >= 5)
+      if (line == "END NODE")
+      {
+        masterFaculty->insert(f->getId(), *f);
+        delete f;
+      }
+      else if (lineCount >= 5)
       {
         try
         {
@@ -153,12 +159,6 @@ int main()
         {
           continue;
         }
-      }
-      if (line == "END NODE")
-      {
-        cout << "Inserting...\n";
-        masterFaculty->insert(f->getId(), *f);
-        delete f;
       }
       lineCount++;
     }
