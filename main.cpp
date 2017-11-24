@@ -308,6 +308,7 @@ int main()
       case 9: //add a new faculty member to FacultyTree
         hist->addHistory(masterStudent);
         hist->addHistory(masterFaculty);
+        cout << "added faculty history" << endl;
         f = new Faculty();
         cout << "Enter faculty information: " << endl;
         cout << "NAME: ";
@@ -425,10 +426,18 @@ int main()
           cout << "Faculty " << facID << " not found." << endl;
         break;
       case 13: //rollback
+        cout << "\n+++Student before" << endl;
+        masterStudent->printTree(masterStudent->root);
+        cout << "\n+++Faculty before" << endl;
+        masterFaculty->printTree(masterFaculty->root);
         st = hist->getStudHist();
         masterStudent = &st;
+        cout << "\n+++Student after" << endl;
+        masterStudent->printTree(masterStudent->root);
         ft = hist->getFacHist();
         masterFaculty = &ft;
+        cout << "\n+++Faculty after" << endl;
+        masterFaculty->printTree(masterFaculty->root);
         cout << "Last version restored." << endl;
         break;
       case 14: //exit
