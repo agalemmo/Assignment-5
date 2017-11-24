@@ -10,20 +10,20 @@ class Student : public Person
   private:
     string major;
     double gpa;
-    string advisor;
+    int advisor;
 
   public:
     Student();
-    Student(string ident, string nam, string lvl, string maj, double grade, string adv);
+    Student(int ident, string nam, string lvl, string maj, double grade, int adv);
     ~Student();
 
     string getMajor();
     double getGpa();
-    string getAdvisor();
+    int getAdvisor();
 
     void setMajor(string s);
     void setGPA(double d);
-    void setAdvisor(string s);
+    void setAdvisor(int s);
 
     void print();
     void printToFile();
@@ -33,10 +33,10 @@ Student::Student() : Person()
 {
   major = "";
   gpa = 0;
-  advisor = "";
+  advisor = 0;
 }
 
-Student::Student(string ident, string nam, string lvl, string maj, double grade, string adv) : Person(ident, nam, lvl)
+Student::Student(int ident, string nam, string lvl, string maj, double grade, int adv) : Person(ident, nam, lvl)
 {
   major = maj;
   gpa = grade;
@@ -58,7 +58,7 @@ double Student::getGpa()
   return gpa;
 }
 
-string Student::getAdvisor()
+int Student::getAdvisor()
 {
   return advisor;
 }
@@ -73,7 +73,7 @@ void Student::setGPA(double d)
   gpa = d;
 }
 
-void Student::setAdvisor(string s)
+void Student::setAdvisor(int s)
 {
   advisor = s;
 }

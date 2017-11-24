@@ -44,8 +44,8 @@ int main()
   int option;
   string idToBeFound;
   string info;
-  string facID;
-  string studID;
+  int facID;
+  int studID;
   double d;
   Student* s;
 
@@ -64,7 +64,7 @@ int main()
         lineCount = 0;
       }
       if (lineCount == 1)
-        s->setId(line);
+        s->setId(stoi(line));
       if (lineCount == 2)
         s->setName(line);
       if (lineCount == 3)
@@ -74,7 +74,7 @@ int main()
       if (lineCount == 5)
         s->setGPA(stoi(line));
       if (lineCount == 6)
-        s->setAdvisor(line);
+        s->setAdvisor(stoi(line));
       if (line == "END NODE")
       {
         masterStudent->insert(s->getId(), *s);
@@ -96,7 +96,7 @@ int main()
         lineCount = 0;
       }
       if (lineCount == 1)
-        f->setId(line);
+        f->setId(stoi(line));
       if (lineCount == 2)
         f->setName(line);
       if (lineCount == 3)
@@ -104,7 +104,7 @@ int main()
       if (lineCount == 4)
         f->setLevel(line);
       if (lineCount >= 5)
-        f->addAdvisee(line);
+        f->addAdvisee(stoi(line));
       if (line == "END NODE")
       {
         masterFaculty->insert(f->getId(), *f);
@@ -129,23 +129,23 @@ int main()
         break;
       case 3: //find student given id
         cout << "Enter the ID number.\n";
-        cin >> idToBeFound;
-        cout << masterStudent->getNode(idToBeFound) << endl;
+        cin >> (idToBeFound);
+        cout << masterStudent->getNode(stoi(idToBeFound)) << endl;
         break;
       case 4: //find faculty member given id
         cout << "Enter the ID Number." << endl;
-        cin >> idToBeFound;
-        cout << masterFaculty->getNode(idToBeFound) << endl;
+        cin >> (idToBeFound);
+        cout << masterFaculty->getNode(stoi(idToBeFound)) << endl;
         break;
       case 5: //with id of student print info of faculty ADVISOR
         cout << "Enter the ID Number." << endl;
-        cin >> idToBeFound;
-        cout << masterFaculty->getNode(masterStudent->getNode(idToBeFound)->getObj().getAdvisor()) << endl;
+        cin >> (idToBeFound);
+        cout << masterFaculty->getNode(masterStudent->getNode(stoi(idToBeFound))->getObj().getAdvisor()) << endl;
         break;
       case 6: //with id of faculty print names and id of adviseeString
         cout << "Enter the ID Number." << endl;
-        cin >> idToBeFound;
-        cout << masterFaculty->getNode(idToBeFound)->getObj().returnArray() << endl;
+        cin >> (idToBeFound);
+        cout << masterFaculty->getNode(stoi(idToBeFound))->getObj().returnArray() << endl;
         break;
       case 7: //add a new student to StudentTree
         //hist->addHistory(masterStudent);
@@ -157,7 +157,7 @@ int main()
         s->setName(info);
         cout << "\nID: ";
         cin >> info;
-        s->setId(info);
+        s->setId(stoi(info));
         cout << "\nYEAR: ";
         cin >> info;
         s->setLevel(info);
@@ -169,16 +169,16 @@ int main()
         s->setGPA(d);
         cout << "\nADVISOR: ";
         cin >> info;
-        s->setAdvisor(info);
-        masterStudent->insert(s->getId(), *s); //trouble with pointers come back to this
+        s->setAdvisor(stoi(info));
+        masterStudent->insert(s->getId(), *s);
         cout << "\n New student object created and inserted into tree." << endl;
         break;
       case 8: //remove student from StudentTree
         //hist->addHistory(masterStudent);
         //hist->addHistory(masterFaculty);
         cout << "Enter the ID Number: " << endl;
-        cin >> idToBeFound;
-        masterStudent->deleteNode(idToBeFound);
+        cin >> (idToBeFound);
+        masterStudent->deleteNode(stoi(idToBeFound));
         break;
       case 9: //add a new faculty member to FacultyTree
         //hist->addHistory(masterStudent);
@@ -190,7 +190,7 @@ int main()
         //hist->addHistory(masterFaculty);
         cout << "Enter the ID Number: " << endl;
         cin >> idToBeFound;
-        masterFaculty->deleteNode(idToBeFound);
+        masterFaculty->deleteNode(stoi(idToBeFound));
         break;
       case 11: //change student's advisor
         //hist->addHistory(masterStudent);

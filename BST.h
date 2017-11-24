@@ -10,10 +10,10 @@ class BST
     BST();
     ~BST();
 
-    void insert(string id, T data);
-    bool contains(string id);
-    bool deleteNode(string id);
-    TreeNode<T>* getNode(string id);
+    void insert(int id, T data);
+    bool contains(int id);
+    bool deleteNode(int id);
+    TreeNode<T>* getNode(int id);
     TreeNode<T>* getSuccessor(TreeNode<T>* d);
     TreeNode<T>* getMin();
     TreeNode<T>* getMax();
@@ -70,7 +70,7 @@ TreeNode<T>* BST<T>::getMax()
 }
 
 template <class T>
-void BST<T>::insert(string id, T data)
+void BST<T>::insert(int id, T data)
 {
   TreeNode<T>* newNode = new TreeNode<T>(id, data);
 
@@ -111,7 +111,7 @@ void BST<T>::insert(string id, T data)
 }
 
 template <class T>
-bool BST<T>::contains(string id)
+bool BST<T>::contains(int id)
 {
   if (root == NULL)
     return false;
@@ -135,7 +135,7 @@ bool BST<T>::contains(string id)
 }
 
 template <class T>
-bool BST<T>::deleteNode(string id)
+bool BST<T>::deleteNode(int id)
 {
   if(root == NULL)
     return false;
@@ -238,7 +238,7 @@ TreeNode<T>* BST<T>::getSuccessor(TreeNode<T>*d)
 }
 
 template <class T>
-TreeNode<T>* BST<T>::getNode(string id)
+TreeNode<T>* BST<T>::getNode(int id)
 {
   if (root == NULL)
   {

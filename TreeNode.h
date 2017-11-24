@@ -6,11 +6,11 @@ class TreeNode
     TreeNode<T>* left;
     TreeNode<T>* right;
     int height;
-    string key; //ID Number
+    int key; //ID Number
     T data; //the T object
 
     TreeNode();
-    TreeNode(string k, T s);
+    TreeNode(int k, T s);
     ~TreeNode();
 
     T getObj();
@@ -28,7 +28,7 @@ TreeNode<T>::TreeNode()
 }
 
 template <class T>
-TreeNode<T>::TreeNode(string k, T s)
+TreeNode<T>::TreeNode(int k, T s)
 {
   left = NULL;
   right = NULL;

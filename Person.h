@@ -8,19 +8,19 @@ using namespace std;
 class Person
 {
   private:
-    string id;
+    int id;
     string name;
     string level;
   public:
     Person();
-    Person(string iden, string nam, string lvl);
+    Person(int iden, string nam, string lvl);
     ~Person();
 
-    string getId();
+    int getId();
     string getName();
     string getLevel();
 
-    void setId(string n);
+    void setId(int n);
     void setName(string s);
     void setLevel(string s);
 
@@ -31,12 +31,12 @@ class Person
 
 Person::Person()
 {
-  id = "";
+  id = 0;
   name = "";
   level = "";
 }
 
-Person::Person(string iden, string nam, string lvl)
+Person::Person(int iden, string nam, string lvl)
 {
   id = iden;
   name = nam;
@@ -46,7 +46,7 @@ Person::Person(string iden, string nam, string lvl)
 Person::~Person()
 {}
 
-string Person::getId()
+int Person::getId()
 {
   return id;
 }
@@ -61,7 +61,7 @@ string Person::getLevel()
   return level;
 }
 
-void Person::setId(string n)
+void Person::setId(int n)
 {
   id = n;
 }

@@ -13,22 +13,22 @@ class Faculty : public Person
   private:
     string dept;
     Person base;
-    string advArray[10];
+    int advArray[10];
     int numAdvisees;
     int arraySize;
-    string* array;
+    int* array;
 
   public:
     Faculty();
-    Faculty(string id, string name, string level, string dpt);
+    Faculty(int id, string name, string level, string dpt);
     ~Faculty();
 
     string getDept();
-    string* getAdvisees();
+    int* getAdvisees();
 
     void setDept(string s);
-    void addAdvisee(string s);
-    void removeAdvisee(string s);
+    void addAdvisee(int s);
+    void removeAdvisee(int s);
 
     //bool advFull();
 
@@ -45,7 +45,7 @@ Faculty::Faculty() : Person()
   array = advArray;
 }
 
-Faculty::Faculty(string id, string name, string level, string dpt) : Person(id, name, level) //add advisees?
+Faculty::Faculty(int id, string name, string level, string dpt) : Person(id, name, level) //add advisees?
 {
   dept = dpt;
   numAdvisees = 0;
@@ -63,7 +63,7 @@ string Faculty::getDept()
   return dept;
 }
 
-string* Faculty::getAdvisees()
+int* Faculty::getAdvisees()
 {
   return array;
 }
@@ -73,7 +73,7 @@ void Faculty::setDept(string s)
   dept = s;
 }
 
-void Faculty::addAdvisee(string s)
+void Faculty::addAdvisee(int s)
 {
   if (numAdvisees < arraySize)
   {
@@ -82,12 +82,12 @@ void Faculty::addAdvisee(string s)
   }
   else
   {
-    string *newArray = new string[arraySize*2];
+    int *newArray = new int[arraySize*2];
     for (int i = 0; i < arraySize; ++i)
       newArray[i] = advArray[i];
     arraySize = arraySize *2;
     array = newArray;
-    string *advArray = new string[arraySize];
+    int *advArray = new int[arraySize];
     for (int i = 0; i < arraySize; ++i)
       advArray[i] = newArray[i];
     array = advArray;
@@ -97,7 +97,7 @@ void Faculty::addAdvisee(string s)
   }
 }
 
-void Faculty::removeAdvisee(string s)
+void Faculty::removeAdvisee(int s)
 {
   if (numAdvisees >= 0)
   {

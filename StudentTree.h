@@ -7,16 +7,16 @@ public:
   StudentTree();
   void printTree(TreeNode<Student>* root);
   void printTreeToFile(TreeNode<Student>* root);
-  //TreeNode<Student>* getNode(string id);
+  //TreeNode<Student>* getNode(int id);
 };
 
 StudentTree::StudentTree() : BST()
 {
 }
 
-/*TreeNode<Student>* StudentTree::getNode(string id) : BST()
+/*TreeNode<Student>* StudentTree::getNode(int id) : BST()
 {
-  return (Student)BST::getNode(string id);
+  return (Student)BST::getNode(int id);
 }*/
 
 void StudentTree::printTree(TreeNode<Student>* root)
