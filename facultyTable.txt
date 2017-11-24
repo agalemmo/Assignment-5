@@ -1,7 +1,7 @@
 BEGIN NODE
 5807
-mia
-cs
+jn
+math
 prof
 
 END NODE

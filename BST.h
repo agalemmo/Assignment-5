@@ -77,7 +77,10 @@ void BST<T>::insert(int id, T data)
   TreeNode<T>* newNode = new TreeNode<T>(id, data);
 
   if (root == NULL) //empty TreeNode
+  {
     root = newNode;
+    cout << "Inserted null.\n";
+  }
 
   else //not empty
   {
@@ -96,6 +99,7 @@ void BST<T>::insert(int id, T data)
         {
           //found the location for the new node
           parent->left = newNode;
+          cout << "Inserted.\n";
           break;
         }
       }
@@ -105,6 +109,7 @@ void BST<T>::insert(int id, T data)
         if (current == NULL)
         {
           parent->right = newNode;
+          cout << "Inserted2.\n";
           break;
         }
       }

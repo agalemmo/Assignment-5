@@ -70,8 +70,8 @@ int main()
   string line;
   ifstream studFile;
   ifstream facFile;
-  ofstream studentTable ("studentTable.txt");
-  ofstream facultyTable ("facultyTable.txt");
+  fstream studentTable ("studentTable.txt");
+  fstream facultyTable ("facultyTable.txt");
 
   StudentTree* masterStudent = new StudentTree();
   FacultyTree* masterFaculty = new FacultyTree();
@@ -93,14 +93,14 @@ int main()
 
   History* hist = new History();
 
-  studFile.open("Assignment-5\\studentTable.txt");
+  studFile.open("studentTable.txt");
   if (studFile.is_open())
   {
     while ( getline (studFile, line))
     {
       if (line == "BEGIN NODE")
       {
-        Student* s = new Student();
+        s = new Student();
         lineCount = 0;
       }
       if (lineCount == 1)
@@ -125,7 +125,7 @@ int main()
     studFile.close();
   }
 
-  facFile.open("Assignment-5\\facultyTable.txt");
+  facFile.open("facultyTable.txt");
   if (facFile.is_open())
   {
     Faculty* f = new Faculty();
@@ -144,9 +144,19 @@ int main()
       if (lineCount == 4)
         f->setLevel(line);
       if (lineCount >= 5)
-        f->addAdvisee(stoi(line));
+      {
+        try
+        {
+          f->addAdvisee(stoi(line));
+        }
+        catch (exception)
+        {
+          continue;
+        }
+      }
       if (line == "END NODE")
       {
+        cout << "Inserting...\n";
         masterFaculty->insert(f->getId(), *f);
         delete f;
       }
