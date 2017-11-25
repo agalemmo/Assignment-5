@@ -120,7 +120,7 @@ int main()
   }
 
   studFile.open("studentTable.txt");
-  if (studFile.is_open())
+  while (studFile.is_open())
   {
     while ( getline (studFile, line))
     {
@@ -237,8 +237,10 @@ int main()
           cerr << "No faculty exists with that ID number. Please try again.\n";
         break;
       case 7: //add a new student to StudentTree
-        hist->addHistory(*masterStudent);
-        hist->addHistory(*masterFaculty);
+        cout << "test\n";
+      //  hist->addHistory(*masterStudent);
+      //  hist->addHistory(*masterFaculty);
+        cout << "Yo\n";
         if (masterFaculty->isEmpty())
         {
           cerr << "Your faculty tree is empty. You can't add a student until you have at least one faculty member, or your student can't have an advisor.\n";
@@ -293,8 +295,8 @@ int main()
         cout << "\n New student object created and inserted into tree." << endl;
         break;
       case 8: //remove student from StudentTree
-        hist->addHistory(*masterStudent);
-        hist->addHistory(*masterFaculty);
+    //    hist->addHistory(*masterStudent);
+    //    hist->addHistory(*masterFaculty);
         cout << "Enter the ID Number: " << endl;
         cin >> (idToBeFound);
         while (cin.fail())
@@ -308,8 +310,8 @@ int main()
           cerr << "This student does not exist, and therefore could not be removed.\n";
         break;
       case 9: //add a new faculty member to FacultyTree
-        hist->addHistory(*masterStudent);
-        hist->addHistory(*masterFaculty);
+  //      hist->addHistory(*masterStudent);
+//        hist->addHistory(*masterFaculty);
         cout << "added faculty history" << endl;
         f = new Faculty();
         cout << "Enter faculty information: " << endl;
@@ -337,8 +339,8 @@ int main()
         cout << "\n New faculty object created and inserted into tree." << endl;
         break;
       case 10: //remove faculty from FacultyTree
-        hist->addHistory(*masterStudent);
-        hist->addHistory(*masterFaculty);
+  //      hist->addHistory(*masterStudent);
+  //      hist->addHistory(*masterFaculty);
         cout << "Enter the ID Number: " << endl;
         cin >> facID;
         while (cin.fail())
@@ -369,8 +371,8 @@ int main()
         }
         break;
       case 11: //change student's advisor
-        hist->addHistory(*masterStudent);
-        hist->addHistory(*masterFaculty);
+  //      hist->addHistory(*masterStudent);
+  //      hist->addHistory(*masterFaculty);
         cout << "Enter the Student's ID Number: " << endl;
         cin >> studID;
         while (cin.fail())
@@ -405,8 +407,8 @@ int main()
           cout << "Faculty member " << facID << " not found." << endl;
         break;
       case 12: //remove advisee from faculty member
-        hist->addHistory(*masterStudent);
-        hist->addHistory(*masterFaculty);
+  //      hist->addHistory(*masterStudent);
+  //      hist->addHistory(*masterFaculty);
         cout << "Enter the Faculty Member's ID Number: " << endl;
         cin >> facID;
         while (cin.fail())
