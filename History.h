@@ -13,8 +13,8 @@ class History
     History();
     ~History();
 
-    void addHistory(StudentTree* stud);
-    void addHistory(FacultyTree* fac);
+    void addHistory(StudentTree stud);
+    void addHistory(FacultyTree fac);
 
     StudentTree getStudHist();
     FacultyTree getFacHist();
@@ -22,7 +22,6 @@ class History
 
 History::History()
 {
-  cout << "history object created" << endl;
   studHist = new DoublyLinkedList<StudentTree>();
   facHist = new DoublyLinkedList<FacultyTree>();
 
@@ -35,22 +34,18 @@ History::~History()
   //delete hist;
 }
 
-void History::addHistory(StudentTree* stud)
+void History::addHistory(StudentTree stud)
 {
-  cout << "size before" << studHist->getSize() << endl;
   if (studHist->getSize() == 5)
     studHist->removeBack();
-  studHist->insertFront(*stud);
-  cout << "size after" << studHist->getSize() << endl;
+  studHist->insertFront(stud);
 }
 
-void History::addHistory(FacultyTree* fac)
+void History::addHistory(FacultyTree fac)
 {
-  cout << "size before" << facHist->getSize() << endl;
   if (facHist->getSize() == 5)
     facHist->removeBack();
-  facHist->insertFront(*fac);
-  cout << "size after" << facHist->getSize() << endl;
+  facHist->insertFront(fac);
 }
 
 StudentTree History::getStudHist()

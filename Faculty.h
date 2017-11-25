@@ -92,36 +92,27 @@ void Faculty::setDept(string s)
   dept = s;
 }
 
-<<<<<<< HEAD
-=======
 /**
 getNumAdvisees gets number of advisees this faculty member has.
 */
->>>>>>> c5e3770da027bd6f8595089e1bc6d5e219326686
 int Faculty::getNumAdvisees()
 {
   return numAdvisees;
 }
 
-<<<<<<< HEAD
-=======
 /**
 setNumAdvisees sets number of advisees to parameter.
 */
->>>>>>> c5e3770da027bd6f8595089e1bc6d5e219326686
 void Faculty::setNumAdvisees(int n)
 {
   numAdvisees = n;
 }
 
-<<<<<<< HEAD
-=======
 /**
 addAdvisee
 Adds a student to list of advisees. Increments numAdvisees.
 If necessary, increases array size.
 */
->>>>>>> c5e3770da027bd6f8595089e1bc6d5e219326686
 void Faculty::addAdvisee(int s)
 {
   if (numAdvisees < arraySize)

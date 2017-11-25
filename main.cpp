@@ -95,23 +95,15 @@ int main()
 
   History* hist = new History();
 
-<<<<<<< HEAD
-  studFile.open("studentTable.txt");
-  if (studFile.is_open())
-=======
   facFile.open("facultyTable.txt");
   if (facFile.is_open())
->>>>>>> c5e3770da027bd6f8595089e1bc6d5e219326686
   {
     f = new Faculty();
     while ( getline (facFile, line))
     {
       if (line == "BEGIN NODE")
       {
-<<<<<<< HEAD
         s = new Student();
-=======
->>>>>>> c5e3770da027bd6f8595089e1bc6d5e219326686
         lineCount = 0;
       }
       if (lineCount == 1)
@@ -132,18 +124,10 @@ int main()
     facFile.close();
   }
 
-<<<<<<< HEAD
-  facFile.open("facultyTable.txt");
-  if (facFile.is_open())
-  {
-    f = new Faculty();
-    while ( getline (facFile, line))
-=======
   studFile.open("studentTable.txt");
   if (studFile.is_open())
   {
     while ( getline (studFile, line))
->>>>>>> c5e3770da027bd6f8595089e1bc6d5e219326686
     {
       if (line == "BEGIN NODE")
       {
@@ -157,9 +141,6 @@ int main()
       if (lineCount == 3)
         s->setLevel(line);
       if (lineCount == 4)
-<<<<<<< HEAD
-        f->setLevel(line);
-=======
         s->setMajor(line);
       if (lineCount == 5)
         s->setGPA(stoi(line));
@@ -168,7 +149,6 @@ int main()
         s->setAdvisor(stoi(line));
         masterFaculty->getNode(stoi(line))->getObj().addAdvisee(s->getId());
       }
->>>>>>> c5e3770da027bd6f8595089e1bc6d5e219326686
       if (line == "END NODE")
       {
         masterStudent->insert(s->getId(), *s);
@@ -273,8 +253,8 @@ int main()
           cerr << "No faculty exists with that ID number. Please try again.\n";
         break;
       case 7: //add a new student to StudentTree
-        hist->addHistory(masterStudent);
-        hist->addHistory(masterFaculty);
+        hist->addHistory(*masterStudent);
+        hist->addHistory(*masterFaculty);
         if (masterFaculty->isEmpty())
         {
           cerr << "Your faculty tree is empty. You can't add a student until you have at least one faculty member, or your student can't have an advisor.\n";
@@ -329,8 +309,8 @@ int main()
         cout << "\n New student object created and inserted into tree." << endl;
         break;
       case 8: //remove student from StudentTree
-        hist->addHistory(masterStudent);
-        hist->addHistory(masterFaculty);
+        hist->addHistory(*masterStudent);
+        hist->addHistory(*masterFaculty);
         cout << "Enter the ID Number: " << endl;
         cin >> (idToBeFound);
         while (cin.fail())
@@ -344,8 +324,8 @@ int main()
           cerr << "This student does not exist, and therefore could not be removed.\n";
         break;
       case 9: //add a new faculty member to FacultyTree
-        hist->addHistory(masterStudent);
-        hist->addHistory(masterFaculty);
+        hist->addHistory(*masterStudent);
+        hist->addHistory(*masterFaculty);
         cout << "added faculty history" << endl;
         f = new Faculty();
         cout << "Enter faculty information: " << endl;
@@ -373,8 +353,8 @@ int main()
         cout << "\n New faculty object created and inserted into tree." << endl;
         break;
       case 10: //remove faculty from FacultyTree
-        hist->addHistory(masterStudent);
-        hist->addHistory(masterFaculty);
+        hist->addHistory(*masterStudent);
+        hist->addHistory(*masterFaculty);
         cout << "Enter the ID Number: " << endl;
         cin >> facID;
         while (cin.fail())
@@ -405,8 +385,8 @@ int main()
         }
         break;
       case 11: //change student's advisor
-        hist->addHistory(masterStudent);
-        hist->addHistory(masterFaculty);
+        hist->addHistory(*masterStudent);
+        hist->addHistory(*masterFaculty);
         cout << "Enter the Student's ID Number: " << endl;
         cin >> studID;
         while (cin.fail())
@@ -441,8 +421,8 @@ int main()
           cout << "Faculty member " << facID << " not found." << endl;
         break;
       case 12: //remove advisee from faculty member
-        hist->addHistory(masterStudent);
-        hist->addHistory(masterFaculty);
+        hist->addHistory(*masterStudent);
+        hist->addHistory(*masterFaculty);
         cout << "Enter the Faculty Member's ID Number: " << endl;
         cin >> facID;
         while (cin.fail())
