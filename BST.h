@@ -77,7 +77,9 @@ void BST<T>::insert(int id, T data)
   TreeNode<T>* newNode = new TreeNode<T>(id, data);
 
   if (root == NULL) //empty TreeNode
+  {
     root = newNode;
+  }
 
   else //not empty
   {

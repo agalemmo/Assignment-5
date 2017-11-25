@@ -1,7 +1,6 @@
 /**
   @TODO
     FUNCTIONS TO BE ADDED:
-      - Fix write/restore from file
       - Rollback/history
     BUGS:
       - Print all students only works once (also with faculty) TEMP FIX
@@ -70,8 +69,8 @@ int main()
   string line;
   ifstream studFile;
   ifstream facFile;
-  ofstream studentTable ("studentTable.txt");
-  ofstream facultyTable ("facultyTable.txt");
+  fstream studentTable ("studentTable.txt");
+  fstream facultyTable ("facultyTable.txt");
 
   StudentTree* masterStudent = new StudentTree();
   FacultyTree* masterFaculty = new FacultyTree();
@@ -93,14 +92,14 @@ int main()
 
   History* hist = new History();
 
-  studFile.open("Assignment-5\\studentTable.txt");
+  studFile.open("studentTable.txt");
   if (studFile.is_open())
   {
     while ( getline (studFile, line))
     {
       if (line == "BEGIN NODE")
       {
-        Student* s = new Student();
+        s = new Student();
         lineCount = 0;
       }
       if (lineCount == 1)
@@ -125,10 +124,10 @@ int main()
     studFile.close();
   }
 
-  facFile.open("Assignment-5\\facultyTable.txt");
+  facFile.open("facultyTable.txt");
   if (facFile.is_open())
   {
-    Faculty* f = new Faculty();
+    f = new Faculty();
     while ( getline (facFile, line))
     {
       if (line == "BEGIN NODE")
@@ -143,12 +142,21 @@ int main()
         f->setDept(line);
       if (lineCount == 4)
         f->setLevel(line);
-      if (lineCount >= 5)
-        f->addAdvisee(stoi(line));
       if (line == "END NODE")
       {
         masterFaculty->insert(f->getId(), *f);
         delete f;
+      }
+      else if (lineCount >= 5)
+      {
+        try
+        {
+          f->addAdvisee(stoi(line));
+        }
+        catch (exception)
+        {
+          continue;
+        }
       }
       lineCount++;
     }
@@ -281,6 +289,7 @@ int main()
         {
           s->setAdvisor(facID);
           masterFaculty->getNode(facID)->getObj().addAdvisee(studID);
+          cout << "1." << to_string(masterFaculty->getNode(facID)->getObj().getNumAdvisees()) << endl;
         }
         else
         {

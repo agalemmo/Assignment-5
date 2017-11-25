@@ -165,6 +165,7 @@ string Student::printToFile()
   fileString += getAdvisor();       //6
   fileString += "\n";
   fileString += "END NODE\n";         //7
+  cout << fileString; //DEBUG
   return fileString;
 }
 
