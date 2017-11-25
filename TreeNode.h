@@ -38,7 +38,7 @@ TreeNode<T>::TreeNode(int k, T s)
 template <class T>
 TreeNode<T>::~TreeNode()
 {
-  //let's build character, have fun!!!!!!!!!!!@!!@!!!!!!
+  delete &data;
 }
 
 template <class T>

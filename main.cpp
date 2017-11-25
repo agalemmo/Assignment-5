@@ -3,7 +3,6 @@
     FUNCTIONS TO BE ADDED:
       - Rollback/history
     BUGS:
-      - Print all students only works once (also with faculty) TEMP FIX
       - Advisors recognize that they have advisees when students added, but don't remember that later on. WHY???
 **/
 
@@ -17,6 +16,9 @@
 
 using namespace std;
 
+/**
+printOptions prints the database MENU
+*/
 void printOptions()
 {
   cout << "DATABASE MENU: " << endl;
@@ -87,51 +89,29 @@ int main()
   TreeNode<Faculty>* tf;
   StudentTree st;
   FacultyTree ft;
+  int* tempArray;
 
   int lineCount;
 
   History* hist = new History();
 
+<<<<<<< HEAD
   studFile.open("studentTable.txt");
   if (studFile.is_open())
-  {
-    while ( getline (studFile, line))
-    {
-      if (line == "BEGIN NODE")
-      {
-        s = new Student();
-        lineCount = 0;
-      }
-      if (lineCount == 1)
-        s->setId(stoi(line));
-      if (lineCount == 2)
-        s->setName(line);
-      if (lineCount == 3)
-        s->setLevel(line);
-      if (lineCount == 4)
-        s->setMajor(line);
-      if (lineCount == 5)
-        s->setGPA(stoi(line));
-      if (lineCount == 6)
-        s->setAdvisor(stoi(line));
-      if (line == "END NODE")
-      {
-        masterStudent->insert(s->getId(), *s);
-        delete s;
-      }
-      lineCount++;
-    }
-    studFile.close();
-  }
-
+=======
   facFile.open("facultyTable.txt");
   if (facFile.is_open())
+>>>>>>> c5e3770da027bd6f8595089e1bc6d5e219326686
   {
     f = new Faculty();
     while ( getline (facFile, line))
     {
       if (line == "BEGIN NODE")
       {
+<<<<<<< HEAD
+        s = new Student();
+=======
+>>>>>>> c5e3770da027bd6f8595089e1bc6d5e219326686
         lineCount = 0;
       }
       if (lineCount == 1)
@@ -147,6 +127,53 @@ int main()
         masterFaculty->insert(f->getId(), *f);
         delete f;
       }
+      lineCount++;
+    }
+    facFile.close();
+  }
+
+<<<<<<< HEAD
+  facFile.open("facultyTable.txt");
+  if (facFile.is_open())
+  {
+    f = new Faculty();
+    while ( getline (facFile, line))
+=======
+  studFile.open("studentTable.txt");
+  if (studFile.is_open())
+  {
+    while ( getline (studFile, line))
+>>>>>>> c5e3770da027bd6f8595089e1bc6d5e219326686
+    {
+      if (line == "BEGIN NODE")
+      {
+        s = new Student();
+        lineCount = 0;
+      }
+      if (lineCount == 1)
+        s->setId(stoi(line));
+      if (lineCount == 2)
+        s->setName(line);
+      if (lineCount == 3)
+        s->setLevel(line);
+      if (lineCount == 4)
+<<<<<<< HEAD
+        f->setLevel(line);
+=======
+        s->setMajor(line);
+      if (lineCount == 5)
+        s->setGPA(stoi(line));
+      if (lineCount == 6)
+      {
+        s->setAdvisor(stoi(line));
+        masterFaculty->getNode(stoi(line))->getObj().addAdvisee(s->getId());
+      }
+>>>>>>> c5e3770da027bd6f8595089e1bc6d5e219326686
+      if (line == "END NODE")
+      {
+        masterStudent->insert(s->getId(), *s);
+        delete s;
+      }
       else if (lineCount >= 5)
       {
         try
@@ -160,8 +187,10 @@ int main()
       }
       lineCount++;
     }
-    facFile.close();
+    studFile.close();
   }
+
+
   while (true)
   {
     printOptions();
@@ -347,7 +376,7 @@ int main()
         hist->addHistory(masterStudent);
         hist->addHistory(masterFaculty);
         cout << "Enter the ID Number: " << endl;
-        cin >> idToBeFound;
+        cin >> facID;
         while (cin.fail())
         {
           cin.clear();
@@ -355,12 +384,25 @@ int main()
           cerr << "Data is formatted improperly. Please try again. ID should be an int.\n";
           cin >> facID;
         }
-        if (!masterFaculty->getNode(idToBeFound)->left && !masterFaculty->getNode(idToBeFound)->right && !masterStudent->isEmpty())
+        if (!masterFaculty->getNode(facID)->left && !masterFaculty->getNode(facID)->right && !masterStudent->isEmpty())
         {
           cerr << "You are trying to delete the only faculty member listed. This will leave several students without an advisor, so you can not do this until there are more faculty.\n";
+          break;
         }
-        if (!masterFaculty->deleteNode(idToBeFound))
+        if (!masterFaculty->deleteNode(facID))
           cerr << "This faculty member does not exist, and therefore could not be removed.\n";
+        else
+        {
+          *f = masterFaculty->getNode(facID)->getObj();
+          tempArray = f->getAdvisees();
+          for (int i = 0; i < f->getNumAdvisees(); ++i)
+          {
+            masterStudent->getNode(tempArray[i])->getObj().setAdvisor(masterFaculty->getMin()->getObj().getId());
+            masterFaculty->getMin()->getObj().addAdvisee(tempArray[i]);
+          }
+          masterFaculty->deleteNode(facID);
+          cout << "Faculty member deleted. His advisees have been reassigned to the faculty with the lowest ID.\n";
+        }
         break;
       case 11: //change student's advisor
         hist->addHistory(masterStudent);

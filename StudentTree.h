@@ -5,21 +5,29 @@ class StudentTree : public BST<Student>
 {
 public:
   StudentTree();
+  ~StudentTree();
   void printTree(TreeNode<Student>* root);
   string printTreeToFile(TreeNode<Student>* root);
   //TreeNode<Student>* getNode(int id);
 };
 
+/**
+Constructor inherited from parent
+*/
 StudentTree::StudentTree() : BST()
 {
 }
 
-/*TreeNode<Student>* StudentTree::getNode(int id) : BST()
-{
-  return (Student)BST::getNode(int id);
-}*/
+/**
+Destructor empty - will automatically call parent's destructor upon Exit
+*/
+StudentTree::~StudentTree()
+{}
 
-//TEMP FIX OF NO DELETE - look at this pls
+/**
+printTree outputs the tree to standard out in order
+Parameter root - the root of the tree
+*/
 void StudentTree::printTree(TreeNode<Student>* root)
 {
   TreeNode<Student>* n = root;
@@ -31,6 +39,11 @@ void StudentTree::printTree(TreeNode<Student>* root)
   }
 }
 
+/**
+printTreeToFile returns a string that is the tree in order
+Does not actually print to file, but the resulting string can be printed.
+Parameter root - the root of the tree
+*/
 string StudentTree::printTreeToFile(TreeNode<Student>* root)
 {
   string returnString = "";

@@ -1,8 +1,3 @@
-/**
-  @TODO
-    all that array business
-**/
-
 #ifndef FACULTY_H
 #define FACULTY_H
 
@@ -39,6 +34,10 @@ class Faculty : public Person
     string printToFile();
 };
 
+/**
+Default constructor.
+Inherits from parent and assigns default arraySize to 10.
+*/
 Faculty::Faculty() : Person()
 {
   cout << "Constructor called for Faculty number " << getId() << endl;
@@ -48,6 +47,10 @@ Faculty::Faculty() : Person()
   array = advArray;
 }
 
+/**
+Overloaded constructor.
+Inherits from parents and assigns member variables to parameters.
+*/
 Faculty::Faculty(int id, string name, string level, string dpt) : Person(id, name, level) //add advisees?
 {
   cout << "Overloaded constructor.\n";
@@ -57,36 +60,68 @@ Faculty::Faculty(int id, string name, string level, string dpt) : Person(id, nam
   array = advArray;
 }
 
-
+/**
+Destructor.
+Does nothing.
+*/
 Faculty::~Faculty()
 {
 }
 
+/**
+getDept returns department.
+*/
 string Faculty::getDept()
 {
   return dept;
 }
 
+/**
+getAdvisor returns a pointer to int array of advisees.
+*/
 int* Faculty::getAdvisees()
 {
   return array;
 }
 
+/**
+setDept sets department to parameter.
+*/
 void Faculty::setDept(string s)
 {
   dept = s;
 }
 
+<<<<<<< HEAD
+=======
+/**
+getNumAdvisees gets number of advisees this faculty member has.
+*/
+>>>>>>> c5e3770da027bd6f8595089e1bc6d5e219326686
 int Faculty::getNumAdvisees()
 {
   return numAdvisees;
 }
 
+<<<<<<< HEAD
+=======
+/**
+setNumAdvisees sets number of advisees to parameter.
+*/
+>>>>>>> c5e3770da027bd6f8595089e1bc6d5e219326686
 void Faculty::setNumAdvisees(int n)
 {
   numAdvisees = n;
 }
 
+<<<<<<< HEAD
+=======
+/**
+addAdvisee
+Adds a student to list of advisees. Increments numAdvisees.
+If necessary, increases array size.
+*/
+>>>>>>> c5e3770da027bd6f8595089e1bc6d5e219326686
 void Faculty::addAdvisee(int s)
 {
   if (numAdvisees < arraySize)
@@ -112,6 +147,11 @@ void Faculty::addAdvisee(int s)
   }
 }
 
+/**
+removeAdvisee
+Removes advisee with ID number given by parameter.
+Paramter s - ID number of student to be removed.
+*/
 void Faculty::removeAdvisee(int s)
 {
   if (numAdvisees >= 0)
@@ -138,6 +178,10 @@ void Faculty::removeAdvisee(int s)
     cout << "Action invalid. No advisees found." << endl;
 }
 
+/**
+returnArray
+Creates and returns a string containing the data of all of this faculty's advisees.
+*/
 string Faculty::returnArray()
 {
   cout << "ReturnArray called. The prof has this many advisees: " << numAdvisees << "\n";
@@ -151,6 +195,10 @@ string Faculty::returnArray()
   return adviseeString;
 }
 
+/**
+Overloaded equality operator.
+Returns true if all properties are equal.
+*/
 bool operator==(Faculty& x, Faculty& y)
 {
   return x.getId() == y.getId()
@@ -160,16 +208,27 @@ bool operator==(Faculty& x, Faculty& y)
       && x.getAdvisees() == y.getAdvisees();
 }
 
+/**
+Overloaded less than operator.
+Returns true if the first faculty's ID is less than the second faculty member's.
+*/
 bool operator < (Faculty& x, Faculty& y)
 {
   return x.getId() < y.getId();
 }
 
+/**
+Overloaded greater than operator.
+Returns true if the first faculty's ID is greater than the second faculty member's.
+*/
 bool operator > (Faculty& x, Faculty& y)
 {
   return x.getId() > y.getId();
 }
 
+/**
+print outputs Faculty's data to screen.
+*/
 void Faculty::print()
 {
   cout << "FACULTY ID: " << getId() << endl;
@@ -179,6 +238,10 @@ void Faculty::print()
   cout << "FACULTY ADVISEES: "<< returnArray() << endl;
 }
 
+/**
+printToFile creates and returns string of Faculty's data.
+Does not actually print to file, but the resulting string can be printed to file.
+*/
 string Faculty::printToFile()
 {
   string returnString = "";
