@@ -99,10 +99,11 @@ int main()
 
   History* hist = new History();
 
-  facFile.open("facultyTable.txt");
+  facFile.open("facultyTable.txt", fstream::in | fstream::out | fstream::app);
   while (facFile.is_open())
   {
     f = new Faculty();
+    cout << "Opening fac file.\n";
     while ( getline (facFile, line))
     {
     if (lineCount == 1)
@@ -122,7 +123,7 @@ int main()
     facFile.close();
   }
 
-  studFile.open("studentTable.txt");
+  studFile.open("studentTable.txt", fstream::in | fstream::out | fstream::app);
   while (studFile.is_open())
   {
     while ( getline (studFile, line))
@@ -491,6 +492,7 @@ int main()
         if (facultyTable.is_open())
         {
           facultyTable << masterFaculty->printTreeToFile(masterFaculty->root);
+          cout << "here.\n";
           facultyTable.close();
         }
         cout << "Saved to studentTable.txt and facultyTable.txt. Goodbye." << endl;
