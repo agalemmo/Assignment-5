@@ -290,9 +290,8 @@ int main()
           s->setAdvisor(facID);
           //masterFaculty->getNode(facID)->getObj().addAdvisee(studID);
           fac = (Faculty)masterFaculty->getNode(facID)->getObj();
-          cout << "1. " << to_string(fac.getNumAdvisees()) << endl;
           fac.addAdvisee(studID);
-          cout << "1. " << to_string(fac.getNumAdvisees()) << endl;
+          masterFaculty->getNode(facID)->setObj(fac);
         }
         else
         {
@@ -439,7 +438,8 @@ int main()
         {
           if (masterStudent->contains(studID))
           {
-            masterFaculty->getNode(facID)->getObj().removeAdvisee(studID);
+            fac = masterFaculty->getNode(facID)->getObj();
+            fac.removeAdvisee(studID);
             cout << "Student " << studID << " successfully removed." << endl;
           }
           else
