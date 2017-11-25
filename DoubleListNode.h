@@ -28,6 +28,7 @@ ListNode<T>::ListNode(T d)
   data = d;
   next = NULL;
   prev = NULL;
+  cout << "list node created" << endl;
 }
 
 template <class T>
@@ -95,18 +96,27 @@ Parameter data: the data to be in the new node
 template <class T>
 void DoublyLinkedList<T>::insertFront(T data)
 {
+  cout << "insert front line 98" << endl;
   ListNode<T>* node = new ListNode<T>(data);
+  cout << "new node created" << endl;
   if (size == 0)
   {
+    cout << "size = 0 if check" << endl;
     back = node;
+    cout << "back set " << endl;
   }
   else
   {
+    cout << "size > 0 else check" << endl;
     front->prev = node;
     node->next = front;
+    cout << "nodes set" << endl;
   }
+  cout << "insert front line 114" << endl;
   front = node;
+  cout << "front = node" << endl;
   ++size;
+  cout << "size = " << size << endl;
 }
 
 /**
