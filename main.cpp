@@ -96,25 +96,20 @@ int main()
   History* hist = new History();
 
   facFile.open("facultyTable.txt");
-  if (facFile.is_open())
+  while (facFile.is_open())
   {
     f = new Faculty();
     while ( getline (facFile, line))
     {
-      if (line == "BEGIN NODE")
-      {
-        s = new Student();
-        lineCount = 0;
-      }
-      if (lineCount == 1)
-        f->setId(stoi(line));
-      if (lineCount == 2)
-        f->setName(line);
-      if (lineCount == 3)
-        f->setDept(line);
-      if (lineCount == 4)
-        f->setLevel(line);
-      if (line == "END NODE")
+    if (lineCount == 1)
+      f->setId(stoi(line));
+    if (lineCount == 2)
+      f->setName(line);
+    if (lineCount == 3)
+      f->setDept(line);
+    if (lineCount == 4)
+      f->setLevel(line);
+    if (line == "END NODE")
       {
         masterFaculty->insert(f->getId(), *f);
         delete f;
@@ -153,17 +148,6 @@ int main()
       {
         masterStudent->insert(s->getId(), *s);
         delete s;
-      }
-      else if (lineCount >= 5)
-      {
-        try
-        {
-          f->addAdvisee(stoi(line));
-        }
-        catch (exception)
-        {
-          continue;
-        }
       }
       lineCount++;
     }
