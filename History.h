@@ -1,13 +1,3 @@
-/**
-Sarah Lasman and Amanda Galemmo
-2278776          2270004
-lasma101@mail.chapman.edu  galem100@mail.chapman.edu
-CS 350 Section 3
-Assignment #5
-*/
-
-//@TODO: Fix the dumb seg fault with insertion
-
 #include <iostream>
 #include "DoubleListNode.h"
 
@@ -16,113 +6,51 @@ using namespace std;
 class History
 {
   private:
-    DoublyLinkedList<StudentTree> studHist;
-    DoublyLinkedList<FacultyTree> facHist;
-    //DoublyLinkedList<StudentTree, FacultyTree>* hist;
+    DoublyLinkedList<StudentTree> studHist*;
+    DoublyLinkedList<FacultyTree> facHist*;
+
+    StudentTree* s;
+    FacultyTree* f;
   public:
     History();
     ~History();
 
-    void addHistory(StudentTree stud);
-    void addHistory(FacultyTree fac);
+    void addStudHistory(StudentTree* stud);
+    void addFacHistory();
 
-    StudentTree getStudHist();
-    FacultyTree getFacHist();
+    StudentTree* getLastStud();
+    FacultyTree* getLastFac();
 };
 
-/*
-  Constructor for the History class
-*/
 History::History()
- {
-//   studHist = new DoublyLinkedList<StudentTree>();
-//   facHist = new DoublyLinkedList<FacultyTree>();
-
+{
+  studHist = new DoublyLinkedList<StudentTree>();
+  facHist = new DoublyLinkedList<FacultyTree>();
 }
 
-/*
-  Destructor for the history class
-*/
 History::~History()
 {
-  //delete studHist;
-  //delete facHist;
-  //delete hist;
+  delete studHist;
+  delete facHist;
+  delete s;
+  delete f;
 }
 
-/*
-  Adds a node to the student history list
-*/
-void History::addHistory(StudentTree* stud)
+void History::addStudHistory(StudentTree* stud)
 {
-  cout << "line 39 add student history" << endl;
-  if (studHist.getSize() == 5)
-  {
-    cout << "student history if check" << endl;
-    studHist.removeBack();
-    cout << "student history back removed" << endl;
-  }
-  cout << "student history less than 5" << endl;
-  cout << studHist.getSize();
-  cout << studHist.insertFront(stud); //@TODO it gets to the end of the insert front function?
-  cout << "front inserted" << endl; //@TODO now it doesn't get here for some reason??
-  // cout << "size before" << studHist.getSize() << endl;
-  // if (studHist.getSize() == 5)
-  //   studHist.removeBack();
-  // studHist.insertFront(*stud);
-  // cout << "size after" << studHist.getSize() << endl;
+  if (studHist->getSize() == 5)
+    studHist->removeBack();
+  studHist->insertFront(stud);
 }
 
-/*
-  Adds a node to the faculty history list
-*/
-void History::addHistory(FacultyTree fac)
+StudentTree* History::getLastStud();
 {
-  if (facHist.getSize() == 5)
-    facHist.removeBack();
-  cout << facHist.insertFront(fac); //@TODO: ditto
-  cout << "front inserted" << endl;
-  // cout << "size before" << facHist.getSize() << endl;
-  // if (facHist.getSize() == 5)
-  //   facHist.removeBack();
-  // facHist.insertFront(*fac);
-  // cout << "size after" << facHist.getSize() << endl;
-}
-
-/*
-  returns the most recent instance of StudentTree
-*/
-StudentTree History::getStudHist()
-{
-  if (studHist.front == NULL)
-  {
-    cerr << "No history." << endl;
-    return StudentTree();
-  }
+  if (studHist->front == NULL)
+    cout << "No history." << endl;
   else
   {
-    StudentTree s;
-    s = studHist.front->data;
-    studHist.removeFront();
+    s = studHist->front;
+    studHist->removeFront();
     return s;
-  }
-}
-
-/*
-  returns the most recent instance of FacultyTree
-*/
-FacultyTree History::getFacHist()
-{
-  if (facHist.front == NULL)
-  {
-    cerr << "No history." << endl;
-    return FacultyTree();
-  }
-  else
-  {
-    FacultyTree f;
-    f = facHist.front->data;
-    facHist.removeFront();
-    return f;
   }
 }
