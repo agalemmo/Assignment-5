@@ -36,16 +36,32 @@ History::~History()
 
 void History::addHistory(StudentTree stud)
 {
+<<<<<<< HEAD
   if (studHist->getSize() == 5)
     studHist->removeBack();
   studHist->insertFront(stud);
+=======
+  // cout << "size before" << studHist->getSize() << endl;
+  // if (studHist->getSize() == 5)
+  //   studHist->removeBack();
+  // studHist->insertFront(*stud);
+  // cout << "size after" << studHist->getSize() << endl;
+>>>>>>> 28927297b32239c330c851475264d33f5662406c
 }
 
 void History::addHistory(FacultyTree fac)
 {
+<<<<<<< HEAD
   if (facHist->getSize() == 5)
     facHist->removeBack();
   facHist->insertFront(fac);
+=======
+  // cout << "size before" << facHist->getSize() << endl;
+  // if (facHist->getSize() == 5)
+  //   facHist->removeBack();
+  // facHist->insertFront(*fac);
+  // cout << "size after" << facHist->getSize() << endl;
+>>>>>>> 28927297b32239c330c851475264d33f5662406c
 }
 
 StudentTree History::getStudHist()

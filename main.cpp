@@ -298,7 +298,7 @@ int main()
         {
           s->setAdvisor(facID);
           masterFaculty->getNode(facID)->getObj().addAdvisee(studID);
-          cout << "1." << to_string(masterFaculty->getNode(facID)->getObj().getNumAdvisees()) << endl;
+          cout << "1. " << to_string(masterFaculty->getNode(facID)->getObj().getNumAdvisees()) << endl;
         }
         else
         {
