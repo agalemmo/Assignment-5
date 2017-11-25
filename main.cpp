@@ -265,7 +265,14 @@ int main()
         }
         tf = masterFaculty->getNode(idToBeFound);
         if (tf)
-          cout << tf->getObj().returnArray() << endl;
+        {
+          for (int i = 0; i < tf->getObj().getNumAdvisees(); ++i)
+          {
+            stud = masterStudent->getNode(tf->getObj().getAdvisees()[i])->getObj();
+            stud.print();
+            cout << endl;
+          }
+        }
         else
           cerr << "No faculty exists with that ID number. Please try again.\n";
         break;
@@ -329,16 +336,25 @@ int main()
     //    hist->addHistory(*masterStudent);
     //    hist->addHistory(*masterFaculty);
         cout << "Enter the ID Number: " << endl;
-        cin >> (idToBeFound);
+        cin >> (studID);
         while (cin.fail())
         {
           cin.clear();
           cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
           cerr << "Data is formatted improperly. Please try again. ID should be an int.\n";
-          cin >> facID;
+          cin >> studID;
         }
-        if (!masterStudent->deleteNode(idToBeFound))
+        if (!masterStudent->contains(studID))
           cerr << "This student does not exist, and therefore could not be removed.\n";
+        else
+        {
+          cout << "This student has been successfully deleted.\n";
+          facID = masterStudent->getNode(studID)->getObj().getAdvisor();
+          fac = masterFaculty->getNode(facID)->getObj();
+          fac.removeAdvisee(studID);
+          masterFaculty->getNode(facID)->setObj(fac);
+          masterStudent->deleteNode(studID);
+        }
         break;
       case 9: //add a new faculty member to FacultyTree
       //  hist->addHistory(masterStudent);

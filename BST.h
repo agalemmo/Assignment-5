@@ -25,7 +25,6 @@ class BST
     TreeNode<T>* getSuccessor(TreeNode<T>* d);
     TreeNode<T>* getMin();
     TreeNode<T>* getMax();
-    void deleteNodeFromMemory(TreeNode<T>* node);
 
     void printTree(TreeNode<T>* root);
 

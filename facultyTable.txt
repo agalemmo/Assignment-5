@@ -1,10 +1,7 @@
 BEGIN NODE
 5807
-joe
+jon
 cs
 prof
-1807
-4249
-3073
 
 END NODE
