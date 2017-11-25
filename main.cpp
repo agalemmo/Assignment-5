@@ -249,27 +249,19 @@ int main()
         }
         s = new Student();
         cout << "Enter student information: " << endl;
+        getline(cin, info);
         cout << "NAME: ";
-        cin >> info;
+        getline(cin, info);
         s->setName(info);
-        // cout << "\nID: ";
-        // cin >> studID;
-        // while (cin.fail())
-        // {
-        //   cin.clear();
-        //   cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        //   cerr << "Data is formatted improperly. Please try again. ID should be an int.\n";
-        //   cin >> facID;
-        // }
         studID = generateStudID(masterStudent);
         s->setId(studID);
-        cout << "\nYEAR: ";
-        cin >> info;
+        cout << "YEAR: ";
+        getline(cin, info);
         s->setLevel(info);
-        cout << "\nMAJOR: ";
-        cin >> info;
+        cout << "MAJOR: ";
+        getline(cin, info);
         s->setMajor(info);
-        cout << "\nGPA: ";
+        cout << "GPA: ";
         cin >> d;
         while (cin.fail())
         {
@@ -279,7 +271,7 @@ int main()
           cin >> d;
         }
         s->setGPA(d);
-        cout << "\nADVISOR: ";
+        cout << "ADVISOR: ";
         cin >> facID;
         while (cin.fail())
         {
@@ -301,7 +293,7 @@ int main()
           continue;
         }
         masterStudent->insert(s->getId(), *s);
-        cout << "\n New student object created and inserted into tree." << endl;
+        cout << "New student object created and inserted into tree." << endl;
         break;
       case 8: //remove student from StudentTree
     //    hist->addHistory(*masterStudent);
@@ -324,28 +316,20 @@ int main()
         cout << "added faculty history" << endl;
         f = new Faculty();
         cout << "Enter faculty information: " << endl;
+        getline(cin, info);
         cout << "NAME: ";
-        cin >> info;
+        getline(cin, info);
         f->setName(info);
-        // cout << "\nID: ";
-        // cin >> facID;
-        // while (cin.fail())
-        // {
-        //   cin.clear();
-        //   cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        //   cerr << "Data is formatted improperly. Please try again. ID should be an int.\n";
-        //   cin >> facID;
-        // }
         facID = generateFacID(masterFaculty);
         f->setId(facID);
-        cout << "\nLEVEL: ";
-        cin >> info;
+        cout << "LEVEL: ";
+        getline(cin, info);
         f->setLevel(info);
-        cout << "\nDEPARTMENT: ";
-        cin >> info;
+        cout << "DEPARTMENT: ";
+        getline(cin, info);
         f->setDept(info);
         masterFaculty->insert(f->getId(), *f);
-        cout << "\n New faculty object created and inserted into tree." << endl;
+        cout << "New faculty object created and inserted into tree." << endl;
         break;
       case 10: //remove faculty from FacultyTree
   //      hist->addHistory(*masterStudent);
