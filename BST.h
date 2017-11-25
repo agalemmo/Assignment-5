@@ -17,6 +17,7 @@ class BST
     TreeNode<T>* getSuccessor(TreeNode<T>* d);
     TreeNode<T>* getMin();
     TreeNode<T>* getMax();
+    void deleteNodeFromMemory(TreeNode<T>* node);
 
     void printTree(TreeNode<T>* root);
 
@@ -34,9 +35,15 @@ BST<T>::BST()
 template <class T>
 BST<T>::~BST()
 {
-  //build more character
+  deleteNodeFromMemory(root);
+}
 
-  //iterate and delete
+template <class T>
+void BST<T>::deleteNodeFromMemory(TreeNode<T>* node)
+{
+  deleteNodeFromMemory(node->left);
+  deleteNodeFromMemory(node->right);
+  delete node;
 }
 
 template <class T>

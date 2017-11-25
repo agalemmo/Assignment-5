@@ -152,7 +152,7 @@ string Student::printToFile()
 {
   string fileString = "";
   fileString += "BEGIN NODE\n";       //0
-  fileString += getId();            //1
+  fileString += to_string(getId());            //1
   fileString += "\n";
   fileString += getName();          //2
   fileString += "\n";
@@ -160,9 +160,9 @@ string Student::printToFile()
   fileString += "\n";
   fileString += getMajor();         //4
   fileString += "\n";
-  fileString += getGpa();           //5
+  fileString += to_string(getGpa());           //5
   fileString += "\n";
-  fileString += getAdvisor();       //6
+  fileString += to_string(getAdvisor());       //6
   fileString += "\n";
   fileString += "END NODE\n";         //7
   cout << fileString; //DEBUG
