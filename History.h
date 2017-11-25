@@ -16,8 +16,8 @@ using namespace std;
 class History
 {
   private:
-    DoublyLinkedList<StudentTree> *studHist;
-    DoublyLinkedList<FacultyTree> *facHist;
+    DoublyLinkedList<StudentTree> studHist;
+    DoublyLinkedList<FacultyTree> facHist;
     //DoublyLinkedList<StudentTree, FacultyTree>* hist;
   public:
     History();
@@ -34,9 +34,9 @@ class History
   Constructor for the History class
 */
 History::History()
-{
-  studHist = new DoublyLinkedList<StudentTree>();
-  facHist = new DoublyLinkedList<FacultyTree>();
+ {
+//   studHist = new DoublyLinkedList<StudentTree>();
+//   facHist = new DoublyLinkedList<FacultyTree>();
 
 }
 
@@ -45,31 +45,32 @@ History::History()
 */
 History::~History()
 {
-  delete studHist;
-  delete facHist;
+  //delete studHist;
+  //delete facHist;
   //delete hist;
 }
 
 /*
   Adds a node to the student history list
 */
-void History::addHistory(StudentTree stud)
+void History::addHistory(StudentTree* stud)
 {
   cout << "line 39 add student history" << endl;
-  if (studHist->getSize() == 5)
+  if (studHist.getSize() == 5)
   {
     cout << "student history if check" << endl;
-    studHist->removeBack();
+    studHist.removeBack();
     cout << "student history back removed" << endl;
   }
   cout << "student history less than 5" << endl;
-  studHist->insertFront(stud); //@TODO it gets to the end of the insert front function?
+  cout << studHist.getSize();
+  cout << studHist.insertFront(stud); //@TODO it gets to the end of the insert front function?
   cout << "front inserted" << endl; //@TODO now it doesn't get here for some reason??
-  // cout << "size before" << studHist->getSize() << endl;
-  // if (studHist->getSize() == 5)
-  //   studHist->removeBack();
-  // studHist->insertFront(*stud);
-  // cout << "size after" << studHist->getSize() << endl;
+  // cout << "size before" << studHist.getSize() << endl;
+  // if (studHist.getSize() == 5)
+  //   studHist.removeBack();
+  // studHist.insertFront(*stud);
+  // cout << "size after" << studHist.getSize() << endl;
 }
 
 /*
@@ -77,14 +78,15 @@ void History::addHistory(StudentTree stud)
 */
 void History::addHistory(FacultyTree fac)
 {
-  if (facHist->getSize() == 5)
-    facHist->removeBack();
-  facHist->insertFront(fac); //@TODO: ditto
-  // cout << "size before" << facHist->getSize() << endl;
-  // if (facHist->getSize() == 5)
-  //   facHist->removeBack();
-  // facHist->insertFront(*fac);
-  // cout << "size after" << facHist->getSize() << endl;
+  if (facHist.getSize() == 5)
+    facHist.removeBack();
+  cout << facHist.insertFront(fac); //@TODO: ditto
+  cout << "front inserted" << endl;
+  // cout << "size before" << facHist.getSize() << endl;
+  // if (facHist.getSize() == 5)
+  //   facHist.removeBack();
+  // facHist.insertFront(*fac);
+  // cout << "size after" << facHist.getSize() << endl;
 }
 
 /*
@@ -92,7 +94,7 @@ void History::addHistory(FacultyTree fac)
 */
 StudentTree History::getStudHist()
 {
-  if (studHist->front == NULL)
+  if (studHist.front == NULL)
   {
     cerr << "No history." << endl;
     return StudentTree();
@@ -100,8 +102,8 @@ StudentTree History::getStudHist()
   else
   {
     StudentTree s;
-    s = studHist->front->data;
-    studHist->removeFront();
+    s = studHist.front->data;
+    studHist.removeFront();
     return s;
   }
 }
@@ -111,7 +113,7 @@ StudentTree History::getStudHist()
 */
 FacultyTree History::getFacHist()
 {
-  if (facHist->front == NULL)
+  if (facHist.front == NULL)
   {
     cerr << "No history." << endl;
     return FacultyTree();
@@ -119,8 +121,8 @@ FacultyTree History::getFacHist()
   else
   {
     FacultyTree f;
-    f = facHist->front->data;
-    facHist->removeFront();
+    f = facHist.front->data;
+    facHist.removeFront();
     return f;
   }
 }

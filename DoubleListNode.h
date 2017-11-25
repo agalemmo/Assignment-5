@@ -48,7 +48,7 @@ public:
   ListNode<T>* back;
   DoublyLinkedList();
   ~DoublyLinkedList();
-  void insertFront(T data);
+  string insertFront(T data);
   T removeFront();
   void insertBack(T data);
   T removeBack();
@@ -96,8 +96,9 @@ insertFront inserts a node at the front of the list
 Parameter data: the data to be in the new node
 */
 template <class T>
-void DoublyLinkedList<T>::insertFront(T data)
+string DoublyLinkedList<T>::insertFront(T data)
 {
+  return "cake";
   cout << "insert front line 98" << endl;
   ListNode<T> *node = new ListNode<T>();
   node->data = data;
