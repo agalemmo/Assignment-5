@@ -36,9 +36,16 @@ History::~History()
 
 void History::addHistory(StudentTree stud)
 {
+  cout << "line 39 add student history" << endl;
   if (studHist->getSize() == 5)
+  {
+    cout << "student history if check" << endl;
     studHist->removeBack();
+    cout << "student history back removed" << endl;
+  }
+  cout << "student history less than 5" << endl;
   studHist->insertFront(stud);
+  cout << "front inserted" << endl;
   // cout << "size before" << studHist->getSize() << endl;
   // if (studHist->getSize() == 5)
   //   studHist->removeBack();

@@ -268,6 +268,13 @@ int main()
         s->setMajor(info);
         cout << "\nGPA: ";
         cin >> d;
+        while (cin.fail())
+        {
+          cin.clear();
+          cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+          cerr << "Data is formatted improperly. Please try again. GPA should be an double.\n";
+          cin >> d;
+        }
         s->setGPA(d);
         cout << "\nADVISOR: ";
         cin >> facID;
