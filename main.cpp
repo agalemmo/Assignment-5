@@ -319,7 +319,7 @@ int main()
           cerr << "This student does not exist, and therefore could not be removed.\n";
         break;
       case 9: //add a new faculty member to FacultyTree
-  //      hist->addHistory(*masterStudent);
+        hist->addHistory(*masterStudent);
 //        hist->addHistory(*masterFaculty);
         cout << "added faculty history" << endl;
         f = new Faculty();

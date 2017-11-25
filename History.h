@@ -55,8 +55,8 @@ void History::addHistory(StudentTree stud)
     cout << "student history back removed" << endl;
   }
   cout << "student history less than 5" << endl;
-  studHist->insertFront(stud); //@TODO: gets to the end of the constructor, but hates the assignment to a pointer.
-  cout << "front inserted" << endl;
+  studHist->insertFront(stud); //@TODO it gets to the end of the insert front function?
+  cout << "front inserted" << endl; //@TODO now it doesn't get here for some reason??
   // cout << "size before" << studHist->getSize() << endl;
   // if (studHist->getSize() == 5)
   //   studHist->removeBack();
