@@ -1,6 +1,14 @@
 # Assignment-5
 Building a Database with Binary Search Trees
 
+
+Sarah Lasman and Amanda Galemmo
+2278776          2270004
+lasma101@mail.chapman.edu  galem100@mail.chapman.edu
+CS 350 Section 3
+Assignment #5
+
+
 referenced:
 http://www.cplusplus.com/doc/tutorial/files/
 https://stackoverflow.com/questions/19761069/opening-a-file-in-the-current-directory

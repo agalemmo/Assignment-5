@@ -1,3 +1,11 @@
+/**
+Sarah Lasman and Amanda Galemmo
+2278776          2270004
+lasma101@mail.chapman.edu  galem100@mail.chapman.edu
+CS 350 Section 3
+Assignment #5
+*/
+
 #ifndef FACULTY_H
 #define FACULTY_H
 
@@ -12,7 +20,6 @@ class Faculty : public Person
     int advArray[10];
     int arraySize;
     int numAdvisees;
-//  int* array;
 
   public:
 
@@ -29,7 +36,6 @@ class Faculty : public Person
     int getNumAdvisees();
     void setNumAdvisees(int n);
 
-    //bool advFull();
 
     string returnArray();
     void print();
@@ -42,16 +48,13 @@ Inherits from parent and assigns default arraySize to 10.
 */
 Faculty::Faculty() : Person()
 {
-  cout << "Constructor called for Faculty number " << getId() << endl;
   dept = "";
   numAdvisees = 0;
-  cout << "numAdvisees set to 0\n";
   arraySize = 10;
   for (int i = 0; i < 10; ++i)
   {
     advArray[i] = 0;
   }
-//  array = advArray;
 }
 
 /**
@@ -68,7 +71,6 @@ Faculty::Faculty(int id, string name, string level, string dpt) : Person(id, nam
   {
     advArray[i] = 0;
   }
-//  array = advArray;
 }
 
 /**
@@ -130,7 +132,6 @@ void Faculty::addAdvisee(int s)
   if (numAdvisees < arraySize)
   {
     advArray[numAdvisees++] = s;
-    //numAdvisees++;
     cout << to_string(getNumAdvisees()) << endl;
   }
   else

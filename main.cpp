@@ -1,10 +1,10 @@
 /**
-  @TODO
-    FUNCTIONS TO BE ADDED:
-      - Rollback/history
-    BUGS:
-      - Advisors recognize that they have advisees when students added, but don't remember that later on. WHY???
-**/
+Sarah Lasman and Amanda Galemmo
+2278776          2270004
+lasma101@mail.chapman.edu  galem100@mail.chapman.edu
+CS 350 Section 3
+Assignment #5
+*/
 
 #include "Student.h"
 #include "StudentTree.h"
@@ -67,6 +67,9 @@ int generateFacID(FacultyTree* masterFaculty)
   }
 }
 
+/**
+main does most of the work. sorry.
+*/
 int main()
 {
   string line;
@@ -78,6 +81,9 @@ int main()
   StudentTree* masterStudent = new StudentTree();
   FacultyTree* masterFaculty = new FacultyTree();
 
+  /**
+  Temporary variables used in the gathering of info in the below switch statement.
+  */
   int option;
   int idToBeFound;
   string info;
@@ -91,7 +97,6 @@ int main()
   StudentTree st;
   FacultyTree ft;
   int* tempArray;
-
   Faculty fac;
   Student stud;
 
@@ -99,11 +104,13 @@ int main()
 
   History* hist = new History();
 
+  /**
+  Create/access and restore facultyTable text file.
+  */
   facFile.open("facultyTable.txt", fstream::in | fstream::out | fstream::app);
   while (facFile.is_open())
   {
     f = new Faculty();
-    cout << "Opening fac file.\n";
     while ( getline (facFile, line))
     {
     if (lineCount == 1)
@@ -123,6 +130,9 @@ int main()
     facFile.close();
   }
 
+  /**
+  Create/access and restore studentTable text file.
+  */
   studFile.open("studentTable.txt", fstream::in | fstream::out | fstream::app);
   while (studFile.is_open())
   {
@@ -165,6 +175,10 @@ int main()
     printOptions();
     cin >> option;
 
+    /**
+    The big switch statement.
+    Each case corresponds with the action on the printout.
+    */
     switch(option)
     {
       case 1: //print all masterStudent
