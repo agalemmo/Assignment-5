@@ -91,6 +91,8 @@ int main()
   FacultyTree ft;
   int* tempArray;
 
+  Faculty fac;
+
   int lineCount;
 
   History* hist = new History();
@@ -112,7 +114,6 @@ int main()
     if (line == "END NODE")
       {
         masterFaculty->insert(f->getId(), *f);
-        delete f;
       }
       lineCount++;
     }
@@ -147,7 +148,6 @@ int main()
       if (line == "END NODE")
       {
         masterStudent->insert(s->getId(), *s);
-        delete s;
       }
       lineCount++;
     }
@@ -237,10 +237,8 @@ int main()
           cerr << "No faculty exists with that ID number. Please try again.\n";
         break;
       case 7: //add a new student to StudentTree
-        cout << "test\n";
       //  hist->addHistory(*masterStudent);
       //  hist->addHistory(*masterFaculty);
-        cout << "Yo\n";
         if (masterFaculty->isEmpty())
         {
           cerr << "Your faculty tree is empty. You can't add a student until you have at least one faculty member, or your student can't have an advisor.\n";
@@ -270,6 +268,13 @@ int main()
         s->setMajor(info);
         cout << "\nGPA: ";
         cin >> d;
+        while (cin.fail())
+        {
+          cin.clear();
+          cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+          cerr << "Data is formatted improperly. Please try again. GPA should be an double.\n";
+          cin >> d;
+        }
         s->setGPA(d);
         cout << "\nADVISOR: ";
         cin >> facID;
@@ -283,8 +288,11 @@ int main()
         if (masterFaculty->contains(facID))
         {
           s->setAdvisor(facID);
-          masterFaculty->getNode(facID)->getObj().addAdvisee(studID);
-          cout << "1. " << to_string(masterFaculty->getNode(facID)->getObj().getNumAdvisees()) << endl;
+          //masterFaculty->getNode(facID)->getObj().addAdvisee(studID);
+          fac = (Faculty)masterFaculty->getNode(facID)->getObj();
+          cout << "1. " << to_string(fac.getNumAdvisees()) << endl;
+          fac.addAdvisee(studID);
+          cout << "1. " << to_string(fac.getNumAdvisees()) << endl;
         }
         else
         {
