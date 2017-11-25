@@ -369,6 +369,7 @@ int main()
             masterFaculty->getMin()->getObj().addAdvisee(tempArray[i]);
           }
           masterFaculty->deleteNode(facID);
+          cout << "Faculty member deleted. His advisees have been reassigned to the faculty with the lowest ID.\n";
         }
         break;
       case 11: //change student's advisor
