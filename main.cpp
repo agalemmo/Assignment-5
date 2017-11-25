@@ -327,8 +327,8 @@ int main()
           cerr << "This student does not exist, and therefore could not be removed.\n";
         break;
       case 9: //add a new faculty member to FacultyTree
-        hist->addHistory(*studentFaculty);
-        hist->addHistory(*masterFaculty);
+      //  hist->addHistory(masterStudent);
+      //  hist->addHistory(masterFaculty);
         cout << "added faculty history" << endl;
         f = new Faculty();
         cout << "Enter faculty information: " << endl;
@@ -364,22 +364,24 @@ int main()
           cerr << "You are trying to delete the only faculty member listed. This will leave several students without an advisor, so you can not do this until there are more faculty.\n";
           break;
         }
-        if (!masterFaculty->deleteNode(facID))
+        if (!masterFaculty->contains(facID))
           cerr << "This faculty member does not exist, and therefore could not be removed.\n";
         else
         {
           *f = masterFaculty->getNode(facID)->getObj();
           tempArray = f->getAdvisees();
+          masterFaculty->deleteNode(facID);
           for (int i = 0; i < f->getNumAdvisees(); ++i)
           {
             stud = masterStudent->getNode(tempArray[i])->getObj();
             stud.setAdvisor(masterFaculty->getMin()->getObj().getId());
+            cout << stud.getAdvisor();
             masterStudent->getNode(tempArray[i])->setObj(stud);
             fac = masterFaculty->getMin()->getObj();
             fac.addAdvisee(tempArray[i]);
+            cout << fac.getAdvisees();
             masterFaculty->getMin()->setObj(fac);
           }
-          masterFaculty->deleteNode(facID);
           cout << "Faculty member deleted. His advisees have been reassigned to the faculty with the lowest ID.\n";
         }
         break;
