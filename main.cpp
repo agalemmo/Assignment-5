@@ -35,7 +35,8 @@ void printOptions()
   cout << "[11] Change a student's advisor given the student ID and the new faculty ID" << endl;
   cout << "[12] Remove an advisee from a faculty member given the ID" << endl;
   cout << "[13] Rollback" << endl;
-  cout << "[14] Exit." << endl;
+  cout << "[14] Change a student's major" << endl;
+  cout << "[15] Exit" << endl;
 }
 
 /**
@@ -456,7 +457,32 @@ int main()
         masterFaculty->printTree(masterFaculty->root);
         cout << "Last version restored." << endl;
         break;
-      case 14: //exit
+      case 14: //change major
+        cout << "Enter the student's ID number:\n";
+        cin >> studID;
+        while (cin.fail())
+        {
+          cin.clear();
+          cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+          cerr << "Data is formatted improperly. Please try again. ID should be an int.\n";
+          cin >> facID;
+        }
+        if (masterStudent->contains(studID))
+        {
+          stud = masterStudent->getNode(studID)->getObj();
+          cout << "This student's major is " << stud.getMajor() << ". What would you like to change it to?\n";
+          getline(cin, info);
+          getline(cin, info);
+          stud.setMajor(info);
+          masterStudent->getNode(studID)->setObj(stud);
+          cout << "Student's major has been changed.\n";
+        }
+        else
+        {
+          cout << "Student " << studID << " not found.\n";
+        }
+        break;
+      case 15: //exit
         if (studentTable.is_open())
         {
           studentTable << masterStudent->printTreeToFile(masterStudent->root);
