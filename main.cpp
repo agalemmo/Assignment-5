@@ -35,7 +35,8 @@ void printOptions()
   cout << "[11] Change a student's advisor given the student ID and the new faculty ID" << endl;
   cout << "[12] Remove an advisee from a faculty member given the ID" << endl;
   cout << "[13] Rollback" << endl;
-  cout << "[14] Exit." << endl;
+  cout << "[14] Change a student's major" << endl;
+  cout << "[15] Exit" << endl;
 }
 
 /**
@@ -98,10 +99,11 @@ int main()
 
   History* hist = new History();
 
-  facFile.open("facultyTable.txt");
+  facFile.open("facultyTable.txt", fstream::in | fstream::out | fstream::app);
   while (facFile.is_open())
   {
     f = new Faculty();
+    cout << "Opening fac file.\n";
     while ( getline (facFile, line))
     {
     if (lineCount == 1)
@@ -121,7 +123,7 @@ int main()
     facFile.close();
   }
 
-  studFile.open("studentTable.txt");
+  studFile.open("studentTable.txt", fstream::in | fstream::out | fstream::app);
   while (studFile.is_open())
   {
     while ( getline (studFile, line))
@@ -249,27 +251,19 @@ int main()
         }
         s = new Student();
         cout << "Enter student information: " << endl;
+        getline(cin, info);
         cout << "NAME: ";
-        cin >> info;
+        getline(cin, info);
         s->setName(info);
-        // cout << "\nID: ";
-        // cin >> studID;
-        // while (cin.fail())
-        // {
-        //   cin.clear();
-        //   cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        //   cerr << "Data is formatted improperly. Please try again. ID should be an int.\n";
-        //   cin >> facID;
-        // }
         studID = generateStudID(masterStudent);
         s->setId(studID);
-        cout << "\nYEAR: ";
-        cin >> info;
+        cout << "YEAR: ";
+        getline(cin, info);
         s->setLevel(info);
-        cout << "\nMAJOR: ";
-        cin >> info;
+        cout << "MAJOR: ";
+        getline(cin, info);
         s->setMajor(info);
-        cout << "\nGPA: ";
+        cout << "GPA: ";
         cin >> d;
         while (cin.fail())
         {
@@ -279,7 +273,7 @@ int main()
           cin >> d;
         }
         s->setGPA(d);
-        cout << "\nADVISOR: ";
+        cout << "ADVISOR: ";
         cin >> facID;
         while (cin.fail())
         {
@@ -301,7 +295,7 @@ int main()
           continue;
         }
         masterStudent->insert(s->getId(), *s);
-        cout << "\n New student object created and inserted into tree." << endl;
+        cout << "New student object created and inserted into tree." << endl;
         break;
       case 8: //remove student from StudentTree
     //    hist->addHistory(*masterStudent);
@@ -324,28 +318,20 @@ int main()
         cout << "added faculty history" << endl;
         f = new Faculty();
         cout << "Enter faculty information: " << endl;
+        getline(cin, info);
         cout << "NAME: ";
-        cin >> info;
+        getline(cin, info);
         f->setName(info);
-        // cout << "\nID: ";
-        // cin >> facID;
-        // while (cin.fail())
-        // {
-        //   cin.clear();
-        //   cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        //   cerr << "Data is formatted improperly. Please try again. ID should be an int.\n";
-        //   cin >> facID;
-        // }
         facID = generateFacID(masterFaculty);
         f->setId(facID);
-        cout << "\nLEVEL: ";
-        cin >> info;
+        cout << "LEVEL: ";
+        getline(cin, info);
         f->setLevel(info);
-        cout << "\nDEPARTMENT: ";
-        cin >> info;
+        cout << "DEPARTMENT: ";
+        getline(cin, info);
         f->setDept(info);
         masterFaculty->insert(f->getId(), *f);
-        cout << "\n New faculty object created and inserted into tree." << endl;
+        cout << "New faculty object created and inserted into tree." << endl;
         break;
       case 10: //remove faculty from FacultyTree
   //      hist->addHistory(*masterStudent);
@@ -472,7 +458,32 @@ int main()
         masterFaculty->printTree(masterFaculty->root);
         cout << "Last version restored." << endl;
         break;
-      case 14: //exit
+      case 14: //change major
+        cout << "Enter the student's ID number:\n";
+        cin >> studID;
+        while (cin.fail())
+        {
+          cin.clear();
+          cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+          cerr << "Data is formatted improperly. Please try again. ID should be an int.\n";
+          cin >> facID;
+        }
+        if (masterStudent->contains(studID))
+        {
+          stud = masterStudent->getNode(studID)->getObj();
+          cout << "This student's major is " << stud.getMajor() << ". What would you like to change it to?\n";
+          getline(cin, info);
+          getline(cin, info);
+          stud.setMajor(info);
+          masterStudent->getNode(studID)->setObj(stud);
+          cout << "Student's major has been changed.\n";
+        }
+        else
+        {
+          cout << "Student " << studID << " not found.\n";
+        }
+        break;
+      case 15: //exit
         if (studentTable.is_open())
         {
           studentTable << masterStudent->printTreeToFile(masterStudent->root);
@@ -481,6 +492,7 @@ int main()
         if (facultyTable.is_open())
         {
           facultyTable << masterFaculty->printTreeToFile(masterFaculty->root);
+          cout << "here.\n";
           facultyTable.close();
         }
         cout << "Saved to studentTable.txt and facultyTable.txt. Goodbye." << endl;
