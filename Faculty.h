@@ -129,8 +129,8 @@ void Faculty::addAdvisee(int s)
 {
   if (numAdvisees < arraySize)
   {
-    advArray[numAdvisees] = s;
-    numAdvisees++;
+    advArray[numAdvisees++] = s;
+    //numAdvisees++;
     cout << to_string(getNumAdvisees()) << endl;
   }
   else
