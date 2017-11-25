@@ -92,6 +92,7 @@ int main()
   int* tempArray;
 
   Faculty fac;
+  Student stud;
 
   int lineCount;
 
@@ -143,7 +144,9 @@ int main()
       if (lineCount == 6)
       {
         s->setAdvisor(stoi(line));
-        masterFaculty->getNode(stoi(line))->getObj().addAdvisee(s->getId());
+        fac = masterFaculty->getNode(stoi(line))->getObj();
+        fac.addAdvisee(s->getId());
+        masterFaculty->getNode(stoi(line))->setObj(fac);
       }
       if (line == "END NODE")
       {
@@ -288,11 +291,9 @@ int main()
         if (masterFaculty->contains(facID))
         {
           s->setAdvisor(facID);
-          //masterFaculty->getNode(facID)->getObj().addAdvisee(studID);
           fac = (Faculty)masterFaculty->getNode(facID)->getObj();
-          cout << "1. " << to_string(fac.getNumAdvisees()) << endl;
           fac.addAdvisee(studID);
-          cout << "1. " << to_string(fac.getNumAdvisees()) << endl;
+          masterFaculty->getNode(facID)->setObj(fac);
         }
         else
         {
@@ -371,8 +372,12 @@ int main()
           tempArray = f->getAdvisees();
           for (int i = 0; i < f->getNumAdvisees(); ++i)
           {
-            masterStudent->getNode(tempArray[i])->getObj().setAdvisor(masterFaculty->getMin()->getObj().getId());
-            masterFaculty->getMin()->getObj().addAdvisee(tempArray[i]);
+            stud = masterStudent->getNode(tempArray[i])->getObj();
+            stud.setAdvisor(masterFaculty->getMin()->getObj().getId());
+            masterStudent->getNode(tempArray[i])->setObj(stud);
+            fac = masterFaculty->getMin()->getObj();
+            fac.addAdvisee(tempArray[i]);
+            masterFaculty->getMin()->setObj(fac);
           }
           masterFaculty->deleteNode(facID);
           cout << "Faculty member deleted. His advisees have been reassigned to the faculty with the lowest ID.\n";
@@ -439,7 +444,9 @@ int main()
         {
           if (masterStudent->contains(studID))
           {
-            masterFaculty->getNode(facID)->getObj().removeAdvisee(studID);
+            fac = masterFaculty->getNode(facID)->getObj();
+            fac.removeAdvisee(studID);
+            masterFaculty->getNode(facID)->setObj(fac);
             cout << "Student " << studID << " successfully removed." << endl;
           }
           else

@@ -14,6 +14,7 @@ class TreeNode
     ~TreeNode();
 
     T getObj();
+    void setObj(T obj);
 
     //create front pointer?
 };
@@ -45,4 +46,10 @@ template <class T>
 T TreeNode<T>::getObj()
 {
   return data;
+}
+
+template <class T>
+void TreeNode<T>::setObj(T obj)
+{
+  data = obj;
 }
