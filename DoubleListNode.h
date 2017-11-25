@@ -97,7 +97,7 @@ template <class T>
 void DoublyLinkedList<T>::insertFront(T data)
 {
   cout << "insert front line 98" << endl;
-  ListNode<T>* node = new ListNode<T>(data);
+  ListNode<T> *node = new ListNode<T>(data);
   cout << "new node created" << endl;
   if (size == 0)
   {
