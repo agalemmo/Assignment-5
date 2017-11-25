@@ -187,14 +187,12 @@ Creates and returns a string containing the data of all of this faculty's advise
 */
 string Faculty::returnArray()
 {
-  cout << "ReturnArray called. The prof has this many advisees: " << numAdvisees << "\n";
   string adviseeString = "";
   for (int i = 0; i < numAdvisees; ++i)
   {
-    adviseeString += advArray[i];
+    adviseeString += to_string(advArray[i]);
     adviseeString += "\n";
   }
-  cout << adviseeString;
   return adviseeString;
 }
 
