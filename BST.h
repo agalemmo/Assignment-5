@@ -43,15 +43,7 @@ BST<T>::BST()
 template <class T>
 BST<T>::~BST()
 {
-  deleteNodeFromMemory(root);
-}
-
-template <class T>
-void BST<T>::deleteNodeFromMemory(TreeNode<T>* node)
-{
-  deleteNodeFromMemory(node->left);
-  deleteNodeFromMemory(node->right);
-  delete node;
+  delete root;
 }
 
 template <class T>

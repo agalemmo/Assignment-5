@@ -75,8 +75,8 @@ int main()
   string line;
   ifstream studFile;
   ifstream facFile;
-  fstream studentTable ("studentTable.txt");
-  fstream facultyTable ("facultyTable.txt");
+  ofstream studentTable;
+  ofstream facultyTable;
 
   StudentTree* masterStudent = new StudentTree();
   FacultyTree* masterFaculty = new FacultyTree();
@@ -107,23 +107,29 @@ int main()
   /**
   Create/access and restore facultyTable text file.
   */
-  facFile.open("facultyTable.txt", fstream::in | fstream::out | fstream::app);
+  facFile.open("facultyTable.txt", fstream::in);
   while (facFile.is_open())
   {
     f = new Faculty();
-    while ( getline (facFile, line))
+    lineCount = 0;
+    while (getline (facFile, line))
     {
-    if (lineCount == 1)
-      f->setId(stoi(line));
-    if (lineCount == 2)
-      f->setName(line);
-    if (lineCount == 3)
-      f->setDept(line);
-    if (lineCount == 4)
-      f->setLevel(line);
-    if (line == "END NODE")
+      if (line == "BEGIN NODE")
+      {
+        lineCount = 0;
+      }
+      if (lineCount == 1)
+        f->setId(stoi(line));
+      if (lineCount == 2)
+        f->setName(line);
+      if (lineCount == 3)
+        f->setDept(line);
+      if (lineCount == 4)
+        f->setLevel(line);
+      if (line == "END NODE")
       {
         masterFaculty->insert(f->getId(), *f);
+        cout << to_string(f->getId());
       }
       lineCount++;
     }
@@ -133,39 +139,41 @@ int main()
   /**
   Create/access and restore studentTable text file.
   */
-  studFile.open("studentTable.txt", fstream::in | fstream::out | fstream::app);
+  studFile.open("studentTable.txt", fstream::in);
   while (studFile.is_open())
   {
-    while ( getline (studFile, line))
-    {
-      if (line == "BEGIN NODE")
+      s = new Student();
+      lineCount = 0;
+      while ( getline (studFile, line))
       {
-        s = new Student();
-        lineCount = 0;
-      }
-      if (lineCount == 1)
-        s->setId(stoi(line));
-      if (lineCount == 2)
-        s->setName(line);
-      if (lineCount == 3)
-        s->setLevel(line);
-      if (lineCount == 4)
-        s->setMajor(line);
-      if (lineCount == 5)
-        s->setGPA(stoi(line));
-      if (lineCount == 6)
-      {
-        s->setAdvisor(stoi(line));
-        fac = masterFaculty->getNode(stoi(line))->getObj();
-        fac.addAdvisee(s->getId());
-        masterFaculty->getNode(stoi(line))->setObj(fac);
-      }
-      if (line == "END NODE")
-      {
-        masterStudent->insert(s->getId(), *s);
-      }
-      lineCount++;
+        if (line == "BEGIN NODE")
+        {
+          lineCount = 0;
+        }
+        if (lineCount == 1)
+          s->setId(stoi(line));
+        if (lineCount == 2)
+          s->setName(line);
+        if (lineCount == 3)
+          s->setLevel(line);
+        if (lineCount == 4)
+          s->setMajor(line);
+        if (lineCount == 5)
+          s->setGPA(stoi(line));
+        if (lineCount == 6)
+        {
+          s->setAdvisor(stoi(line));
+          fac = masterFaculty->getNode(stoi(line))->getObj();
+          fac.addAdvisee(s->getId());
+          masterFaculty->getNode(stoi(line))->setObj(fac);
+        }
+        if (line == "END NODE")
+        {
+          masterStudent->insert(s->getId(), *s);
+        }
+        lineCount++;
     }
+    break;
     studFile.close();
   }
 
@@ -174,7 +182,13 @@ int main()
   {
     printOptions();
     cin >> option;
-
+    while (cin.fail())
+    {
+      cin.clear();
+      cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      cerr << "That's not a valid option, I'm afraid. Please try again.\n";
+      cin >> facID;
+    }
     /**
     The big switch statement.
     Each case corresponds with the action on the printout.
@@ -375,11 +389,9 @@ int main()
           {
             stud = masterStudent->getNode(tempArray[i])->getObj();
             stud.setAdvisor(masterFaculty->getMin()->getObj().getId());
-            cout << stud.getAdvisor();
             masterStudent->getNode(tempArray[i])->setObj(stud);
             fac = masterFaculty->getMin()->getObj();
             fac.addAdvisee(tempArray[i]);
-            cout << fac.getAdvisees();
             masterFaculty->getMin()->setObj(fac);
           }
           cout << "Faculty member deleted. His advisees have been reassigned to the faculty with the lowest ID.\n";
@@ -500,6 +512,8 @@ int main()
         }
         break;
       case 15: //exit
+        studentTable.open("studentTable.txt", fstream::in | fstream::out | fstream::trunc);
+        facultyTable.open("facultyTable.txt", fstream::in | fstream::out | fstream::trunc);
         if (studentTable.is_open())
         {
           studentTable << masterStudent->printTreeToFile(masterStudent->root);
@@ -508,11 +522,12 @@ int main()
         if (facultyTable.is_open())
         {
           facultyTable << masterFaculty->printTreeToFile(masterFaculty->root);
-          cout << "here.\n";
           facultyTable.close();
         }
         cout << "Saved to studentTable.txt and facultyTable.txt. Goodbye." << endl;
         return 0;
+      default:
+        cout << "That's not a valid choice, I'm afraid. Please try again.\n";
         break;
     }
   }

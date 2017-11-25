@@ -66,7 +66,6 @@ Destructor does nothing.
 */
 Student::~Student()
 {
-
 }
 
 /**
@@ -173,7 +172,6 @@ string Student::printToFile()
   fileString += to_string(getAdvisor());       //6
   fileString += "\n";
   fileString += "END NODE\n";         //7
-  cout << fileString; //DEBUG
   return fileString;
 }
 

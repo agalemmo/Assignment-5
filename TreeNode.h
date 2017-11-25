@@ -46,6 +46,8 @@ TreeNode<T>::TreeNode(int k, T s)
 template <class T>
 TreeNode<T>::~TreeNode()
 {
+  delete left;
+  delete right;
   delete &data;
 }
 

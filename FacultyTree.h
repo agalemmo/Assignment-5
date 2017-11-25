@@ -57,10 +57,9 @@ string FacultyTree::printTreeToFile(TreeNode<Faculty>* root)
   TreeNode<Faculty>* n = root;
   if (n)
   {
-    printTreeToFile(n->left);
+    returnString += printTreeToFile(n->left);
     returnString += n->data.printToFile();
-    printTreeToFile(n->right);
+    returnString += printTreeToFile(n->right);
   }
-  delete n;
   return returnString;
 }
