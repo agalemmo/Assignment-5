@@ -1,8 +1,0 @@
-BEGIN NODE
-1807
-Sarah
-Soph
-cs
-4.000000
-5807
-END NODE

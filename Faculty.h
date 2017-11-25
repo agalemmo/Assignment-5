@@ -3,17 +3,19 @@
 
 #include "Person.h"
 
+
 class Faculty : public Person
 {
   private:
     string dept;
     Person base;
     int advArray[10];
-    int numAdvisees;
     int arraySize;
-    int* array;
+    int numAdvisees;
+//  int* array;
 
   public:
+
     Faculty();
     Faculty(int id, string name, string level, string dpt);
     ~Faculty();
@@ -43,8 +45,13 @@ Faculty::Faculty() : Person()
   cout << "Constructor called for Faculty number " << getId() << endl;
   dept = "";
   numAdvisees = 0;
+  cout << "numAdvisees set to 0\n";
   arraySize = 10;
-  array = advArray;
+  for (int i = 0; i < 10; ++i)
+  {
+    advArray[i] = 0;
+  }
+//  array = advArray;
 }
 
 /**
@@ -57,7 +64,11 @@ Faculty::Faculty(int id, string name, string level, string dpt) : Person(id, nam
   dept = dpt;
   numAdvisees = 0;
   arraySize = 10;
-  array = advArray;
+  for (int i = 0; i < 10; ++i)
+  {
+    advArray[i] = 0;
+  }
+//  array = advArray;
 }
 
 /**
@@ -81,7 +92,7 @@ getAdvisor returns a pointer to int array of advisees.
 */
 int* Faculty::getAdvisees()
 {
-  return array;
+  return advArray;
 }
 
 /**
@@ -120,6 +131,7 @@ void Faculty::setNumAdvisees(int n)
 addAdvisee
 Adds a student to list of advisees. Increments numAdvisees.
 If necessary, increases array size.
+Parameter s - ID number of student to be added.
 */
 >>>>>>> c5e3770da027bd6f8595089e1bc6d5e219326686
 void Faculty::addAdvisee(int s)
@@ -127,7 +139,7 @@ void Faculty::addAdvisee(int s)
   if (numAdvisees < arraySize)
   {
     advArray[numAdvisees] = s;
-    setNumAdvisees(++numAdvisees);
+    numAdvisees++;
     cout << to_string(getNumAdvisees()) << endl;
   }
   else
@@ -136,11 +148,11 @@ void Faculty::addAdvisee(int s)
     for (int i = 0; i < arraySize; ++i)
       newArray[i] = advArray[i];
     arraySize = arraySize *2;
-    array = newArray;
+    // array = newArray;
     int *advArray = new int[arraySize];
     for (int i = 0; i < arraySize; ++i)
       advArray[i] = newArray[i];
-    array = advArray;
+//    array = advArray;
     delete [] newArray;
     advArray[numAdvisees] = s;
     numAdvisees++;
@@ -158,19 +170,19 @@ void Faculty::removeAdvisee(int s)
   {
     for (int i = arraySize - 1; i > 0; --i)
     {
-      if (array[i] == s)
+      if (advArray[i] == s)
       {
         for (int n = i; n < arraySize; ++n)
         {
           if (n == (arraySize - 1))
-            array[n] = 0;
+            advArray[n] = 0;
           else
-            array[n] = array[n+1];
+            advArray[n] = advArray[n+1];
         }
         numAdvisees--;
         cout << "Student " << s << " removed." << endl;
       }
-      else if (i == arraySize - 1 && array[i] != s)
+      else if (i == arraySize - 1 && advArray[i] != s)
         cout << "Student " << s << " not found." << endl;
     }
   }
