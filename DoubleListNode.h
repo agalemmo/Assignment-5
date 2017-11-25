@@ -1,3 +1,5 @@
+//@TODO: fix insertion, ref. lines 33 and 102
+
 #include <iostream>
 
 using namespace std;
@@ -28,7 +30,7 @@ ListNode<T>::ListNode(T d)
   data = d;
   next = NULL;
   prev = NULL;
-  cout << "list node created" << endl;
+  cout << "list node created" << endl; //it gets HERE
 }
 
 template <class T>
@@ -97,7 +99,7 @@ template <class T>
 void DoublyLinkedList<T>::insertFront(T data)
 {
   cout << "insert front line 98" << endl;
-  ListNode<T> *node = new ListNode<T>(data);
+  ListNode<T> *node = new ListNode<T>(data); //@TODO: But it doesn't make it past the pointer assignment
   cout << "new node created" << endl;
   if (size == 0)
   {

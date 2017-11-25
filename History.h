@@ -1,3 +1,5 @@
+//@TODO: Fix the dumb seg fault with insertion
+
 #include <iostream>
 #include "DoubleListNode.h"
 
@@ -20,6 +22,9 @@ class History
     FacultyTree getFacHist();
 };
 
+/*
+  Constructor for the History class
+*/
 History::History()
 {
   studHist = new DoublyLinkedList<StudentTree>();
@@ -27,6 +32,9 @@ History::History()
 
 }
 
+/*
+  Destructor for the history class
+*/
 History::~History()
 {
   delete studHist;
@@ -34,6 +42,9 @@ History::~History()
   //delete hist;
 }
 
+/*
+  Adds a node to the student history list
+*/
 void History::addHistory(StudentTree stud)
 {
   cout << "line 39 add student history" << endl;
@@ -44,7 +55,7 @@ void History::addHistory(StudentTree stud)
     cout << "student history back removed" << endl;
   }
   cout << "student history less than 5" << endl;
-  studHist->insertFront(stud);
+  studHist->insertFront(stud); //@TODO: gets to the end of the constructor, but hates the assignment to a pointer.
   cout << "front inserted" << endl;
   // cout << "size before" << studHist->getSize() << endl;
   // if (studHist->getSize() == 5)
@@ -53,11 +64,14 @@ void History::addHistory(StudentTree stud)
   // cout << "size after" << studHist->getSize() << endl;
 }
 
+/*
+  Adds a node to the faculty history list
+*/
 void History::addHistory(FacultyTree fac)
 {
   if (facHist->getSize() == 5)
     facHist->removeBack();
-  facHist->insertFront(fac);
+  facHist->insertFront(fac); //@TODO: ditto
   // cout << "size before" << facHist->getSize() << endl;
   // if (facHist->getSize() == 5)
   //   facHist->removeBack();
@@ -65,6 +79,9 @@ void History::addHistory(FacultyTree fac)
   // cout << "size after" << facHist->getSize() << endl;
 }
 
+/*
+  returns the most recent instance of StudentTree
+*/
 StudentTree History::getStudHist()
 {
   if (studHist->front == NULL)
@@ -81,6 +98,9 @@ StudentTree History::getStudHist()
   }
 }
 
+/*
+  returns the most recent instance of FacultyTree
+*/
 FacultyTree History::getFacHist()
 {
   if (facHist->front == NULL)
