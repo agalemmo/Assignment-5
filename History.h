@@ -1,214 +1,152 @@
 #include <iostream>
-#include "DoubleListNode.h"
 
 using namespace std;
 
 class History
 {
   private:
-    //DoublyLinkedList<StudentTree> *studHist;
-    //DoublyLinkedList<FacultyTree> *facHist;
-    //DoublyLinkedList<StudentTree, FacultyTree>* hist;
+    string st0, st1, st2, st3, st4;
+    string ft0, ft1, ft2, ft3, ft4;
 
-    StudentTree st0;
-    StudentTree st1;
-    StudentTree st2;
-    StudentTree st3;
-    StudentTree st4;
-
-    FacultyTree ft0;
-    FacultyTree ft1;
-    FacultyTree ft2;
-    FacultyTree ft3;
-    FacultyTree ft4;
-
-    int sCount;
-    int fCount;
+    int count;
 
   public:
     History();
     ~History();
 
-    void addHistory(StudentTree stud);
-    void addHistory(FacultyTree fac);
+    void addHistory(string stud, string fac);
 
-    StudentTree getStudHist();
-    FacultyTree getFacHist();
+    string getStudHist();
+    string getFacHist();
 };
 
 History::History()
 {
-  sCount = 0;
-  fCount = 0;
-  //studHist = new DoublyLinkedList<StudentTree>();
-  //facHist = new DoublyLinkedList<FacultyTree>();
-
-  //hist = new DoublyLinkedList<StudentTree, FacultyTree>();
+  count = 0;
 }
 
 History::~History()
 {
-  //delete studHist;
-  //delete facHist;
-  //delete hist;
 }
 
-void History::addHistory(StudentTree stud)
+void History::addHistory(string stud, string fac)
 {
-  if (sCount == 0)
+  if (count == 0)
   {
     st0 = stud;
-    sCount++;
+    ft0 = fac;
+    count++;
+    cout << st0;
+    cout << ft0;
   }
-  else if (sCount == 1)
+  else if (count == 1)
   {
     st1 = stud;
-    sCount++;
+    ft1 = fac;
+    count++;
+    cout << st1;
+    cout << ft1;
   }
-  else if (sCount == 2)
+  else if (count == 2)
   {
     st2 = stud;
-    sCount++;
+    ft2 = fac;
+    count++;
+    cout << st2;
+    cout << ft2;
   }
-  else if (sCount == 3)
+  else if (count == 3)
   {
     st3 = stud;
-    sCount++;
+    ft3 = fac;
+    count++;
+    cout << st3;
+    cout << ft3;
   }
-  else if (sCount == 4)
+  else if (count == 4)
   {
     st4 = stud;
-    sCount++;
+    ft4 = fac;
+    count++;
   }
-  else if (sCount == 5)
+  else if (count == 5)
   {
     st0 = st1;
     st1 = st2;
     st2 = st3;
     st3 = st4;
     st4 = stud;
-  }
-  /*if (studHist->getSize() == 5)
-    studHist->removeBack();
-  studHist->insertFront(*stud);*/
-}
-
-void History::addHistory(FacultyTree fac)
-{
-  cout << "the fCount is " << fCount << endl;
-  if (fCount == 0)
-  {
-    cout << "we are out here in fCount == 0 " << endl;
-    ft0 = fac;
-    cout << "ft0 now equals fac " << endl;
-    fCount++;
-    cout << "the fCount now equals " << fCount << endl;
-  }
-  else if (fCount == 1)
-  {
-    cout << "please don't tell me it goes in here" << endl;
-    ft1 = fac;
-    fCount++;
-  }
-  else if (fCount == 2)
-  {
-    ft2 = fac;
-    fCount++;
-  }
-  else if (fCount == 3)
-  {
-    ft3 = fac;
-    fCount++;
-  }
-  else if (fCount == 4)
-  {
-    ft4 = fac;
-    fCount++;
-  }
-  else if (fCount == 5)
-  {
     ft0 = ft1;
     ft1 = ft2;
     ft2 = ft3;
     ft3 = ft4;
     ft4 = fac;
   }
-  cout << "we are now out here" << endl;
+  cout << "Last instances of masterStudent and masterFaculty added to rollback" << endl;
 }
 
-StudentTree History::getStudHist()
+string History::getStudHist()
 {
-  cout << "the sCount is " << sCount << endl;
-  if (sCount == 1)
+  if (count == 1)
   {
-    cout << "the scount is 1" << endl;
-    sCount--;
-    cout << "the scount is now " << sCount << endl;
+    count--;
+    cout << st0;
     return st0;
   }
-  else if (sCount == 2)
+  else if (count == 2)
   {
-    sCount--;
+    count--;
+    cout << st1;
     return st1;
   }
-  else if (sCount == 3)
+  else if (count == 3)
   {
-    sCount--;
+    count--;
+    cout << st2;
     return st2;
   }
-  else if (sCount == 4)
+  else if (count == 4)
   {
-    sCount--;
+    count--;
+    cout << st3;
     return st3;
   }
-  else if (sCount == 5)
+  else if (count == 5)
   {
-    sCount--;
+    count--;
     return st4;
   }
   else
-    return st4;
-  /*if (studHist->front == NULL)
-  {
-    cerr << "No history." << endl;
-    return StudentTree();
-  }
-  else
-  {
-    StudentTree s;
-    s = studHist->front->data;
-    studHist->removeFront();
-    return s;
-  }*/
+    return "";
 }
 
-FacultyTree History::getFacHist()
+string History::getFacHist()
 {
-  if (fCount == 1)
+  if (count == 1)
   {
-    fCount--;
+    count--;
     return ft0;
   }
-  else if (fCount == 2)
+  else if (count == 2)
   {
-    fCount--;
+    count--;
     return ft1;
   }
-  else if (fCount == 3)
+  else if (count == 3)
   {
-    fCount--;
+    count--;
     return ft2;
   }
-  else if (fCount == 4)
+  else if (count == 4)
   {
-    fCount--;
+    count--;
     return ft3;
   }
-  else if (fCount == 5)
+  else if (count == 5)
   {
-    fCount--;
+    count--;
     return ft4;
   }
   else
-    return ft4;
+    return "";
 }
