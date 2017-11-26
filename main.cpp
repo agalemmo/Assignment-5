@@ -102,7 +102,7 @@ int main()
 
   int lineCount;
 
-  History* hist = new History();
+  //History* hist = new History();
 
   /**
   Create/access and restore facultyTable text file.
@@ -329,7 +329,7 @@ int main()
         }
         masterStudent->insert(s->getId(), *s);
         cout << "New student object created and inserted into tree." << endl;
-        hist->addHistory(*masterStudent, *masterFaculty);
+        //hist->addHistory(*masterStudent, *masterFaculty);
         break;
       case 8: //remove student from StudentTree
         cout << "Enter the ID Number: " << endl;
@@ -351,7 +351,7 @@ int main()
           fac.removeAdvisee(studID);
           masterFaculty->getNode(facID)->setObj(fac);
           masterStudent->deleteNode(studID);
-          hist->addHistory(*masterStudent, *masterFaculty);
+          //hist->addHistory(*masterStudent, *masterFaculty);
         }
         break;
       case 9: //add a new faculty member to FacultyTree
@@ -372,7 +372,7 @@ int main()
         f->setDept(info);
         masterFaculty->insert(f->getId(), *f);
         cout << "New faculty object created and inserted into tree." << endl;
-        hist->addHistory(*masterStudent, *masterFaculty);
+        //hist->addHistory(*masterStudent, *masterFaculty);
         break;
       case 10: //remove faculty from FacultyTree
         cout << "Enter the ID Number: " << endl;
@@ -406,7 +406,7 @@ int main()
             masterFaculty->getMin()->setObj(fac);
           }
           cout << "Faculty member deleted. His advisees have been reassigned to the faculty with the lowest ID.\n";
-          hist->addHistory(*masterStudent, *masterFaculty);
+          //hist->addHistory(*masterStudent, *masterFaculty);
         }
         break;
       case 11: //change student's advisor
@@ -434,7 +434,7 @@ int main()
           {
             masterStudent->getNode(studID)->getObj().setAdvisor(facID);
             cout << "Student " << studID << "'s advisor successfully changed to " << facID << "." << endl;
-            hist->addHistory(*masterStudent, *masterFaculty);
+            //hist->addHistory(*masterStudent, *masterFaculty);
           }
           else
           {
@@ -471,7 +471,7 @@ int main()
             fac.removeAdvisee(studID);
             masterFaculty->getNode(facID)->setObj(fac);
             cout << "Student " << studID << " successfully removed." << endl;
-            hist->addHistory(*masterStudent, *masterFaculty);
+            //hist->addHistory(*masterStudent, *masterFaculty);
           }
           else
           {
@@ -486,12 +486,12 @@ int main()
         masterStudent->printTree(masterStudent->root);
         cout << "\n+++Faculty before" << endl;
         masterFaculty->printTree(masterFaculty->root);
-        st = hist->getStudHist();
-        masterStudent = &st;
+        //st = hist->getStudHist();
+        //masterStudent = &st;
         cout << "\n+++Student after" << endl;
         masterStudent->printTree(masterStudent->root);
-        ft = hist->getFacHist();
-        masterFaculty = &ft;
+        //ft = hist->getFacHist();
+        //masterFaculty = &ft;
         cout << "\n+++Faculty after" << endl;
         masterFaculty->printTree(masterFaculty->root);
         cout << "Last version restored." << endl;
@@ -515,6 +515,7 @@ int main()
           stud.setMajor(info);
           masterStudent->getNode(studID)->setObj(stud);
           cout << "Student's major has been changed.\n";
+          //hist->addHistory(*masterStudent, *masterFaculty);
         }
         else
         {
