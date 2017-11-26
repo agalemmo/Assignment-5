@@ -103,6 +103,11 @@ int main()
   int lineCount;
 
   //History* hist = new History();
+  //History variables
+  StudentTree st0, st1, st2, st3, st4, tempST;
+  FacultyTree ft0, ft1, ft2, ft3, ft4, tempFT;
+
+  int count = 0;
 
   /**
   Create/access and restore facultyTable text file.
@@ -277,6 +282,8 @@ int main()
           cerr << "No faculty exists with that ID number. Please try again.\n";
         break;
       case 7: //add a new student to StudentTree
+        tempST = *masterStudent;
+        tempFT = *masterFaculty;
         if (masterFaculty->isEmpty())
         {
           cerr << "Your faculty tree is empty. You can't add a student until you have at least one faculty member, or your student can't have an advisor.\n";
@@ -329,9 +336,55 @@ int main()
         }
         masterStudent->insert(s->getId(), *s);
         cout << "New student object created and inserted into tree." << endl;
-        //hist->addHistory(*masterStudent, *masterFaculty);
+        //HISTORY
+        if (count == 0)
+        {
+          st0 = tempST;
+          ft0 = tempFT;
+          count++;
+        }
+        else if (count == 1)
+        {
+          st1 = tempST;
+          ft1 = tempFT;
+          count++;
+        }
+        else if (count == 2)
+        {
+          st2 = tempST;
+          ft2 = tempFT;
+          count++;
+        }
+        else if (count == 3)
+        {
+          st3 = tempST;
+          ft3 = tempFT;
+          count++;
+        }
+        else if (count == 4)
+        {
+          st4 = tempST;
+          ft4 = tempFT;
+          count++;
+        }
+        else if (count == 5)
+        {
+          st0 = st1;
+          st1 = st2;
+          st2 = st3;
+          st3 = st4;
+          st4 = tempST;
+          ft0 = ft1;
+          ft1 = ft2;
+          ft2 = ft3;
+          ft3 = ft4;
+          ft4 = tempFT;
+        }
+        cout << "Last instances of masterStudent and masterFaculty added to rollback" << endl;
         break;
       case 8: //remove student from StudentTree
+        tempST = *masterStudent;
+        tempFT = *masterFaculty;
         cout << "Enter the ID Number: " << endl;
         cin >> (studID);
         while (cin.fail())
@@ -351,10 +404,56 @@ int main()
           fac.removeAdvisee(studID);
           masterFaculty->getNode(facID)->setObj(fac);
           masterStudent->deleteNode(studID);
-          //hist->addHistory(*masterStudent, *masterFaculty);
+          //HISTORY
+          if (count == 0)
+          {
+            st0 = tempST;
+            ft0 = tempFT;
+            count++;
+          }
+          else if (count == 1)
+          {
+            st1 = tempST;
+            ft1 = tempFT;
+            count++;
+          }
+          else if (count == 2)
+          {
+            st2 = tempST;
+            ft2 = tempFT;
+            count++;
+          }
+          else if (count == 3)
+          {
+            st3 = tempST;
+            ft3 = tempFT;
+            count++;
+          }
+          else if (count == 4)
+          {
+            st4 = tempST;
+            ft4 = tempFT;
+            count++;
+          }
+          else if (count == 5)
+          {
+            st0 = st1;
+            st1 = st2;
+            st2 = st3;
+            st3 = st4;
+            st4 = tempST;
+            ft0 = ft1;
+            ft1 = ft2;
+            ft2 = ft3;
+            ft3 = ft4;
+            ft4 = tempFT;
+          }
+          cout << "Last instances of masterStudent and masterFaculty added to rollback" << endl;
         }
         break;
       case 9: //add a new faculty member to FacultyTree
+        tempST = *masterStudent;
+        tempFT = *masterFaculty;
         cout << "added faculty history" << endl;
         f = new Faculty();
         cout << "Enter faculty information: " << endl;
@@ -372,9 +471,55 @@ int main()
         f->setDept(info);
         masterFaculty->insert(f->getId(), *f);
         cout << "New faculty object created and inserted into tree." << endl;
-        //hist->addHistory(*masterStudent, *masterFaculty);
+        //HISTORY
+        if (count == 0)
+        {
+          st0 = tempST;
+          ft0 = tempFT;
+          count++;
+        }
+        else if (count == 1)
+        {
+          st1 = tempST;
+          ft1 = tempFT;
+          count++;
+        }
+        else if (count == 2)
+        {
+          st2 = tempST;
+          ft2 = tempFT;
+          count++;
+        }
+        else if (count == 3)
+        {
+          st3 = tempST;
+          ft3 = tempFT;
+          count++;
+        }
+        else if (count == 4)
+        {
+          st4 = tempST;
+          ft4 = tempFT;
+          count++;
+        }
+        else if (count == 5)
+        {
+          st0 = st1;
+          st1 = st2;
+          st2 = st3;
+          st3 = st4;
+          st4 = tempST;
+          ft0 = ft1;
+          ft1 = ft2;
+          ft2 = ft3;
+          ft3 = ft4;
+          ft4 = tempFT;
+        }
+        cout << "Last instances of masterStudent and masterFaculty added to rollback" << endl;
         break;
       case 10: //remove faculty from FacultyTree
+        tempST = *masterStudent;
+        tempFT = *masterFaculty;
         cout << "Enter the ID Number: " << endl;
         cin >> facID;
         while (cin.fail())
@@ -406,10 +551,56 @@ int main()
             masterFaculty->getMin()->setObj(fac);
           }
           cout << "Faculty member deleted. His advisees have been reassigned to the faculty with the lowest ID.\n";
-          //hist->addHistory(*masterStudent, *masterFaculty);
+          //HISTORY
+          if (count == 0)
+          {
+            st0 = tempST;
+            ft0 = tempFT;
+            count++;
+          }
+          else if (count == 1)
+          {
+            st1 = tempST;
+            ft1 = tempFT;
+            count++;
+          }
+          else if (count == 2)
+          {
+            st2 = tempST;
+            ft2 = tempFT;
+            count++;
+          }
+          else if (count == 3)
+          {
+            st3 = tempST;
+            ft3 = tempFT;
+            count++;
+          }
+          else if (count == 4)
+          {
+            st4 = tempST;
+            ft4 = tempFT;
+            count++;
+          }
+          else if (count == 5)
+          {
+            st0 = st1;
+            st1 = st2;
+            st2 = st3;
+            st3 = st4;
+            st4 = tempST;
+            ft0 = ft1;
+            ft1 = ft2;
+            ft2 = ft3;
+            ft3 = ft4;
+            ft4 = tempFT;
+          }
+          cout << "Last instances of masterStudent and masterFaculty added to rollback" << endl;
         }
         break;
       case 11: //change student's advisor
+        tempST = *masterStudent;
+        tempFT = *masterFaculty;
         cout << "Enter the Student's ID Number: " << endl;
         cin >> studID;
         while (cin.fail())
@@ -434,7 +625,51 @@ int main()
           {
             masterStudent->getNode(studID)->getObj().setAdvisor(facID);
             cout << "Student " << studID << "'s advisor successfully changed to " << facID << "." << endl;
-            //hist->addHistory(*masterStudent, *masterFaculty);
+            //HISTORY
+            if (count == 0)
+            {
+              st0 = tempST;
+              ft0 = tempFT;
+              count++;
+            }
+            else if (count == 1)
+            {
+              st1 = tempST;
+              ft1 = tempFT;
+              count++;
+            }
+            else if (count == 2)
+            {
+              st2 = tempST;
+              ft2 = tempFT;
+              count++;
+            }
+            else if (count == 3)
+            {
+              st3 = tempST;
+              ft3 = tempFT;
+              count++;
+            }
+            else if (count == 4)
+            {
+              st4 = tempST;
+              ft4 = tempFT;
+              count++;
+            }
+            else if (count == 5)
+            {
+              st0 = st1;
+              st1 = st2;
+              st2 = st3;
+              st3 = st4;
+              st4 = tempST;
+              ft0 = ft1;
+              ft1 = ft2;
+              ft2 = ft3;
+              ft3 = ft4;
+              ft4 = tempFT;
+            }
+            cout << "Last instances of masterStudent and masterFaculty added to rollback" << endl;
           }
           else
           {
@@ -445,6 +680,8 @@ int main()
           cout << "Faculty member " << facID << " not found." << endl;
         break;
       case 12: //remove advisee from faculty member
+        tempST = *masterStudent;
+        tempFT = *masterFaculty;
         cout << "Enter the Faculty Member's ID Number: " << endl;
         cin >> facID;
         while (cin.fail())
@@ -471,7 +708,51 @@ int main()
             fac.removeAdvisee(studID);
             masterFaculty->getNode(facID)->setObj(fac);
             cout << "Student " << studID << " successfully removed." << endl;
-            //hist->addHistory(*masterStudent, *masterFaculty);
+            //HISTORY
+            if (count == 0)
+            {
+              st0 = tempST;
+              ft0 = tempFT;
+              count++;
+            }
+            else if (count == 1)
+            {
+              st1 = tempST;
+              ft1 = tempFT;
+              count++;
+            }
+            else if (count == 2)
+            {
+              st2 = tempST;
+              ft2 = tempFT;
+              count++;
+            }
+            else if (count == 3)
+            {
+              st3 = tempST;
+              ft3 = tempFT;
+              count++;
+            }
+            else if (count == 4)
+            {
+              st4 = tempST;
+              ft4 = tempFT;
+              count++;
+            }
+            else if (count == 5)
+            {
+              st0 = st1;
+              st1 = st2;
+              st2 = st3;
+              st3 = st4;
+              st4 = tempST;
+              ft0 = ft1;
+              ft1 = ft2;
+              ft2 = ft3;
+              ft3 = ft4;
+              ft4 = tempFT;
+            }
+            cout << "Last instances of masterStudent and masterFaculty added to rollback" << endl;
           }
           else
           {
@@ -486,17 +767,45 @@ int main()
         masterStudent->printTree(masterStudent->root);
         cout << "\n+++Faculty before" << endl;
         masterFaculty->printTree(masterFaculty->root);
-        //st = hist->getStudHist();
-        //masterStudent = &st;
+        if (count == 1)
+        {
+          count--;
+          masterStudent = &st0;
+          masterFaculty = &ft0;
+        }
+        else if (count == 2)
+        {
+          count--;
+          masterStudent = &st1;
+          masterFaculty = &ft1;
+        }
+        else if (count == 3)
+        {
+          count--;
+          masterStudent = &st2;
+          masterFaculty = &ft2;
+        }
+        else if (count == 4)
+        {
+          count--;
+          masterStudent = &st3;
+          masterFaculty = &ft3;
+        }
+        else if (count == 5)
+        {
+          count--;
+          masterStudent = &st4;
+          masterFaculty = &ft4;
+        }
         cout << "\n+++Student after" << endl;
         masterStudent->printTree(masterStudent->root);
-        //ft = hist->getFacHist();
-        //masterFaculty = &ft;
         cout << "\n+++Faculty after" << endl;
         masterFaculty->printTree(masterFaculty->root);
         cout << "Last version restored." << endl;
         break;
       case 14: //change major
+        tempST = *masterStudent;
+        tempFT = *masterFaculty;
         cout << "Enter the student's ID number:\n";
         cin >> studID;
         while (cin.fail())
@@ -515,7 +824,51 @@ int main()
           stud.setMajor(info);
           masterStudent->getNode(studID)->setObj(stud);
           cout << "Student's major has been changed.\n";
-          //hist->addHistory(*masterStudent, *masterFaculty);
+          //HISTORY
+          if (count == 0)
+          {
+            st0 = tempST;
+            ft0 = tempFT;
+            count++;
+          }
+          else if (count == 1)
+          {
+            st1 = tempST;
+            ft1 = tempFT;
+            count++;
+          }
+          else if (count == 2)
+          {
+            st2 = tempST;
+            ft2 = tempFT;
+            count++;
+          }
+          else if (count == 3)
+          {
+            st3 = tempST;
+            ft3 = tempFT;
+            count++;
+          }
+          else if (count == 4)
+          {
+            st4 = tempST;
+            ft4 = tempFT;
+            count++;
+          }
+          else if (count == 5)
+          {
+            st0 = st1;
+            st1 = st2;
+            st2 = st3;
+            st3 = st4;
+            st4 = tempST;
+            ft0 = ft1;
+            ft1 = ft2;
+            ft2 = ft3;
+            ft3 = ft4;
+            ft4 = tempFT;
+          }
+          cout << "Last instances of masterStudent and masterFaculty added to rollback" << endl;
         }
         else
         {
