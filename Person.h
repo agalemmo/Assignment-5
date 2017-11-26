@@ -67,7 +67,8 @@ Destructor.
 Does nothing.
 */
 Person::~Person()
-{}
+{
+}
 
 /**
 getID returns ID.

@@ -75,8 +75,8 @@ int main()
   string line;
   ifstream studFile;
   ifstream facFile;
-  fstream studentTable ("studentTable.txt");
-  fstream facultyTable ("facultyTable.txt");
+  ofstream studentTable ("studentTable.txt");
+  ofstream facultyTable ("facultyTable.txt");
 
   StudentTree* masterStudent = new StudentTree();
   FacultyTree* masterFaculty = new FacultyTree();
@@ -100,30 +100,53 @@ int main()
   Faculty fac;
   Student stud;
 
+  //please delete this eventually this is now History
+  StudentTree st0;
+  StudentTree st1;
+  StudentTree st2;
+  StudentTree st3;
+  StudentTree st4;
+
+  FacultyTree ft0;
+  FacultyTree ft1;
+  FacultyTree ft2;
+  FacultyTree ft3;
+  FacultyTree ft4;
+
+  int sCount = 0;
+  int fCount = 0;
+  //end the please delete
+
   int lineCount;
 
-  History* hist = new History();
+  //History* hist = new History();
 
   /**
   Create/access and restore facultyTable text file.
   */
-  facFile.open("facultyTable.txt", fstream::in | fstream::out | fstream::app);
+  facFile.open("facultyTable.txt", fstream::in);
   while (facFile.is_open())
   {
     f = new Faculty();
+    lineCount = 0;
     while ( getline (facFile, line))
     {
-    if (lineCount == 1)
-      f->setId(stoi(line));
-    if (lineCount == 2)
-      f->setName(line);
-    if (lineCount == 3)
-      f->setDept(line);
-    if (lineCount == 4)
-      f->setLevel(line);
-    if (line == "END NODE")
+      if (line == "BEGIN NODE")
+      {
+        lineCount = 0;
+      }
+      if (lineCount == 1)
+        f->setId(stoi(line));
+      if (lineCount == 2)
+        f->setName(line);
+      if (lineCount == 3)
+        f->setDept(line);
+      if (lineCount == 4)
+        f->setLevel(line);
+      if (line == "END NODE")
       {
         masterFaculty->insert(f->getId(), *f);
+        cout << to_string(f->getId());
       }
       lineCount++;
     }
@@ -133,14 +156,15 @@ int main()
   /**
   Create/access and restore studentTable text file.
   */
-  studFile.open("studentTable.txt", fstream::in | fstream::out | fstream::app);
+  studFile.open("studentTable.txt", fstream::in);
   while (studFile.is_open())
   {
+    s = new Student();
+    lineCount = 0;
     while ( getline (studFile, line))
     {
       if (line == "BEGIN NODE")
       {
-        s = new Student();
         lineCount = 0;
       }
       if (lineCount == 1)
@@ -166,6 +190,7 @@ int main()
       }
       lineCount++;
     }
+    break;
     studFile.close();
   }
 
@@ -174,6 +199,14 @@ int main()
   {
     printOptions();
     cin >> option;
+
+    while (cin.fail())
+    {
+      cin.clear();
+      cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      cerr << "That's not a valid option, I'm afraid. Please try again.\n";
+      cin >> facID;
+    }
 
     /**
     The big switch statement.
@@ -257,7 +290,51 @@ int main()
         break;
       case 7: //add a new student to StudentTree
       //  hist->addHistory(*masterStudent);
+        {
+        StudentTree temp;
+        temp = *masterStudent;
+
       //  hist->addHistory(*masterFaculty);
+        cout << "the fCount is " << fCount << endl;
+        if (fCount == 0)
+        {
+          cout << "we are out here in fCount == 0 " << endl;
+          ft0 = *masterFaculty;
+          cout << "ft0 now equals fac " << endl;
+          fCount++;
+          cout << "the fCount now equals " << fCount << endl;
+        }
+        else if (fCount == 1)
+        {
+          cout << "please don't tell me it goes in here" << endl;
+          ft1 = *masterFaculty;
+          fCount++;
+        }
+        else if (fCount == 2)
+        {
+          ft2 = *masterFaculty;
+          fCount++;
+        }
+        else if (fCount == 3)
+        {
+          ft3 = *masterFaculty;
+          fCount++;
+        }
+        else if (fCount == 4)
+        {
+          ft4 = *masterFaculty;
+          fCount++;
+        }
+        else if (fCount == 5)
+        {
+          ft0 = ft1;
+          ft1 = ft2;
+          ft2 = ft3;
+          ft3 = ft4;
+          ft4 = *masterFaculty;
+        }
+        cout << "we are now out here" << endl;
+        cout << "added faculty history" << endl;
         if (masterFaculty->isEmpty())
         {
           cerr << "Your faculty tree is empty. You can't add a student until you have at least one faculty member, or your student can't have an advisor.\n";
@@ -310,10 +387,138 @@ int main()
         }
         masterStudent->insert(s->getId(), *s);
         cout << "New student object created and inserted into tree." << endl;
+        //{
+        if (sCount == 0)
+        {
+          cout << "inside if sCount is " << sCount << endl;
+          st0 = temp;
+          cout << "st now equals temp" << endl;
+          sCount++;
+          cout << "sCount is now " << sCount << endl;
+        }
+        else if (sCount == 1)
+        {
+          cout << "inside if sCount is " << sCount << endl;
+          st1 = temp;
+          cout << "st now equals temp" << endl;
+          sCount++;
+          cout << "sCount is now " << sCount << endl;
+        }
+        else if (sCount == 2)
+        {
+          cout << "inside if sCount is " << sCount << endl;
+          st2 = temp;
+          cout << "st now equals temp" << endl;
+          sCount++;
+          cout << "sCount is now " << sCount << endl;
+        }
+        else if (sCount == 3)
+        {
+          cout << "inside if sCount is " << sCount << endl;
+          st3 = temp;
+          cout << "st now equals temp" << endl;
+          sCount++;
+          cout << "sCount is now " << sCount << endl;
+        }
+        else if (sCount == 4)
+        {
+          cout << "inside if sCount is " << sCount << endl;
+          st4 = temp;
+          cout << "st now equals temp" << endl;
+          sCount++;
+          cout << "sCount is now " << sCount << endl;
+        }
+        else if (sCount == 5)
+        {
+          cout << "inside if sCount is " << sCount << endl;
+          st0 = st1;
+          st1 = st2;
+          st2 = st3;
+          st3 = st4;
+          st4 = temp;
+        }
+        cout << "end of the line, now to delete temp" << endl;
+        //delete &temp;
+        //cout << "temp deleted" << endl;
+        cout << "temp commented out" << endl;
+      //}}
         break;
       case 8: //remove student from StudentTree
     //    hist->addHistory(*masterStudent);
+        if (sCount == 0)
+        {
+          st0 = *masterStudent;
+          sCount++;
+        }
+        else if (sCount == 1)
+        {
+          st1 = *masterStudent;
+          sCount++;
+        }
+        else if (sCount == 2)
+        {
+          st2 = *masterStudent;
+          sCount++;
+        }
+        else if (sCount == 3)
+        {
+          st3 = *masterStudent;
+          sCount++;
+        }
+        else if (sCount == 4)
+        {
+          st4 = *masterStudent;
+          sCount++;
+        }
+        else if (sCount == 5)
+        {
+          st0 = st1;
+          st1 = st2;
+          st2 = st3;
+          st3 = st4;
+          st4 = *masterStudent;
+        }
     //    hist->addHistory(*masterFaculty);
+        cout << "the fCount is " << fCount << endl;
+        if (fCount == 0)
+        {
+          cout << "we are out here in fCount == 0 " << endl;
+          ft0 = *masterFaculty;
+          cout << "ft0 now equals fac " << endl;
+          fCount++;
+          cout << "the fCount now equals " << fCount << endl;
+        }
+        else if (fCount == 1)
+        {
+          cout << "please don't tell me it goes in here" << endl;
+          ft1 = *masterFaculty;
+          fCount++;
+        }
+        else if (fCount == 2)
+        {
+          ft2 = *masterFaculty;
+          fCount++;
+        }
+        else if (fCount == 3)
+        {
+          ft3 = *masterFaculty;
+          fCount++;
+        }
+        else if (fCount == 4)
+        {
+          ft4 = *masterFaculty;
+          fCount++;
+        }
+        else if (fCount == 5)
+        {
+          ft0 = ft1;
+          ft1 = ft2;
+          ft2 = ft3;
+          ft3 = ft4;
+          ft4 = *masterFaculty;
+        }
+        cout << "we are now out here" << endl;
+        cout << "added faculty history" << endl;
         cout << "Enter the ID Number: " << endl;
         cin >> (idToBeFound);
         while (cin.fail())
@@ -327,8 +532,81 @@ int main()
           cerr << "This student does not exist, and therefore could not be removed.\n";
         break;
       case 9: //add a new faculty member to FacultyTree
+        cout << "pls add history thank u" << endl;
       //  hist->addHistory(masterStudent);
-      //  hist->addHistory(masterFaculty);
+        if (sCount == 0)
+        {
+          st0 = *masterStudent;
+          sCount++;
+        }
+        else if (sCount == 1)
+        {
+          st1 = *masterStudent;
+          sCount++;
+        }
+        else if (sCount == 2)
+        {
+          st2 = *masterStudent;
+          sCount++;
+        }
+        else if (sCount == 3)
+        {
+          st3 = *masterStudent;
+          sCount++;
+        }
+        else if (sCount == 4)
+        {
+          st4 = *masterStudent;
+          sCount++;
+        }
+        else if (sCount == 5)
+        {
+          st0 = st1;
+          st1 = st2;
+          st2 = st3;
+          st3 = st4;
+          st4 = *masterStudent;
+        }
+        //hist->addHistory(*masterFaculty);
+        cout << "the fCount is " << fCount << endl;
+        if (fCount == 0)
+        {
+          cout << "we are out here in fCount == 0 " << endl;
+          ft0 = *masterFaculty;
+          cout << "ft0 now equals fac " << endl;
+          fCount++;
+          cout << "the fCount now equals " << fCount << endl;
+        }
+        else if (fCount == 1)
+        {
+          cout << "please don't tell me it goes in here" << endl;
+          ft1 = *masterFaculty;
+          fCount++;
+        }
+        else if (fCount == 2)
+        {
+          ft2 = *masterFaculty;
+          fCount++;
+        }
+        else if (fCount == 3)
+        {
+          ft3 = *masterFaculty;
+          fCount++;
+        }
+        else if (fCount == 4)
+        {
+          ft4 = *masterFaculty;
+          fCount++;
+        }
+        else if (fCount == 5)
+        {
+          ft0 = ft1;
+          ft1 = ft2;
+          ft2 = ft3;
+          ft3 = ft4;
+          ft4 = *masterFaculty;
+        }
+        cout << "we are now out here" << endl;
         cout << "added faculty history" << endl;
         f = new Faculty();
         cout << "Enter faculty information: " << endl;
@@ -349,7 +627,80 @@ int main()
         break;
       case 10: //remove faculty from FacultyTree
   //      hist->addHistory(*masterStudent);
+        if (sCount == 0)
+        {
+          st0 = *masterStudent;
+          sCount++;
+        }
+        else if (sCount == 1)
+        {
+          st1 = *masterStudent;
+          sCount++;
+        }
+        else if (sCount == 2)
+        {
+          st2 = *masterStudent;
+          sCount++;
+        }
+        else if (sCount == 3)
+        {
+          st3 = *masterStudent;
+          sCount++;
+        }
+        else if (sCount == 4)
+        {
+          st4 = *masterStudent;
+          sCount++;
+        }
+        else if (sCount == 5)
+        {
+          st0 = st1;
+          st1 = st2;
+          st2 = st3;
+          st3 = st4;
+          st4 = *masterStudent;
+        }
   //      hist->addHistory(*masterFaculty);
+        cout << "the fCount is " << fCount << endl;
+        if (fCount == 0)
+        {
+          cout << "we are out here in fCount == 0 " << endl;
+          ft0 = *masterFaculty;
+          cout << "ft0 now equals fac " << endl;
+          fCount++;
+          cout << "the fCount now equals " << fCount << endl;
+        }
+        else if (fCount == 1)
+        {
+          cout << "please don't tell me it goes in here" << endl;
+          ft1 = *masterFaculty;
+          fCount++;
+        }
+        else if (fCount == 2)
+        {
+          ft2 = *masterFaculty;
+          fCount++;
+        }
+        else if (fCount == 3)
+        {
+          ft3 = *masterFaculty;
+          fCount++;
+        }
+        else if (fCount == 4)
+        {
+          ft4 = *masterFaculty;
+          fCount++;
+        }
+        else if (fCount == 5)
+        {
+          ft0 = ft1;
+          ft1 = ft2;
+          ft2 = ft3;
+          ft3 = ft4;
+          ft4 = *masterFaculty;
+        }
+        cout << "we are now out here" << endl;
+        cout << "added faculty history" << endl;
         cout << "Enter the ID Number: " << endl;
         cin >> facID;
         while (cin.fail())
@@ -375,11 +726,9 @@ int main()
           {
             stud = masterStudent->getNode(tempArray[i])->getObj();
             stud.setAdvisor(masterFaculty->getMin()->getObj().getId());
-            cout << stud.getAdvisor();
             masterStudent->getNode(tempArray[i])->setObj(stud);
             fac = masterFaculty->getMin()->getObj();
             fac.addAdvisee(tempArray[i]);
-            cout << fac.getAdvisees();
             masterFaculty->getMin()->setObj(fac);
           }
           cout << "Faculty member deleted. His advisees have been reassigned to the faculty with the lowest ID.\n";
@@ -387,7 +736,80 @@ int main()
         break;
       case 11: //change student's advisor
   //      hist->addHistory(*masterStudent);
+        if (sCount == 0)
+        {
+          st0 = *masterStudent;
+          sCount++;
+        }
+        else if (sCount == 1)
+        {
+          st1 = *masterStudent;
+          sCount++;
+        }
+        else if (sCount == 2)
+        {
+          st2 = *masterStudent;
+          sCount++;
+        }
+        else if (sCount == 3)
+        {
+          st3 = *masterStudent;
+          sCount++;
+        }
+        else if (sCount == 4)
+        {
+          st4 = *masterStudent;
+          sCount++;
+        }
+        else if (sCount == 5)
+        {
+          st0 = st1;
+          st1 = st2;
+          st2 = st3;
+          st3 = st4;
+          st4 = *masterStudent;
+        }
   //      hist->addHistory(*masterFaculty);
+        cout << "the fCount is " << fCount << endl;
+        if (fCount == 0)
+        {
+          cout << "we are out here in fCount == 0 " << endl;
+          ft0 = *masterFaculty;
+          cout << "ft0 now equals fac " << endl;
+          fCount++;
+          cout << "the fCount now equals " << fCount << endl;
+        }
+        else if (fCount == 1)
+        {
+          cout << "please don't tell me it goes in here" << endl;
+          ft1 = *masterFaculty;
+          fCount++;
+        }
+        else if (fCount == 2)
+        {
+          ft2 = *masterFaculty;
+          fCount++;
+        }
+        else if (fCount == 3)
+        {
+          ft3 = *masterFaculty;
+          fCount++;
+        }
+        else if (fCount == 4)
+        {
+          ft4 = *masterFaculty;
+          fCount++;
+        }
+        else if (fCount == 5)
+        {
+          ft0 = ft1;
+          ft1 = ft2;
+          ft2 = ft3;
+          ft3 = ft4;
+          ft4 = *masterFaculty;
+        }
+        cout << "we are now out here" << endl;
+        cout << "added faculty history" << endl;
         cout << "Enter the Student's ID Number: " << endl;
         cin >> studID;
         while (cin.fail())
@@ -423,7 +845,80 @@ int main()
         break;
       case 12: //remove advisee from faculty member
   //      hist->addHistory(*masterStudent);
+        if (sCount == 0)
+        {
+          st0 = *masterStudent;
+          sCount++;
+        }
+        else if (sCount == 1)
+        {
+          st1 = *masterStudent;
+          sCount++;
+        }
+        else if (sCount == 2)
+        {
+          st2 = *masterStudent;
+          sCount++;
+        }
+        else if (sCount == 3)
+        {
+          st3 = *masterStudent;
+          sCount++;
+        }
+        else if (sCount == 4)
+        {
+          st4 = *masterStudent;
+          sCount++;
+        }
+        else if (sCount == 5)
+        {
+          st0 = st1;
+          st1 = st2;
+          st2 = st3;
+          st3 = st4;
+          st4 = *masterStudent;
+        }
   //      hist->addHistory(*masterFaculty);
+        cout << "the fCount is " << fCount << endl;
+        if (fCount == 0)
+        {
+          cout << "we are out here in fCount == 0 " << endl;
+          ft0 = *masterFaculty;
+          cout << "ft0 now equals fac " << endl;
+          fCount++;
+          cout << "the fCount now equals " << fCount << endl;
+        }
+        else if (fCount == 1)
+        {
+          cout << "please don't tell me it goes in here" << endl;
+          ft1 = *masterFaculty;
+          fCount++;
+        }
+        else if (fCount == 2)
+        {
+          ft2 = *masterFaculty;
+          fCount++;
+        }
+        else if (fCount == 3)
+        {
+          ft3 = *masterFaculty;
+          fCount++;
+        }
+        else if (fCount == 4)
+        {
+          ft4 = *masterFaculty;
+          fCount++;
+        }
+        else if (fCount == 5)
+        {
+          ft0 = ft1;
+          ft1 = ft2;
+          ft2 = ft3;
+          ft3 = ft4;
+          ft4 = *masterFaculty;
+        }
+        cout << "we are now out here" << endl;
+        cout << "added faculty history" << endl;
         cout << "Enter the Faculty Member's ID Number: " << endl;
         cin >> facID;
         while (cin.fail())
@@ -464,17 +959,122 @@ int main()
         masterStudent->printTree(masterStudent->root);
         cout << "\n+++Faculty before" << endl;
         masterFaculty->printTree(masterFaculty->root);
-        st = hist->getStudHist();
-        masterStudent = &st;
+        //st = hist->getStudHist();
+        //masterStudent = &st;
+        cout << "the sCount is " << sCount << endl;
+        if (sCount == 1)
+        {
+          cout << "we are in the sCount is " << sCount << endl;
+          sCount--;
+          cout << "the scount is now " << sCount << endl;
+          *masterStudent = st0;
+        }
+        else if (sCount == 2)
+        {
+          cout << "we are in the sCount is " << sCount << endl;
+          sCount--;
+          cout << "the scount is now " << sCount << endl;
+          *masterStudent = st1;
+        }
+        else if (sCount == 3)
+        {
+          cout << "we are in the sCount is " << sCount << endl;
+          sCount--;
+          cout << "the scount is now " << sCount << endl;
+          *masterStudent = st2;
+        }
+        else if (sCount == 4)
+        {
+          cout << "we are in the sCount is " << sCount << endl;
+          sCount--;
+          cout << "the scount is now " << sCount << endl;
+          *masterStudent = st3;
+        }
+        else if (sCount == 5)
+        {
+          cout << "we are in the sCount is " << sCount << endl;
+          sCount--;
+          cout << "the scount is now " << sCount << endl;
+          *masterStudent = st4;
+        }
+        else
+          *masterStudent = st4;
         cout << "\n+++Student after" << endl;
         masterStudent->printTree(masterStudent->root);
-        ft = hist->getFacHist();
-        masterFaculty = &ft;
+        //ft = hist->getFacHist();
+        //masterFaculty = &ft;
+        if (fCount == 1)
+        {
+          fCount--;
+          *masterFaculty = ft0;
+        }
+        else if (fCount == 2)
+        {
+          fCount--;
+          *masterFaculty = ft1;
+        }
+        else if (fCount == 3)
+        {
+          fCount--;
+          *masterFaculty = ft2;
+        }
+        else if (fCount == 4)
+        {
+          fCount--;
+          *masterFaculty = ft3;
+        }
+        else if (fCount == 5)
+        {
+          fCount--;
+          *masterFaculty = ft4;
+        }
+        else
+          *masterFaculty = ft4;
         cout << "\n+++Faculty after" << endl;
         masterFaculty->printTree(masterFaculty->root);
         cout << "Last version restored." << endl;
         break;
       case 14: //change major
+        cout << "the fCount is " << fCount << endl;
+        if (fCount == 0)
+        {
+          cout << "we are out here in fCount == 0 " << endl;
+          ft0 = *masterFaculty;
+          cout << "ft0 now equals fac " << endl;
+          fCount++;
+          cout << "the fCount now equals " << fCount << endl;
+        }
+        else if (fCount == 1)
+        {
+          cout << "please don't tell me it goes in here" << endl;
+          ft1 = *masterFaculty;
+          fCount++;
+        }
+        else if (fCount == 2)
+        {
+          ft2 = *masterFaculty;
+          fCount++;
+        }
+        else if (fCount == 3)
+        {
+          ft3 = *masterFaculty;
+          fCount++;
+        }
+        else if (fCount == 4)
+        {
+          ft4 = *masterFaculty;
+          fCount++;
+        }
+        else if (fCount == 5)
+        {
+          ft0 = ft1;
+          ft1 = ft2;
+          ft2 = ft3;
+          ft3 = ft4;
+          ft4 = *masterFaculty;
+        }
+        cout << "we are now out here" << endl;
+        cout << "added faculty history" << endl;
         cout << "Enter the student's ID number:\n";
         cin >> studID;
         while (cin.fail())
@@ -500,6 +1100,8 @@ int main()
         }
         break;
       case 15: //exit
+        studentTable.open("studentTable.txt", fstream::in | fstream::out | fstream::trunc);
+        facultyTable.open("facultyTable.txt", fstream::in | fstream::out | fstream::trunc);
         if (studentTable.is_open())
         {
           studentTable << masterStudent->printTreeToFile(masterStudent->root);
@@ -508,11 +1110,12 @@ int main()
         if (facultyTable.is_open())
         {
           facultyTable << masterFaculty->printTreeToFile(masterFaculty->root);
-          cout << "here.\n";
           facultyTable.close();
         }
         cout << "Saved to studentTable.txt and facultyTable.txt. Goodbye." << endl;
         return 0;
+      default:
+        cout << "That's not a valid choice, I'm afraid. Please try again.\n";
         break;
     }
   }

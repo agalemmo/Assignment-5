@@ -32,7 +32,7 @@ class Faculty : public Person
 
     void setDept(string s);
     void addAdvisee(int s);
-    void removeAdvisee(int s);
+    bool removeAdvisee(int s);
     int getNumAdvisees();
     void setNumAdvisees(int n);
 
@@ -155,15 +155,17 @@ void Faculty::addAdvisee(int s)
 removeAdvisee
 Removes advisee with ID number given by parameter.
 Paramter s - ID number of student to be removed.
+Return true if the removal is successful
 */
-void Faculty::removeAdvisee(int s)
+bool Faculty::removeAdvisee(int s)
 {
   if (numAdvisees >= 0)
   {
-    for (int i = arraySize - 1; i > 0; --i)
+    for (int i = 0; i < arraySize; ++i)
     {
       if (advArray[i] == s)
       {
+        cout << "Yo\n";
         for (int n = i; n < arraySize; ++n)
         {
           if (n == (arraySize - 1))
@@ -172,14 +174,18 @@ void Faculty::removeAdvisee(int s)
             advArray[n] = advArray[n+1];
         }
         numAdvisees--;
-        cout << "Student " << s << " removed." << endl;
+        return true;
       }
       else if (i == arraySize - 1 && advArray[i] != s)
-        cout << "Student " << s << " not found." << endl;
+        return false;
     }
   }
   else
+  {
     cout << "Action invalid. No advisees found." << endl;
+    return false;
+  }
+  return false;
 }
 
 /**

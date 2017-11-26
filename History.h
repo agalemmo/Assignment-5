@@ -95,13 +95,18 @@ void History::addHistory(StudentTree stud)
 
 void History::addHistory(FacultyTree fac)
 {
+  cout << "the fCount is " << fCount << endl;
   if (fCount == 0)
   {
+    cout << "we are out here in fCount == 0 " << endl;
     ft0 = fac;
+    cout << "ft0 now equals fac " << endl;
     fCount++;
+    cout << "the fCount now equals " << fCount << endl;
   }
   else if (fCount == 1)
   {
+    cout << "please don't tell me it goes in here" << endl;
     ft1 = fac;
     fCount++;
   }
@@ -128,13 +133,17 @@ void History::addHistory(FacultyTree fac)
     ft3 = ft4;
     ft4 = fac;
   }
+  cout << "we are now out here" << endl;
 }
 
 StudentTree History::getStudHist()
 {
+  cout << "the sCount is " << sCount << endl;
   if (sCount == 1)
   {
+    cout << "the scount is 1" << endl;
     sCount--;
+    cout << "the scount is now " << sCount << endl;
     return st0;
   }
   else if (sCount == 2)
