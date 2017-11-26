@@ -9,7 +9,6 @@ Assignment #5
 #include "Student.h"
 #include "StudentTree.h"
 #include "FacultyTree.h"
-#include "History.h"
 #include <fstream>
 #include <string>
 #include <limits>
@@ -102,7 +101,6 @@ int main()
 
   int lineCount;
 
-  //History* hist = new History();
   //History variables
   StudentTree st0, st1, st2, st3, st4, tempST;
   FacultyTree ft0, ft1, ft2, ft3, ft4, tempFT;
@@ -134,7 +132,6 @@ int main()
       if (line == "END NODE")
       {
         masterFaculty->insert(f->getId(), *f);
-        cout << to_string(f->getId());
       }
       lineCount++;
     }
@@ -380,7 +377,6 @@ int main()
           ft3 = ft4;
           ft4 = tempFT;
         }
-        cout << "Last instances of masterStudent and masterFaculty added to rollback" << endl;
         break;
       case 8: //remove student from StudentTree
         tempST = *masterStudent;
@@ -448,13 +444,11 @@ int main()
             ft3 = ft4;
             ft4 = tempFT;
           }
-          cout << "Last instances of masterStudent and masterFaculty added to rollback" << endl;
         }
         break;
       case 9: //add a new faculty member to FacultyTree
         tempST = *masterStudent;
         tempFT = *masterFaculty;
-        cout << "added faculty history" << endl;
         f = new Faculty();
         cout << "Enter faculty information: " << endl;
         getline(cin, info);
@@ -515,7 +509,6 @@ int main()
           ft3 = ft4;
           ft4 = tempFT;
         }
-        cout << "Last instances of masterStudent and masterFaculty added to rollback" << endl;
         break;
       case 10: //remove faculty from FacultyTree
         tempST = *masterStudent;
@@ -595,7 +588,6 @@ int main()
             ft3 = ft4;
             ft4 = tempFT;
           }
-          cout << "Last instances of masterStudent and masterFaculty added to rollback" << endl;
         }
         break;
       case 11: //change student's advisor
@@ -669,7 +661,6 @@ int main()
               ft3 = ft4;
               ft4 = tempFT;
             }
-            cout << "Last instances of masterStudent and masterFaculty added to rollback" << endl;
           }
           else
           {
@@ -752,7 +743,6 @@ int main()
               ft3 = ft4;
               ft4 = tempFT;
             }
-            cout << "Last instances of masterStudent and masterFaculty added to rollback" << endl;
           }
           else
           {
@@ -763,10 +753,6 @@ int main()
           cout << "Faculty " << facID << " not found." << endl;
         break;
       case 13: //rollback
-        cout << "\n+++Student before" << endl;
-        masterStudent->printTree(masterStudent->root);
-        cout << "\n+++Faculty before" << endl;
-        masterFaculty->printTree(masterFaculty->root);
         if (count == 1)
         {
           count--;
@@ -797,10 +783,6 @@ int main()
           masterStudent = &st4;
           masterFaculty = &ft4;
         }
-        cout << "\n+++Student after" << endl;
-        masterStudent->printTree(masterStudent->root);
-        cout << "\n+++Faculty after" << endl;
-        masterFaculty->printTree(masterFaculty->root);
         cout << "Last version restored." << endl;
         break;
       case 14: //change major
@@ -868,7 +850,6 @@ int main()
             ft3 = ft4;
             ft4 = tempFT;
           }
-          cout << "Last instances of masterStudent and masterFaculty added to rollback" << endl;
         }
         else
         {

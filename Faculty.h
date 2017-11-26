@@ -63,7 +63,6 @@ Inherits from parents and assigns member variables to parameters.
 */
 Faculty::Faculty(int id, string name, string level, string dpt) : Person(id, name, level) //add advisees?
 {
-  cout << "Overloaded constructor.\n";
   dept = dpt;
   numAdvisees = 0;
   arraySize = 10;
@@ -132,7 +131,6 @@ void Faculty::addAdvisee(int s)
   if (numAdvisees < arraySize)
   {
     advArray[numAdvisees++] = s;
-    cout << to_string(getNumAdvisees()) << endl;
   }
   else
   {
@@ -165,7 +163,6 @@ bool Faculty::removeAdvisee(int s)
     {
       if (advArray[i] == s)
       {
-        cout << "Yo\n";
         for (int n = i; n < arraySize; ++n)
         {
           if (n == (arraySize - 1))
