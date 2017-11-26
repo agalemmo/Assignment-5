@@ -75,8 +75,8 @@ int main()
   string line;
   ifstream studFile;
   ifstream facFile;
-  ofstream studentTable ("studentTable.txt");
-  ofstream facultyTable ("facultyTable.txt");
+  ofstream studentTable;
+  ofstream facultyTable;
 
   StudentTree* masterStudent = new StudentTree();
   FacultyTree* masterFaculty = new FacultyTree();
@@ -100,12 +100,6 @@ int main()
   Faculty fac;
   Student stud;
 
-  //please delete this eventually this is now History
-  // StudentTree st0, st1, st2, st3, st4;
-  // FacultyTree ft0, ft1, ft2, ft3, ft4;
-  // int count = 0;
-  //end the please delete
-
   int lineCount;
 
   History* hist = new History();
@@ -118,7 +112,7 @@ int main()
   {
     f = new Faculty();
     lineCount = 0;
-    while ( getline (facFile, line))
+    while (getline (facFile, line))
     {
       if (line == "BEGIN NODE")
       {
@@ -148,37 +142,38 @@ int main()
   studFile.open("studentTable.txt", fstream::in);
   while (studFile.is_open())
   {
-    s = new Student();
-    lineCount = 0;
-    while ( getline (studFile, line))
-    {
-      if (line == "BEGIN NODE")
+      s = new Student();
+      lineCount = 0;
+      while ( getline (studFile, line))
       {
-        lineCount = 0;
-      }
-      if (lineCount == 1)
-        s->setId(stoi(line));
-      if (lineCount == 2)
-        s->setName(line);
-      if (lineCount == 3)
-        s->setLevel(line);
-      if (lineCount == 4)
-        s->setMajor(line);
-      if (lineCount == 5)
-        s->setGPA(stoi(line));
-      if (lineCount == 6)
-      {
-        s->setAdvisor(stoi(line));
-        fac = masterFaculty->getNode(stoi(line))->getObj();
-        fac.addAdvisee(s->getId());
-        masterFaculty->getNode(stoi(line))->setObj(fac);
-      }
-      if (line == "END NODE")
-      {
-        masterStudent->insert(s->getId(), *s);
-      }
-      lineCount++;
+        if (line == "BEGIN NODE")
+        {
+          lineCount = 0;
+        }
+        if (lineCount == 1)
+          s->setId(stoi(line));
+        if (lineCount == 2)
+          s->setName(line);
+        if (lineCount == 3)
+          s->setLevel(line);
+        if (lineCount == 4)
+          s->setMajor(line);
+        if (lineCount == 5)
+          s->setGPA(stoi(line));
+        if (lineCount == 6)
+        {
+          s->setAdvisor(stoi(line));
+          fac = masterFaculty->getNode(stoi(line))->getObj();
+          fac.addAdvisee(s->getId());
+          masterFaculty->getNode(stoi(line))->setObj(fac);
+        }
+        if (line == "END NODE")
+        {
+          masterStudent->insert(s->getId(), *s);
+        }
+        lineCount++;
     }
+    break;
     studFile.close();
   }
 
@@ -187,7 +182,6 @@ int main()
   {
     printOptions();
     cin >> option;
-
     while (cin.fail())
     {
       cin.clear();
@@ -195,7 +189,6 @@ int main()
       cerr << "That's not a valid option, I'm afraid. Please try again.\n";
       cin >> facID;
     }
-
     /**
     The big switch statement.
     Each case corresponds with the action on the printout.
@@ -272,7 +265,14 @@ int main()
         }
         tf = masterFaculty->getNode(idToBeFound);
         if (tf)
-          cout << tf->getObj().returnArray() << endl;
+        {
+          for (int i = 0; i < tf->getObj().getNumAdvisees(); ++i)
+          {
+            stud = masterStudent->getNode(tf->getObj().getAdvisees()[i])->getObj();
+            stud.print();
+            cout << endl;
+          }
+        }
         else
           cerr << "No faculty exists with that ID number. Please try again.\n";
         break;
@@ -329,27 +329,33 @@ int main()
         }
         masterStudent->insert(s->getId(), *s);
         cout << "New student object created and inserted into tree." << endl;
-        hist->addHistory(masterStudent->printTreeToFile(masterStudent->root), masterFaculty->printTreeToFile(masterFaculty->root));
+        hist->addHistory(*masterStudent, *masterFaculty);
         break;
       case 8: //remove student from StudentTree
         cout << "Enter the ID Number: " << endl;
-        cin >> (idToBeFound);
+        cin >> (studID);
         while (cin.fail())
         {
           cin.clear();
           cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
           cerr << "Data is formatted improperly. Please try again. ID should be an int.\n";
-          cin >> facID;
+          cin >> studID;
         }
-        if (!masterStudent->deleteNode(idToBeFound))
+        if (!masterStudent->contains(studID))
           cerr << "This student does not exist, and therefore could not be removed.\n";
         else
         {
-          cout << "Student " << idToBeFound << " removed." << endl;
-          hist->addHistory(masterStudent->printTreeToFile(masterStudent->root), masterFaculty->printTreeToFile(masterFaculty->root));
+          cout << "This student has been successfully deleted.\n";
+          facID = masterStudent->getNode(studID)->getObj().getAdvisor();
+          fac = masterFaculty->getNode(facID)->getObj();
+          fac.removeAdvisee(studID);
+          masterFaculty->getNode(facID)->setObj(fac);
+          masterStudent->deleteNode(studID);
+          hist->addHistory(*masterStudent, *masterFaculty);
         }
         break;
       case 9: //add a new faculty member to FacultyTree
+        cout << "added faculty history" << endl;
         f = new Faculty();
         cout << "Enter faculty information: " << endl;
         getline(cin, info);
@@ -366,7 +372,7 @@ int main()
         f->setDept(info);
         masterFaculty->insert(f->getId(), *f);
         cout << "New faculty object created and inserted into tree." << endl;
-        hist->addHistory(masterStudent->printTreeToFile(masterStudent->root), masterFaculty->printTreeToFile(masterFaculty->root));
+        hist->addHistory(*masterStudent, *masterFaculty);
         break;
       case 10: //remove faculty from FacultyTree
         cout << "Enter the ID Number: " << endl;
@@ -400,7 +406,7 @@ int main()
             masterFaculty->getMin()->setObj(fac);
           }
           cout << "Faculty member deleted. His advisees have been reassigned to the faculty with the lowest ID.\n";
-          hist->addHistory(masterStudent->printTreeToFile(masterStudent->root), masterFaculty->printTreeToFile(masterFaculty->root));
+          hist->addHistory(*masterStudent, *masterFaculty);
         }
         break;
       case 11: //change student's advisor
@@ -428,7 +434,7 @@ int main()
           {
             masterStudent->getNode(studID)->getObj().setAdvisor(facID);
             cout << "Student " << studID << "'s advisor successfully changed to " << facID << "." << endl;
-            hist->addHistory(masterStudent->printTreeToFile(masterStudent->root), masterFaculty->printTreeToFile(masterFaculty->root));
+            hist->addHistory(*masterStudent, *masterFaculty);
           }
           else
           {
@@ -465,7 +471,7 @@ int main()
             fac.removeAdvisee(studID);
             masterFaculty->getNode(facID)->setObj(fac);
             cout << "Student " << studID << " successfully removed." << endl;
-            hist->addHistory(masterStudent->printTreeToFile(masterStudent->root), masterFaculty->printTreeToFile(masterFaculty->root));
+            hist->addHistory(*masterStudent, *masterFaculty);
           }
           else
           {
@@ -480,83 +486,12 @@ int main()
         masterStudent->printTree(masterStudent->root);
         cout << "\n+++Faculty before" << endl;
         masterFaculty->printTree(masterFaculty->root);
-
-        studentTable.open("studentTable.txt", fstream::in | fstream::out | fstream::trunc);
-        facultyTable.open("facultyTable.txt", fstream::in | fstream::out | fstream::trunc);
-        if (facultyTable.is_open())
-        {
-          facultyTable << hist->getFacHist();
-          f = new Faculty();
-          lineCount = 0;
-          while ( getline (facFile, line))
-          {
-            if (line == "BEGIN NODE")
-            {
-              lineCount = 0;
-            }
-            if (lineCount == 1)
-              f->setId(stoi(line));
-            if (lineCount == 2)
-              f->setName(line);
-            if (lineCount == 3)
-              f->setDept(line);
-            if (lineCount == 4)
-              f->setLevel(line);
-            if (line == "END NODE")
-            {
-              ft.insert(f->getId(), *f);
-              cout << to_string(f->getId());
-            }
-            lineCount++;
-          }
-          masterFaculty = &ft;
-          //delete &ft;
-          cout << masterFaculty->printTreeToFile(masterFaculty->root);
-          facultyTable.close();
-        }
-
-        if (studentTable.is_open())
-        {
-          studentTable << hist->getStudHist();
-          s = new Student();
-          lineCount = 0;
-          while ( getline (studFile, line))
-          {
-            if (line == "BEGIN NODE")
-            {
-              lineCount = 0;
-            }
-            if (lineCount == 1)
-              s->setId(stoi(line));
-            if (lineCount == 2)
-              s->setName(line);
-            if (lineCount == 3)
-              s->setLevel(line);
-            if (lineCount == 4)
-              s->setMajor(line);
-            if (lineCount == 5)
-              s->setGPA(stoi(line));
-            if (lineCount == 6)
-            {
-              s->setAdvisor(stoi(line));
-              fac = masterFaculty->getNode(stoi(line))->getObj();
-              fac.addAdvisee(s->getId());
-              masterFaculty->getNode(stoi(line))->setObj(fac);
-            }
-            if (line == "END NODE")
-            {
-              st.insert(s->getId(), *s);
-            }
-            lineCount++;
-          }
-          masterStudent = &st;
-          //delete &st;
-          studFile.close();
-        }
-        //end file reading
-
+        st = hist->getStudHist();
+        masterStudent = &st;
         cout << "\n+++Student after" << endl;
         masterStudent->printTree(masterStudent->root);
+        ft = hist->getFacHist();
+        masterFaculty = &ft;
         cout << "\n+++Faculty after" << endl;
         masterFaculty->printTree(masterFaculty->root);
         cout << "Last version restored." << endl;
@@ -580,7 +515,6 @@ int main()
           stud.setMajor(info);
           masterStudent->getNode(studID)->setObj(stud);
           cout << "Student's major has been changed.\n";
-          hist->addHistory(masterStudent->printTreeToFile(masterStudent->root), masterFaculty->printTreeToFile(masterFaculty->root));
         }
         else
         {
